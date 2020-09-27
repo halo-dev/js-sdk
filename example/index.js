@@ -1,11 +1,11 @@
 const HaloSDK = require('../dist/halo-js-sdk.cjs')
 
 const api = new HaloSDK({
-  url: 'xxx'
+  basePath: '/'
 })
 
-const commentsApi = api.commentsApi
+const commentsApi = api.commentsApi()
 
-commentsApi.createComment('test', 'test').then(response => {
-  console.log('xx')
+commentsApi.createComment('test', 'xdd').then().catch(err => {
+  console.error(err)
 })

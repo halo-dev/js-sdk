@@ -3,8 +3,7 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es6: true,
-    jest: true
+    es6: true
   },
   extends: [
     'eslint:recommended',
@@ -15,14 +14,6 @@ module.exports = {
     parser: 'babel-eslint',
     sourceType: 'module'
   },
-  overrides: [
-    {
-      files: ['**/test/**/*.spec.{j,t}s'],
-      env: {
-        jest: true,
-      },
-    },
-  ],
   rules: {
     'no-console': 'warn',
     'no-debugger': 'warn',
@@ -40,6 +31,7 @@ module.exports = {
         }
       }],
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-inferrable-types': 'off'
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-this-alias': 'off'
   }
 }

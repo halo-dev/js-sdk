@@ -1,4 +1,4 @@
-import request from '../utils/service'
+import { AxiosAdapter } from "axios";
 
 const baseUrl: string = '/api/content'
 
@@ -6,8 +6,9 @@ const baseUrl: string = '/api/content'
  * 提交评论
  * @param target
  * @param comment
+ * @param request
  */
-export const createComment = (target: string, comment: string) => {
+export const createComment = (target: string, comment: string, request: AxiosAdapter) => {
   return request({
     url: `${baseUrl}/${target}/comments`,
     method: 'post',
@@ -21,8 +22,9 @@ export const createComment = (target: string, comment: string) => {
  * @param targetId
  * @param view
  * @param pagination
+ * @param request
  */
-export const listComments = (target: string, targetId: number, view: string = 'tree_view', pagination: any) => {
+export const listComments = (target: string, targetId: number, view: string = 'tree_view', pagination: any, request: AxiosAdapter) => {
   return request({
     url: `${baseUrl}/${target}/${targetId}/comments/${view}`,
     params: pagination,
