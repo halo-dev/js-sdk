@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
-import babel from '@rollup/plugin-babel'
+import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel'
+import { terser } from "rollup-plugin-terser"
 import { eslint } from "rollup-plugin-eslint"
 import pkg from './package.json'
 
@@ -11,6 +12,7 @@ const extensions = ['.js', '.ts', '.json']
 export default {
   input: './src/index.ts',
   plugins: [
+    terser(),
     resolve({
       extensions,
       mainFields: ['main', 'module', 'browser']
@@ -20,7 +22,8 @@ export default {
       extensions,
       babelHelpers: 'bundled',
       include: ['src/**/*'],
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
+      presets: ['@babel/preset-env']
     }),
     eslint({
       throwOnError: false,
@@ -42,6 +45,11 @@ export default {
     file: pkg.browser,
     format: 'iife',
     name: browserName,
+    plugins: [
+      getBabelOutputPlugin({
+        allowAllFormats: true
+      })
+    ],
     sourcemap: !production
   }]
 }

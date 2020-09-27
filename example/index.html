@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -8,13 +8,13 @@
   <script type="application/javascript" src="../dist/halo-js-sdk.iife.js"></script>
   <script>
   const api = new HaloSDK({
-    url: '/'
+    basePath: '/'
   })
 
-  const commentsApi = api.commentsApi
+  const commentsApi = api.commentsApi()
 
-  commentsApi.createComment('xx', 'dd').then(function (response) {
-    console.log(response)
+  commentsApi.createComment('test', 'xdd').then().catch(err => {
+    alert(err)
   })
   </script>
 </body>
