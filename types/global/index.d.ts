@@ -19,6 +19,13 @@ declare module NodeJS {
   interface Global {
     halo: typeof halo;
     garoon: typeof garoon;
-    location: typeof location;
+    server: typeof haloServer;
   }
 }
+
+declare const haloServer:
+  | {
+      host: string;
+      protocol: string;
+    }
+  | undefined;

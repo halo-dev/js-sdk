@@ -45,7 +45,7 @@ export const buildFormDataValue = (data: any) => {
 
 export const buildBaseUrl = (baseUrl?: string) => {
   // We assume that location always exists in a browser environment
-  const { host, protocol } = location!;
+  const { host, protocol } = global.server!;
   return baseUrl ?? `${protocol}//${host}`;
 };
 
