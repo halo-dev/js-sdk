@@ -38,6 +38,9 @@ const buildDiscriminatedAuth = (auth: Auth): DiscriminatedAuth => {
   if ("apiToken" in auth) {
     return { type: "apiToken", ...auth };
   }
+  if ("adminToken" in auth) {
+    return { type: "adminToken", ...auth };
+  }
   if ("oAuthToken" in auth) {
     return { type: "oAuthToken", ...auth };
   }

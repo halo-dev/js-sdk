@@ -1,25 +1,23 @@
-import { MockClient, buildMockClient } from "../../http/MockClient";
-import { HaloRequestConfigBuilder } from "../../HaloRequestConfigBuilder";
 import { AdminClient } from "../AdminClient";
-
+import { HaloRestAPIClient } from "../../HaloRestAPIClient";
 describe("AdminClient", () => {
-  let mockClient: MockClient;
+  console.log("world");
+});
+
+describe("Admin client real environment test", () => {
   let adminClient: AdminClient;
+  let haloRestApiClient: HaloRestAPIClient;
   beforeEach(() => {
-    const requestConfigBuilder = new HaloRequestConfigBuilder({
-      baseUrl: "https://example.halo.run",
-      auth: { type: "adminToken", adminToken: "foo" },
+    haloRestApiClient = new HaloRestAPIClient({
+      baseUrl: "http://127.0.0.1:8090",
+      auth: { type: "adminToken", adminToken: "admin12345" },
     });
-    mockClient = buildMockClient(requestConfigBuilder);
-    adminClient = new AdminClient(mockClient);
+    adminClient = haloRestApiClient.adminClient;
   });
   describe("getEnvironment", () => {
-    beforeEach(async () => {
-      await adminClient.getEnvironment();
-    });
-    it("should pass the path to the http client", () => {
-      console.log(mockClient.getLogs());
-      console.log(adminClient);
+    it("should pass the path to the http client", async () => {
+      let data = await adminClient.getEnvironment();
+      console.log(data);
     });
   });
 });
