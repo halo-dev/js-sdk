@@ -16,22 +16,23 @@ type Data = Params | FormData;
 
 type HaloAuthHeader =
   | {
-      "Admin-Authorization": string;
-      Authorization?: string;
-    }
+    "Admin-Authorization": string;
+    Authorization?: string;
+  }
   | {
-      "API-Authorization": string;
-      Authorization?: string;
-    }
+    "API-Authorization": string;
+    Authorization?: string;
+  }
   | {
-      "X-Requested-With": "XMLHttpRequest";
-      Authorization?: string;
-    }
+    "X-Requested-With": "XMLHttpRequest";
+    Authorization?: string;
+  }
   | {
-      Authorization: string;
-    };
+    Authorization: string;
+  };
 
 const THRESHOLD_AVOID_REQUEST_URL_TOO_LARGE = 4096;
+const SESSION_TOKEN_KEY = "__REQUEST_TOKEN__";
 
 export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private baseUrl: string;
@@ -39,13 +40,13 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private auth: DiscriminatedAuth;
   private clientCertAuth?:
     | {
-        pfx: Buffer;
-        password: string;
-      }
+      pfx: Buffer;
+      password: string;
+    }
     | {
-        pfxFilePath: string;
-        password: string;
-      };
+      pfxFilePath: string;
+      password: string;
+    };
   private proxy?: ProxyConfig;
   private requestToken: string | null;
 
@@ -61,14 +62,14 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     auth: DiscriminatedAuth;
     basicAuth?: BasicAuth;
     clientCertAuth?:
-      | {
-          pfx: Buffer;
-          password: string;
-        }
-      | {
-          pfxFilePath: string;
-          password: string;
-        };
+    | {
+      pfx: Buffer;
+      password: string;
+    }
+    | {
+      pfxFilePath: string;
+      password: string;
+    };
     proxy?: ProxyConfig;
     userAgent?: string;
   }) {
@@ -161,11 +162,11 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     if (this.auth.type === "session") {
       const requestToken = await this.getRequestToken();
       if (params instanceof FormData) {
-        params.append("__REQUEST_TOKEN__", requestToken);
+        params.append(SESSION_TOKEN_KEY, requestToken);
         return params;
       }
       return {
-        __REQUEST_TOKEN__: requestToken,
+        [SESSION_TOKEN_KEY]: requestToken,
         ...params,
       };
     }
@@ -179,10 +180,10 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     const { basicAuth, userAgent } = params;
     const basicAuthHeaders = basicAuth
       ? {
-          Authorization: `Basic ${Base64.encode(
-            `${basicAuth.username}:${basicAuth.password}`
-          )}`,
-        }
+        Authorization: `Basic ${Base64.encode(
+          `${basicAuth.username}:${basicAuth.password}`
+        )}`,
+      }
       : {};
     const platformDepsHeaders = platformDeps.buildHeaders({ userAgent });
     const commonHeaders = { ...platformDepsHeaders, ...basicAuthHeaders };

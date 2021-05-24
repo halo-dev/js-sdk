@@ -4,14 +4,11 @@ import {
   Response,
   ResponseHandler,
 } from "./http/HttpClientInterface";
-import { HaloAbortSearchError } from "./error/HaloAbortSearchError";
 import { HaloRestAPIError, HaloErrorResponse } from "./error/HaloRestAPIError";
 
 export class HaloResponseHandler implements ResponseHandler {
-  private enableAbortSearchError: boolean;
-  constructor({ enableAbortSearchError }: { enableAbortSearchError: boolean }) {
-    this.enableAbortSearchError = enableAbortSearchError;
-  }
+  constructor() { }
+
   handle<T>(response: Promise<Response<T>>): Promise<T> {
     return response.then(
       (res) => this.handleSuccessResponse<T>(res),
@@ -19,14 +16,6 @@ export class HaloResponseHandler implements ResponseHandler {
     );
   }
   private handleSuccessResponse<T>(response: Response<T>): T {
-    if (
-      this.enableAbortSearchError &&
-      /Filter aborted because of too many search results/.test(
-        response.headers["x-cybozu-warning"]
-      )
-    ) {
-      throw new HaloAbortSearchError(response.headers["x-cybozu-warning"]);
-    }
     return response.data;
   }
   private handleErrorResponse(
@@ -34,7 +23,7 @@ export class HaloResponseHandler implements ResponseHandler {
   ): never {
     if (!error.response) {
       // FIXME: find a better way to handle this error
-      if (/mac verify failure/.test(error.toString())) {
+      if (/MAC address verify failure/.test(error.toString())) {
         throw new Error("invalid clientCertAuth setting");
       }
       throw error;

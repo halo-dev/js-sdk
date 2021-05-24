@@ -16,14 +16,14 @@ type Options = {
   guestSpaceId?: number | string;
   basicAuth?: BasicAuth;
   clientCertAuth?:
-    | {
-        pfx: Buffer;
-        password: string;
-      }
-    | {
-        pfxFilePath: string;
-        password: string;
-      };
+  | {
+    pfx: Buffer;
+    password: string;
+  }
+  | {
+    pfxFilePath: string;
+    password: string;
+  };
   proxy?: ProxyConfig;
   featureFlags?: {
     enableAbortSearchError: boolean;
@@ -69,10 +69,7 @@ export class HaloRestAPIClient {
       baseUrl: this.baseUrl,
       auth,
     });
-    const responseHandler = new HaloResponseHandler({
-      enableAbortSearchError:
-        options.featureFlags?.enableAbortSearchError ?? false,
-    });
+    const responseHandler = new HaloResponseHandler();
     const httpClient = new DefaultHttpClient({
       responseHandler,
       requestConfigBuilder,
