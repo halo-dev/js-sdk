@@ -3,6 +3,7 @@ import FormData from "form-data";
 import { injectPlatformDeps } from "../platform";
 import * as browserDeps from "../platform/browser";
 import { Base64 } from "js-base64";
+import { SESSION_TOKEN_KEY } from "../types/auth";
 import os from "os";
 
 const packageJson = require("../../package.json");
@@ -202,7 +203,7 @@ describe("HaloRequestConfigBuilder in Browser environment", () => {
         "X-Requested-With": "XMLHttpRequest",
         "X-HTTP-Method-Override": "GET",
       },
-      data: { key: value, __REQUEST_TOKEN__: requestToken },
+      data: { key: value, [SESSION_TOKEN_KEY]: requestToken },
     });
   });
 
@@ -239,7 +240,7 @@ describe("HaloRequestConfigBuilder in Browser environment", () => {
       },
       data: {
         key: "value",
-        __REQUEST_TOKEN__: requestToken,
+        [SESSION_TOKEN_KEY]: requestToken,
       },
     });
   });
@@ -280,7 +281,7 @@ describe("HaloRequestConfigBuilder in Browser environment", () => {
       },
       data: {
         key: "value",
-        __REQUEST_TOKEN__: requestToken,
+        [SESSION_TOKEN_KEY]: requestToken,
       },
     });
   });
@@ -294,7 +295,7 @@ describe("HaloRequestConfigBuilder in Browser environment", () => {
     expect(requestConfig).toStrictEqual({
       method: "delete",
       proxy: undefined,
-      url: `${baseUrl}/v1/record.json?__REQUEST_TOKEN__=${requestToken}&key=value`,
+      url: `${baseUrl}/v1/record.json?${SESSION_TOKEN_KEY}=${requestToken}&key=value`,
       headers: {
         "X-Requested-With": "XMLHttpRequest",
       },

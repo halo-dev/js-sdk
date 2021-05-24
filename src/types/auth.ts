@@ -34,3 +34,5 @@ export type BasicAuth = {
   username: string;
   password: string;
 };
+
+export const SESSION_TOKEN_KEY = "__REQUEST_TOKEN__";

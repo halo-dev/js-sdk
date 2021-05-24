@@ -9,7 +9,7 @@ import {
   Params,
   ProxyConfig,
 } from "./http/HttpClientInterface";
-import { BasicAuth, DiscriminatedAuth } from "./types/auth";
+import { BasicAuth, DiscriminatedAuth, SESSION_TOKEN_KEY } from "./types/auth";
 import { platformDeps } from "./platform/";
 
 type Data = Params | FormData;
@@ -32,7 +32,6 @@ type HaloAuthHeader =
   };
 
 const THRESHOLD_AVOID_REQUEST_URL_TOO_LARGE = 4096;
-const SESSION_TOKEN_KEY = "__REQUEST_TOKEN__";
 
 export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private baseUrl: string;
