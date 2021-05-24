@@ -13,15 +13,6 @@ export const getRequestToken = async () => {
   ) {
     return halo.getRequestToken();
   }
-
-  if (
-    typeof garoon === "object" &&
-    garoon !== null &&
-    typeof garoon.connect?.halo?.getRequestToken === "function"
-  ) {
-    return garoon.connect.halo.getRequestToken();
-  }
-
   throw new Error("session authentication must specify a request token");
 };
 

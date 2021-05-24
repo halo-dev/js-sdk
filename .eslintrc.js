@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     'no-console': 'warn',
     'no-debugger': 'warn',
+    'no-constant-condition': 'off',
     'no-var': 'off',
     'prefer-rest-params': 'off',
     '@typescript-eslint/ban-types': 'off',
