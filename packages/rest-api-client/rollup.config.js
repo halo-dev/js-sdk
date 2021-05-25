@@ -1,11 +1,11 @@
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-import babel, { getBabelOutputPlugin } from "@rollup/plugin-babel";
+import babel from "@rollup/plugin-babel";
 import { terser } from "rollup-plugin-terser";
 import { eslint } from "rollup-plugin-eslint";
 import pkg from "./package.json";
+import replace from "rollup-plugin-replace";
 
-const browserName = "HaloSDK";
 const production = process.env.NODE_ENV === "production";
 const extensions = [".js", ".ts", ".json"];
 
@@ -15,7 +15,10 @@ export default {
     terser(),
     resolve({
       extensions,
-      mainFields: ["main", "module", "browser"],
+      browser: true,
+    }),
+    replace({
+      PACKAGE_VERSION: JSON.stringify(pkg.version),
     }),
     commonjs(),
     babel({
@@ -33,27 +36,11 @@ export default {
     }),
   ],
 
-  output: [
-    {
-      file: pkg.main,
-      format: "cjs",
-      sourcemap: !production,
-    },
-    {
-      file: pkg.module,
-      format: "es",
-      sourcemap: !production,
-    },
-    {
-      file: pkg.browser,
-      format: "iife",
-      name: browserName,
-      plugins: [
-        getBabelOutputPlugin({
-          allowAllFormats: true,
-        }),
-      ],
-      sourcemap: !production,
-    },
-  ],
+  output: {
+    extend: true,
+    file: `./dist/HaloRestAPIClient${production ? ".min" : ""}.js`,
+    format: "umd",
+    name: "window",
+    sourcemap: production ? false : "inline",
+  },
 };
