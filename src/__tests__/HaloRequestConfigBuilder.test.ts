@@ -513,6 +513,29 @@ describe("Headers", () => {
     });
   });
 
+  it("Customizer auth", async () => {
+    const adminToken = "admin-token-12345";
+    const haloRequestConfigBuilder = new HaloRequestConfigBuilder({
+      baseUrl,
+      auth: {
+        type: "customizeAuth",
+        headerName: "Admin-Authorization",
+        getToken() {
+          return adminToken
+        }
+      },
+    });
+    const requestConfig = await haloRequestConfigBuilder.build(
+      "get",
+      "/v1/record.json",
+      {}
+    );
+    expect(requestConfig.headers).toStrictEqual({
+      "Admin-Authorization": adminToken,
+      "User-Agent": expectedDefaultUa,
+    });
+  });
+
   it("Basic auth", async () => {
     const basicAuth = { username: "user", password: "password" };
     const haloRequestConfigBuilder = new HaloRequestConfigBuilder({

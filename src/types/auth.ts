@@ -23,16 +23,40 @@ type OAuthTokenAuth = {
   oAuthToken: string;
 };
 
+type CustomizeAuth = {
+  type: "customizeAuth",
+  headerName: string,
+  getToken(): string;
+}
+
 export type DiscriminatedAuth =
   | AdminTokenAuth
   | ApiTokenAuth
   | PasswordAuth
   | SessionAuth
-  | OAuthTokenAuth;
+  | OAuthTokenAuth
+  | CustomizeAuth;
 
 export type BasicAuth = {
   username: string;
   password: string;
 };
+
+export type HaloAuthHeader =
+  | {
+    "Admin-Authorization": string;
+    Authorization?: string;
+  }
+  | {
+    "API-Authorization": string;
+    Authorization?: string;
+  }
+  | {
+    "X-Requested-With": "XMLHttpRequest";
+    Authorization?: string;
+  }
+  | {
+    Authorization: string;
+  };
 
 export const SESSION_TOKEN_KEY = "__REQUEST_TOKEN__";

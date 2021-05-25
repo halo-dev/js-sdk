@@ -14,28 +14,11 @@ import { platformDeps } from "./platform/";
 
 type Data = Params | FormData;
 
-type HaloAuthHeader =
-  | {
-    "Admin-Authorization": string;
-    Authorization?: string;
-  }
-  | {
-    "API-Authorization": string;
-    Authorization?: string;
-  }
-  | {
-    "X-Requested-With": "XMLHttpRequest";
-    Authorization?: string;
-  }
-  | {
-    Authorization: string;
-  };
-
 const THRESHOLD_AVOID_REQUEST_URL_TOO_LARGE = 4096;
 
 export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private baseUrl: string;
-  private headers: HaloAuthHeader;
+  private headers: any;
   private auth: DiscriminatedAuth;
   private clientCertAuth?:
     | {
@@ -175,7 +158,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private buildHeaders(params: {
     basicAuth?: BasicAuth;
     userAgent?: string;
-  }): HaloAuthHeader {
+  }): any {
     const { basicAuth, userAgent } = params;
     const basicAuthHeaders = basicAuth
       ? {
@@ -219,7 +202,14 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
           Authorization: `Bearer ${this.auth.oAuthToken}`,
         };
       }
+      case "customizeAuth": {
+        return {
+          ...commonHeaders,
+          [this.auth.headerName]: this.auth.getToken(),
+        };
+      }
       default: {
+        // https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest
         return { ...commonHeaders, "X-Requested-With": "XMLHttpRequest" };
       }
     }
