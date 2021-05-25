@@ -1,6 +1,7 @@
 import {
   ErrorResponse,
   HttpClientError,
+  HttpResponse,
   Response,
   ResponseHandler,
 } from "./http/HttpClientInterface";
@@ -9,13 +10,13 @@ import { HaloRestAPIError, HaloErrorResponse } from "./error/HaloRestAPIError";
 export class HaloResponseHandler implements ResponseHandler {
   constructor() { }
 
-  handle<T>(response: Promise<Response<T>>): Promise<T> {
+  handle<T>(response: Promise<HttpResponse<T>>): Promise<Response<T>> {
     return response.then(
       (res) => this.handleSuccessResponse<T>(res),
       (error) => this.handleErrorResponse(error)
     );
   }
-  private handleSuccessResponse<T>(response: Response<T>): T {
+  private handleSuccessResponse<T>(response: HttpResponse<T>): Response<T> {
     return response.data;
   }
   private handleErrorResponse(

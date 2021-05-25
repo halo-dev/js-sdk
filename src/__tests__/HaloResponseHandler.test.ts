@@ -1,19 +1,19 @@
-import { Response } from "../http/HttpClientInterface";
+import { HttpResponse } from "../http/HttpClientInterface";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 
 describe("HaloResponseHandler", () => {
   describe("handle", () => {
     it("should pass", async () => {
       const responseHandler = new HaloResponseHandler();
-      const response: Response = {
-        data: { status: "success" },
+      const response: HttpResponse = {
+        data: { status: "success", data: null },
         headers: {
           "hello": "world",
         },
       };
       await expect(
         responseHandler.handle(Promise.resolve(response))
-      ).resolves.toStrictEqual({ status: "success" });
+      ).resolves.toStrictEqual({ status: "success", data: null });
     });
   });
 });

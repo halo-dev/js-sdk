@@ -10,7 +10,7 @@ describe("Admin client real environment test", () => {
   beforeEach(() => {
     haloRestApiClient = new HaloRestAPIClient({
       baseUrl: "http://127.0.0.1:8090",
-      auth: { type: "adminToken", adminToken: "admin12345" },
+      auth: { type: "adminToken", adminToken: "d3372d58cdd045ef99bd92ec593dec54" },
     });
     adminClient = haloRestApiClient.adminClient;
   });

@@ -1,12 +1,9 @@
 import { ErrorResponse } from "../http/HttpClientInterface";
 
 type SingleErrorResponseData = {
-  id: string;
   status: string | number;
   message: string;
-  devMessage: string;
   data?: any;
-  errors?: any;
 };
 
 type HaloErrorResponseData = SingleErrorResponseData;
@@ -15,7 +12,6 @@ export type HaloErrorResponse = ErrorResponse<HaloErrorResponseData>;
 
 export class HaloRestAPIError extends Error {
   status: number | string;
-  devMessage?: string;
   data?: any;
   headers: any;
 
@@ -32,8 +28,7 @@ export class HaloRestAPIError extends Error {
     super(data.message);
 
     this.name = "HaloRestAPIError";
-    this.data = data.data;
-    this.devMessage = data.devMessage;
+    this.data = data;
     this.status = data.status;
     this.headers = error.headers;
     this.message = `[${this.status}] ${this.message}`;
