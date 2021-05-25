@@ -25,7 +25,7 @@ type OAuthTokenAuth = {
 
 type CustomizeAuth = {
   type: "customizeAuth",
-  headerName: string,
+  headerName: string;
   getToken(): string;
 }
 
@@ -41,22 +41,5 @@ export type BasicAuth = {
   username: string;
   password: string;
 };
-
-export type HaloAuthHeader =
-  | {
-    "Admin-Authorization": string;
-    Authorization?: string;
-  }
-  | {
-    "API-Authorization": string;
-    Authorization?: string;
-  }
-  | {
-    "X-Requested-With": "XMLHttpRequest";
-    Authorization?: string;
-  }
-  | {
-    Authorization: string;
-  };
 
 export const SESSION_TOKEN_KEY = "__REQUEST_TOKEN__";

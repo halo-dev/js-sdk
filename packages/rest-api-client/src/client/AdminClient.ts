@@ -8,7 +8,7 @@ export class AdminClient {
     this.client = client;
   }
 
-  public getEnvironment(): Promise<Environment> {
+  public getEnvironment(): Promise<Response<Environment>> {
     const path = this.buildPathWithScope({
       endpointName: "environments",
     });

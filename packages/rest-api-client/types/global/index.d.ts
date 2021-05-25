@@ -2,6 +2,13 @@ interface sdkOptionsInter {
   basePath: string;
 }
 
+declare type Response<T = any> = {
+  status: number | string;
+  message?: string;
+  devMessage?: any;
+  data: T;
+};
+
 declare const halo: {
   getRequestToken(): string;
 };
@@ -21,3 +28,7 @@ declare const haloServer:
     protocol: string;
   }
   | undefined;
+
+declare class Blob {
+  constructor(array: unknown[]);
+}

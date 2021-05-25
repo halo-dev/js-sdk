@@ -16,15 +16,8 @@ export type ErrorResponse<T = any> = {
 };
 
 export type HttpResponse<T = any> = {
-  data: Response<T>;
-  headers: any;
-};
-
-export type Response<T = any> = {
-  status: number | string;
-  message?: string;
-  devMessage?: any;
   data: T;
+  headers: any;
 };
 
 export type HttpMethod = "get" | "post" | "put" | "delete";
@@ -43,7 +36,7 @@ export interface HttpClientError<T = ErrorResponse> extends Error {
   response?: T;
 }
 export interface ResponseHandler {
-  handle: <T = any>(response: Promise<HttpResponse<T>>) => Promise<Response<T>>;
+  handle: <T = any>(response: Promise<HttpResponse<T>>) => Promise<T>;
 }
 
 export type RequestConfig = {

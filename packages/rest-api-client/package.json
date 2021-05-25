@@ -1,12 +1,15 @@
 {
-  "name": "@halo/js-sdk",
+  "name": "@halo/rest-api-client",
   "version": "1.0.0",
-  "description": "packages for halo javaSript sdk",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Halo REST API client for JavaScript",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "browser": "lib/index.browser.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "dev": "rollup -c -w",
     "test": "jest",
@@ -15,10 +18,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/halo-dev/halo-js-sdk.git"
+    "url": "git+https://github.com/halo-dev/halo-js-sdk.git",
+    "directory": "packages/rest-api-client"
   },
+  "files": [
+    "esm",
+    "lib",
+    "umd",
+    "index.mjs"
+  ],
   "keywords": [
-    "halo"
+    "halo",
+    "rest-api",
+    "api-client",
+    "sdk"
   ],
   "maintainers": [
     {
@@ -27,10 +40,12 @@
       "url": "https://github.com/guqing"
     }
   ],
-  "author": "halo",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/halo-dev/halo-js-sdk/issues"
+  },
+  "engines": {
+    "node": ">=12"
   },
   "homepage": "https://github.com/halo-dev/halo-js-sdk#readme",
   "lint-staged": {
@@ -38,6 +53,12 @@
       "yarn lint --fix",
       "git add"
     ]
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "form-data": "^4.0.0",
+    "js-base64": "^3.6.0",
+    "qs": "^6.10.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -47,18 +68,29 @@
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-typescript": "^6.0.0",
+    "@types/jest": "^26.0.23",
+    "@types/qs": "^6.9.6",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
-    "@types/jest": "^26.0.23",
+    "axios-mock-adapter": "^1.18.2",
     "jest": "^26.6.3",
-    "ts-jest": "^26.5.6",
-    "@types/node": "^13.13.52",
     "lint-staged": "^10.4.0",
     "rollup": "^2.28.2",
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "standard-version": "^9.0.0",
-    "typescript": "^4.0.3",
-    "lerna": "^4.0.0"
+    "ts-jest": "^26.5.6",
+    "typescript": "^4.0.3"
+  },
+  "exports": {
+    ".": {
+      "node": {
+        "import": "./index.mjs",
+        "require": "./lib/index.js",
+        "default": "./lib/index.js"
+      },
+      "browser": "./lib/index.browser.js"
+    },
+    "./package.json": "./package.json"
   }
 }
