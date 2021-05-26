@@ -1,7 +1,6 @@
-import { AdminClient } from "./client/AdminClient";
 import { DefaultHttpClient } from "./http/";
 import { ProxyConfig } from "./http/HttpClientInterface";
-import { BasicAuth, DiscriminatedAuth } from "./types/auth";
+import { BasicAuth, DiscriminatedAuth, CustomizeAuth } from "./types/auth";
 import { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
 import { HaloResponseHandler } from "./HaloResponseHandler";
 import { platformDeps } from "./platform/index";
@@ -44,6 +43,9 @@ const buildDiscriminatedAuth = (auth: Auth): DiscriminatedAuth => {
   if ("oAuthToken" in auth) {
     return { type: "oAuthToken", ...auth };
   }
+  if ("type" in auth && auth["type"] == "customizeAuth") {
+    return auth as CustomizeAuth
+  }
   try {
     return platformDeps.getDefaultAuth();
   } catch (e) {
@@ -57,8 +59,8 @@ const buildDiscriminatedAuth = (auth: Auth): DiscriminatedAuth => {
 };
 
 export class HaloRestAPIClient {
-  adminClient: AdminClient;
   private baseUrl?: string;
+  private httpClient: DefaultHttpClient;
 
   constructor(options: Options = {}) {
     this.baseUrl = platformDeps.buildBaseUrl(options.baseUrl);
@@ -70,12 +72,10 @@ export class HaloRestAPIClient {
       auth,
     });
     const responseHandler = new HaloResponseHandler();
-    const httpClient = new DefaultHttpClient({
+    this.httpClient = new DefaultHttpClient({
       responseHandler,
       requestConfigBuilder,
     });
-
-    this.adminClient = new AdminClient(httpClient);
   }
 
   public static get version() {
@@ -84,5 +84,9 @@ export class HaloRestAPIClient {
 
   public getBaseUrl() {
     return this.baseUrl;
+  }
+
+  public buildHttpClient() {
+    return this.httpClient;
   }
 }

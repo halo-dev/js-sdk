@@ -23,7 +23,7 @@ type OAuthTokenAuth = {
   oAuthToken: string;
 };
 
-type CustomizeAuth = {
+export type CustomizeAuth = {
   type: "customizeAuth",
   headerName: string;
   getToken(): string;

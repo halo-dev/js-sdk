@@ -8,9 +8,12 @@
     "examples/*"
   ],
   "scripts": {
-    "dev": "rollup -c -w",
-    "test": "jest",
-    "build": "rollup -c",
+    "build": "tsc --build packages --force",
+    "preinitial:release": "yarn prerelease",
+    "prerelease": "npm-run-all -s build -p lint test",
+    "pretest": "jest --rootDir __tests__",
+    "start": "yarn build --watch",
+    "pretest:ci": "yarn pretest",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
   },
   "repository": {

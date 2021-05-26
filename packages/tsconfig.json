@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "include": [],
+  "references": [
+    { "path": "./admin-api"},
+    { "path": "./rest-api-client"}
+  ]
+}

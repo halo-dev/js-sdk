@@ -113,9 +113,7 @@ export class MockClient implements HttpClient {
 
 export const buildMockClient = (
   requestConfigBuilder: RequestConfigBuilder,
-  responseHandler = new HaloResponseHandler({
-    enableAbortSearchError: true,
-  })
+  responseHandler = new HaloResponseHandler()
 ) => {
   return new MockClient({ requestConfigBuilder, responseHandler });
 };

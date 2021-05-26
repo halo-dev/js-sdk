@@ -1,14 +1,3 @@
-interface sdkOptionsInter {
-  basePath: string;
-}
-
-declare type Response<T = any> = {
-  status: number | string;
-  message?: string;
-  devMessage?: any;
-  data: T;
-};
-
 declare const halo: {
   getRequestToken(): string;
 };

@@ -5,6 +5,7 @@ import { terser } from "rollup-plugin-terser";
 import { eslint } from "rollup-plugin-eslint";
 import pkg from "./package.json";
 import replace from "rollup-plugin-replace";
+import { ecmaVersionValidator } from "rollup-plugin-ecma-version-validator";
 
 const production = process.env.NODE_ENV === "production";
 const extensions = [".js", ".ts", ".json"];
@@ -34,6 +35,7 @@ export default {
       include: ["src/**"],
       exclude: ["node_modules/**"],
     }),
+    ecmaVersionValidator(),
   ],
 
   output: {

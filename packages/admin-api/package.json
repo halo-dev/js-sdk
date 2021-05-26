@@ -1,0 +1,43 @@
+{
+  "name": "@halo/admin-api",
+  "version": "1.0.0",
+  "description": "A halo admin api client",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "build": "tsc --build --force",
+    "lint": "eslint --ext .ts src",
+    "test": "jest --rootDir src",
+    "test:ci": "jest --rootDir src --runInBand",
+    "start": "yarn build --watch"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halo-dev/halo-js-sdk.git",
+    "directory": "packages/admin-api"
+  },
+  "keywords": [
+    "halo"
+  ],
+  "maintainers": [
+    {
+      "name": "guqing",
+      "email": "1484563614@qq.com",
+      "url": "https://github.com/guqing"
+    }
+  ],
+  "author": "halo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/halo-dev/halo-js-sdk/issues"
+  },
+  "homepage": "https://github.com/halo-dev/halo-js-sdk#readme",
+  "dependencies": {
+    "@halo/rest-api-client": "^1.0.0"
+  }
+}
