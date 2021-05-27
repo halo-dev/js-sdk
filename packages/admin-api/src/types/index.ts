@@ -109,3 +109,28 @@ export interface BasePostDetail extends BasePostSimple {
   formatContent: string;
   commentCount: string;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  thumbnail: string;
+  parentId: number;
+  password: string;
+  createTime: number;
+  fullPath: string;
+}
+
+export interface CategoryTree extends Category {
+  children: Array<Category>
+}
+
+export type CategoryParam = {
+  name: string;
+  slug?: string;
+  description?: string;
+  thumbnail?: string;
+  password?: string;
+  parentId?: number
+}

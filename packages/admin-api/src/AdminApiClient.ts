@@ -8,7 +8,10 @@ import {
   AttachmentQuery,
   Attachment,
   Backup,
-  BasePostDetail
+  BasePostDetail,
+  Category,
+  CategoryParam,
+  CategoryTree
 } from "./types";
 
 export class AdminApiClient {
@@ -252,6 +255,49 @@ export class AdminApiClient {
     });
     return this.client.get(path, { filename })
   }
-}
 
-export { HaloRestAPIClient }
+  public listCategories(params: {
+    sort: Array<string>;
+    more: boolean;
+  }): Promise<Response<Array<Category>>> {
+    const path = buildPath({
+      endpointName: "categories"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public createCategory(params: CategoryParam): Promise<Response<Category>> {
+    const path = buildPath({
+      endpointName: "categories"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public getCategory(categoryId: number): Promise<Response<Category>> {
+    const path = buildPath({
+      endpointName: `categories/${categoryId}`
+    });
+    return this.client.get(path, {})
+  }
+
+  public updateCategory(categoryId: number, params: CategoryParam): Promise<Response<Category>> {
+    const path = buildPath({
+      endpointName: `categories/${categoryId}`
+    });
+    return this.client.put(path, { ...params })
+  }
+
+  public async deleteCategory(categoryId: number): Promise<void> {
+    const path = buildPath({
+      endpointName: `categories/${categoryId}`
+    });
+    await this.client.delete(path, {})
+  }
+
+  public listCategoryAsTree(sort: Array<string>): Promise<Response<Array<CategoryTree>>> {
+    const path = buildPath({
+      endpointName: "categories/tree_view"
+    });
+    return this.client.get(path, { sort })
+  }
+}

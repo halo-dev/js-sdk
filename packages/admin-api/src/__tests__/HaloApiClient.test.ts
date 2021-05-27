@@ -1,4 +1,5 @@
-import { AdminApiClient, HaloRestAPIClient } from "../AdminApiClient";
+import { AdminApiClient } from "../AdminApiClient";
+import { HaloRestAPIClient } from "../../../rest-api-client";
 
 describe("Halo admin api test", () => {
   let client: AdminApiClient;
