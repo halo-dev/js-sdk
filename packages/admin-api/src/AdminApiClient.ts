@@ -16,7 +16,11 @@ import {
   BaseComment,
   JournalCommentParam,
   JournalCommentWithJournal,
-  CommentStatus
+  CommentStatus,
+  Journal,
+  JournalType,
+  JournalQuery,
+  JournalWithCmtCount
 } from "./types";
 
 export class AdminApiClient {
@@ -363,7 +367,7 @@ export class AdminApiClient {
     return this.client.get(path, { ...params })
   }
 
-  public listLatestJournalComment(params: {
+  public latestJournalComment(params: {
     top?: number,
     status?: CommentStatus
   }): Promise<Response<Array<BaseComment>>> {
@@ -371,5 +375,44 @@ export class AdminApiClient {
       endpointName: "journals/comments/latest"
     });
     return this.client.get(path, { ...params })
+  }
+
+  public listJournals(params: JournalQuery): Promise<Page<JournalWithCmtCount>> {
+    const path = buildPath({
+      endpointName: "journals"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public createJournal(params: Journal): Promise<Response<Journal>> {
+    const path = buildPath({
+      endpointName: "journals"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public updateJournal(params: {
+    journalId: number,
+    sourceContent: string,
+    type?: JournalType
+  }): Promise<Response<Journal>> {
+    const path = buildPath({
+      endpointName: `journals/${params.journalId}`
+    });
+    return this.client.put(path, { ...params })
+  }
+
+  public async deleteJournal(journalId: number): Promise<void> {
+    const path = buildPath({
+      endpointName: `journals/${journalId}`
+    });
+    await this.client.delete(path, {})
+  }
+
+  public latestJournal(top: number): Promise<Response<Array<Journal>> {
+    const path = buildPath({
+      endpointName: "journals/latest"
+    });
+    return this.client.get(path, { top })
   }
 }

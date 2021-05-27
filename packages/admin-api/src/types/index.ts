@@ -180,7 +180,7 @@ export interface JournalCommentParam extends PageQuery {
 }
 
 export type Journal = {
-  id: number;
+  id?: number;
   sourceContent: string;
   content: string;
   likes: number;
@@ -190,4 +190,12 @@ export type Journal = {
 
 export interface JournalCommentWithJournal extends BaseComment {
   journal: Journal
+}
+
+export interface JournalQuery extends PageQuery {
+  type: JournalType
+}
+
+export interface JournalWithCmtCount extends Journal {
+  commentCount: number;
 }
