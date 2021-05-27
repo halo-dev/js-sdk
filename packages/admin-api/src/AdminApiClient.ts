@@ -6,7 +6,9 @@ import {
   Page,
   AccessToken,
   AttachmentQuery,
-  Attachment
+  Attachment,
+  Backup,
+  BasePostDetail
 } from "./types";
 
 export class AdminApiClient {
@@ -112,21 +114,21 @@ export class AdminApiClient {
 
   public listAttachmentMediaTypes(): Promise<Response<Array<string>>> {
     const path = buildPath({
-      endpointName: `attachments/media_types`
+      endpointName: "attachments/media_types"
     });
     return this.client.get(path, {})
   }
 
   public listAttachmentTypes(): Promise<Response<Array<string>>> {
     const path = buildPath({
-      endpointName: `attachments/types`
+      endpointName: "attachments/types"
     });
     return this.client.get(path, {})
   }
 
   public uploadAttachment(data: unknown): Promise<Response<Array<string>>> {
     const path = buildPath({
-      endpointName: `attachments/upload`
+      endpointName: "attachments/upload"
     });
     const formData = new FormData()
     formData.append("file", data)
@@ -135,13 +137,120 @@ export class AdminApiClient {
 
   public uploadAttachments(data: Array<unknown>): Promise<Response<Array<string>>> {
     const path = buildPath({
-      endpointName: `attachments/uploads`
+      endpointName: "attachments/uploads"
     });
     const formData = new FormData()
     data.forEach(fileStream => {
       formData.append("files", fileStream)
     })
     return this.client.post(path, formData)
+  }
+
+  public listBackups(): Promise<Response<Array<Backup>>> {
+    const path = buildPath({
+      endpointName: "backups/data"
+    });
+    return this.client.get(path, {})
+  }
+
+  public exportAllBackups(): Promise<Response<Backup>> {
+    const path = buildPath({
+      endpointName: "backups/data"
+    });
+    return this.client.post(path, {})
+  }
+
+  public async deleteBackup(filename: string): Promise<void> {
+    const path = buildPath({
+      endpointName: "backups/data"
+    });
+    await this.client.delete(path, { filename })
+  }
+
+  public downloadBackup(filename: string): Promise<any> {
+    const path = buildPath({
+      endpointName: `backups/data/${filename}`
+    });
+    return this.client.get(path, {})
+  }
+
+  public fetchBackup(filename: string): Promise<Response<Backup>> {
+    const path = buildPath({
+      endpointName: "backups/data/fetch"
+    });
+    return this.client.get(path, { filename })
+  }
+
+  public listMarkdownBackups(): Promise<Response<Array<Backup>>> {
+    const path = buildPath({
+      endpointName: "backups/markdown/export"
+    });
+    return this.client.get(path, {})
+  }
+
+  public exportMarkdownBackup(needFrontMatter?: boolean): Promise<Response<Backup>> {
+    const path = buildPath({
+      endpointName: "backups/markdown/export"
+    });
+    return this.client.post(path, { needFrontMatter })
+  }
+
+  public async deleteMarkdownBackup(filename: string): Promise<void> {
+    const path = buildPath({
+      endpointName: "backups/markdown/export"
+    });
+    await this.client.delete(path, { filename })
+  }
+
+  public downloadMarkdownBackup(filename: string): Promise<any> {
+    const path = buildPath({
+      endpointName: `backups/markdown/export/${filename}`
+    });
+    return this.client.get(path, { filename })
+  }
+
+  public fetchMarkdownBackup(filename: string): Promise<Response<Backup>> {
+    const path = buildPath({
+      endpointName: "backups/markdown/fetch"
+    });
+    return this.client.get(path, { filename })
+  }
+
+  public importMarkdown(data: unknown): Promise<Response<BasePostDetail>> {
+    const path = buildPath({
+      endpointName: "backups/markdown/import"
+    });
+    const formData = new FormData()
+    formData.append("file", data)
+    return this.client.post(path, formData)
+  }
+
+  public listBackupsFromWorkDir(): Promise<Response<Backup>> {
+    const path = buildPath({
+      endpointName: "backups/work-dir"
+    });
+    return this.client.get(path, {})
+  }
+
+  public async deleteBackupsFromWorkDir(filename: string): Promise<void> {
+    const path = buildPath({
+      endpointName: "backups/work-dir"
+    });
+    await this.client.delete(path, { filename })
+  }
+
+  public downloadBackupsFromWorkDir(filename: string): Promise<any> {
+    const path = buildPath({
+      endpointName: `backups/work-dir/${filename}`
+    });
+    return this.client.get(path, { filename })
+  }
+
+  public fetchBackupsFromWorkDir(filename: string): Promise<Response<Backup>> {
+    const path = buildPath({
+      endpointName: "backups/work-dir/fetch"
+    });
+    return this.client.get(path, { filename })
   }
 }
 
