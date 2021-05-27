@@ -1,6 +1,9 @@
 # Node template
 dist/
 lib/
+
+tsconfig.tsbuildinfo
+
 # Logs
 logs
 *.log

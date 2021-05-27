@@ -13,7 +13,6 @@ export class AdminApiClient {
     const path = buildPath({
       endpointName: "environments",
     });
-    console.log(path)
     return this.client.get(path, {});
   }
 }
