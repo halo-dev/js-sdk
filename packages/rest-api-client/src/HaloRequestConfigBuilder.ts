@@ -12,7 +12,7 @@ import {
 import { BasicAuth, DiscriminatedAuth, SESSION_TOKEN_KEY } from "./types/auth";
 import { platformDeps } from "./platform/";
 
-type Data = Params | FormData;
+type Data = Params | FormData | Array<any>;
 
 const THRESHOLD_AVOID_REQUEST_URL_TOO_LARGE = 4096;
 
@@ -121,6 +121,13 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
         };
       }
       case "delete": {
+        if (params instanceof Array) {
+          return {
+            ...requestConfig,
+            headers: this.headers,
+            data: params,
+          };
+        }
         const requestUrl = this.buildRequestUrl(
           path,
           await this.buildData(params)

@@ -80,6 +80,7 @@ export class AxiosClient implements HttpClient {
   }
 
   private sendRequest(requestConfig: RequestConfig) {
+    console.log(requestConfig)
     return this.responseHandler.handle(
       // eslint-disable-next-line new-cap
       Axios({
