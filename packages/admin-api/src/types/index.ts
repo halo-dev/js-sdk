@@ -209,3 +209,28 @@ export type Link = {
   url?: string;
   description?: string;
 }
+
+export type LogType =
+  | "BLOG_INITIALIZED"
+  | "POST_PUBLISHED"
+  | "POST_EDITED"
+  | "POST_DELETED"
+  | "LOGGED_IN"
+  | "LOGGED_OUT"
+  | "LOGIN_FAILED"
+  | "PASSWORD_UPDATED"
+  | "PROFILE_UPDATED"
+  | "SHEET_PUBLISHED"
+  | "SHEET_EDITED"
+  | "SHEET_DELETED"
+  | "MFA_UPDATED"
+  | "LOGGED_PRE_CHECK";
+
+export type Log = {
+  id: number;
+  logKey: string;
+  type: LogType
+  content: string;
+  ipAddress: string;
+  createTime: number;
+}

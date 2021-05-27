@@ -21,7 +21,8 @@ import {
   JournalType,
   JournalQuery,
   JournalWithCmtCount,
-  Link
+  Link,
+  Log
 } from "./types";
 
 export class AdminApiClient {
@@ -457,5 +458,30 @@ export class AdminApiClient {
       endpointName: "links/teams"
     });
     return this.client.get(path, {})
+  }
+
+  public listLogs(params: {
+    page: number,
+    size: number,
+    sort: Array<string>
+  }): Promise<Page<Log>> {
+    const path = buildPath({
+      endpointName: "logs"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public async clearLogs(): Promise<void> {
+    const path = buildPath({
+      endpointName: "logs/clear"
+    });
+    await this.client.get(path, {})
+  }
+
+  public latestLogs(top: number): Promise<Array<Log>> {
+    const path = buildPath({
+      endpointName: "logs/latest"
+    });
+    return this.client.get(path, { top })
   }
 }
