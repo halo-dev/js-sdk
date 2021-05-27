@@ -20,7 +20,8 @@ import {
   Journal,
   JournalType,
   JournalQuery,
-  JournalWithCmtCount
+  JournalWithCmtCount,
+  Link
 } from "./types";
 
 export class AdminApiClient {
@@ -409,10 +410,52 @@ export class AdminApiClient {
     await this.client.delete(path, {})
   }
 
-  public latestJournal(top: number): Promise<Response<Array<Journal>> {
+  public latestJournal(top: number): Promise<Response<Array<Journal>>> {
     const path = buildPath({
       endpointName: "journals/latest"
     });
     return this.client.get(path, { top })
+  }
+
+  public listLinks(sort?: Array<string>): Promise<Response<Array<Link>>> {
+    const path = buildPath({
+      endpointName: "links"
+    });
+    return this.client.get(path, { sort })
+  }
+
+  public createLink(params: Link): Promise<Response<Link>> {
+    const path = buildPath({
+      endpointName: "links"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public getLink(id: number): Promise<Response<Link>> {
+    const path = buildPath({
+      endpointName: `links/${id}`
+    });
+    return this.client.get(path, {})
+  }
+
+  public updateLink(params: Link): Promise<Response<Link>> {
+    const path = buildPath({
+      endpointName: `links/${params.id}`
+    });
+    return this.client.put(path, { ...params })
+  }
+
+  public async deleteLink(id: number): Promise<void> {
+    const path = buildPath({
+      endpointName: `links/${id}`
+    });
+    await this.client.delete(path, {})
+  }
+
+  public listLinkTeams(): Promise<Array<string>> {
+    const path = buildPath({
+      endpointName: "links/teams"
+    });
+    return this.client.get(path, {})
   }
 }

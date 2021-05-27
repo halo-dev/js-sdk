@@ -199,3 +199,13 @@ export interface JournalQuery extends PageQuery {
 export interface JournalWithCmtCount extends Journal {
   commentCount: number;
 }
+
+export type Link = {
+  id?: number;
+  name: string;
+  logo?: string;
+  priority?: number;
+  team?: string;
+  url?: string;
+  description?: string;
+}
