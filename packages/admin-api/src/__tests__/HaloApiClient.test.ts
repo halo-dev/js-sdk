@@ -1,6 +1,5 @@
 import { AdminApiClient, HaloRestAPIClient } from "../AdminApiClient";
 
-
 describe("Halo admin api test", () => {
   let client: AdminApiClient;
 
@@ -11,7 +10,7 @@ describe("Halo admin api test", () => {
         type: "customizeAuth",
         headerName: "Admin-Authorization",
         getToken() {
-          return "c16f10e1ca7040adbf8a921766234920"
+          return "73693a742e7645b781013d66d9c8f749"
         }
       }
     });

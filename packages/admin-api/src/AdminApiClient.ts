@@ -1,8 +1,9 @@
-import { HaloRestAPIClient, HttpClient } from "../../rest-api-client";
+import { HaloRestAPIClient, HttpClient, FormData } from "../../rest-api-client";
 import { buildPath } from "./url";
 import {
   Environment,
   Response,
+  Page,
   AccessToken,
   AttachmentQuery,
   Attachment
@@ -74,18 +75,73 @@ export class AdminApiClient {
     return this.client.post(path, {});
   }
 
-  public listAttachments(params: AttachmentQuery): Promise<Response<Attachment>> {
+  public getAttachment(attachmentId: number): Promise<Response<Attachment>> {
+    const path = buildPath({
+      endpointName: `attachments/${attachmentId}`
+    });
+    return this.client.get(path, {})
+  }
+
+  public listAttachments(params: AttachmentQuery): Promise<Page<Attachment>> {
     const path = buildPath({
       endpointName: "attachments"
     });
     return this.client.get(path, { ...params })
   }
 
-  public deleteAttachments(attachmentIds: Array<number>): Promise<Response<Attachment>> {
+  public deleteAttachments(attachmentIds: Array<number>): Promise<Response<Array<Attachment>>> {
     const path = buildPath({
       endpointName: "attachments"
     });
     return this.client.delete(path, attachmentIds)
+  }
+
+  public deleteAttachmentById(attachmentId: number): Promise<Response<Array<Attachment>>> {
+    const path = buildPath({
+      endpointName: `attachments/${attachmentId}`
+    });
+    return this.client.delete(path, {})
+  }
+
+  public updateAttachmentById(attachmentId: number, name: string): Promise<Response<Attachment>> {
+    const path = buildPath({
+      endpointName: `attachments/${attachmentId}`
+    });
+    return this.client.put(path, { name })
+  }
+
+  public listAttachmentMediaTypes(): Promise<Response<Array<string>>> {
+    const path = buildPath({
+      endpointName: `attachments/media_types`
+    });
+    return this.client.get(path, {})
+  }
+
+  public listAttachmentTypes(): Promise<Response<Array<string>>> {
+    const path = buildPath({
+      endpointName: `attachments/types`
+    });
+    return this.client.get(path, {})
+  }
+
+  public uploadAttachment(data: unknown): Promise<Response<Array<string>>> {
+    const path = buildPath({
+      endpointName: `attachments/upload`
+    });
+    const formData = new FormData()
+    formData.append("file", data)
+    return this.client.post(path, formData)
+  }
+
+  public uploadAttachments(data: Array<unknown>): Promise<Response<Array<string>>> {
+    const path = buildPath({
+      endpointName: `attachments/uploads`
+    });
+    const formData = new FormData()
+    data.forEach(fileStream => {
+      formData.append("files", fileStream)
+    })
+    return this.client.post(path, formData)
   }
 }
 

@@ -12,7 +12,7 @@ export interface PageQuery {
   sort?: Array<string>
 }
 
-export interface Page {
+export interface Page<T> extends Response<T> {
   hasContent: boolean;
   hasNext: boolean,
   hasPrevious: boolean,
@@ -43,7 +43,7 @@ export interface AttachmentQuery extends PageQuery {
   mediaType?: string;
 }
 
-export interface Attachment extends Page {
+export interface Attachment {
   id: number;
   createTime: string;
   fileKey: string;
