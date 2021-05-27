@@ -12,7 +12,7 @@ export interface PageQuery {
   sort?: Array<string>
 }
 
-export interface Page<T> extends Response<T> {
+export interface Page<T> extends Response<Page<T>> {
   hasContent: boolean;
   hasNext: boolean,
   hasPrevious: boolean,
@@ -21,7 +21,23 @@ export interface Page<T> extends Response<T> {
   page: number,
   pages: number,
   rpp: number,
-  total: number
+  total: number,
+  content: T
+}
+
+export interface UserParam {
+  username: string
+  nickname: string,
+  email: string,
+  password: string,
+  avatar: string,
+  description: string,
+}
+
+export interface InstallParam extends UserParam {
+  locale: string,
+  title: string,
+  url: string,
 }
 
 export type Environment = {
@@ -65,17 +81,15 @@ export type Backup = {
   updateTime: number
 }
 
-export enum PostStatus {
-  PUBLISHED = 0,
-  DRAFT = 1,
-  RECYCLE = 2,
-  INTIMATE = 3,
-}
+export type PostStatus =
+  | "PUBLISHED"
+  | "DRAFT"
+  | "RECYCLE"
+  | "INTIMATE";
 
-export enum PostEditorType {
-  MARKDOWN = 0,
-  RICHTEXT = 1
-}
+export type PostEditorType =
+  | "MARKDOWN"
+  | "RICHTEXT";
 
 export interface BasePostMinimal {
   id: number;
@@ -133,4 +147,47 @@ export type CategoryParam = {
   thumbnail?: string;
   password?: string;
   parentId?: number
+}
+
+export type CommentStatus =
+  | "PUBLISHED"
+  | "AUDITING"
+  | "RECYCLE";
+
+export interface BaseComment {
+  id?: number;
+  author: string;
+  email: string;
+  ipAddress: string;
+  authorUrl: string;
+  gravatarMd5: string;
+  content: string;
+  status: CommentStatus;
+  userAgent: string;
+  parentId: number;
+  isAdmin: boolean;
+  allowNotification: boolean;
+  createTime: number;
+  children?: BaseComment;
+}
+
+export type JournalType =
+  | "PUBLIC"
+  | "INTIMATE";
+
+export interface JournalCommentParam extends PageQuery {
+  status?: CommentStatus
+}
+
+export type Journal = {
+  id: number;
+  sourceContent: string;
+  content: string;
+  likes: number;
+  createTime: number;
+  type: JournalType;
+}
+
+export interface JournalCommentWithJournal extends BaseComment {
+  journal: Journal
 }

@@ -1,6 +1,7 @@
 import { HaloRestAPIClient, HttpClient, FormData } from "../../rest-api-client";
 import { buildPath } from "./url";
 import {
+  InstallParam,
   Environment,
   Response,
   Page,
@@ -11,7 +12,11 @@ import {
   BasePostDetail,
   Category,
   CategoryParam,
-  CategoryTree
+  CategoryTree,
+  BaseComment,
+  JournalCommentParam,
+  JournalCommentWithJournal,
+  CommentStatus
 } from "./types";
 
 export class AdminApiClient {
@@ -19,6 +24,13 @@ export class AdminApiClient {
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();
+  }
+
+  public install(params: InstallParam) {
+    const path = buildPath({
+      endpointName: "installations",
+    });
+    return this.client.post(path, { ...params });
   }
 
   public getEnvironment(): Promise<Response<Environment>> {
@@ -299,5 +311,65 @@ export class AdminApiClient {
       endpointName: "categories/tree_view"
     });
     return this.client.get(path, { sort })
+  }
+
+  public async listJournalComments(params: JournalCommentParam): Promise<Page<JournalCommentWithJournal>> {
+    const path = buildPath({
+      endpointName: "journals/comments"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public createJournalComment(params: BaseComment): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: "journals/comments"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public deleteJournalComment(commentId: number): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `journals/comments/${commentId}`
+    });
+    return this.client.delete(path, {})
+  }
+
+  public updateJournalComment(commentId: number, status: CommentStatus): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `journals/comments/${commentId}/status/${status}`
+    });
+    return this.client.put(path, {})
+  }
+
+  public listJournalCommentAsView(params: {
+    journalId: number,
+    sort?: Array<string>,
+    page?: number
+  }): Promise<Page<BaseComment>> {
+    const path = buildPath({
+      endpointName: `journals/comments/${params.journalId}/list_view`
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public listJournalCommentAsTree(params: {
+    journalId: number,
+    sort?: Array<string>,
+    page?: number
+  }): Promise<Page<BaseComment>> {
+    const path = buildPath({
+      endpointName: `journals/comments/${params.journalId}/tree_view`
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public listLatestJournalComment(params: {
+    top?: number,
+    status?: CommentStatus
+  }): Promise<Response<Array<BaseComment>>> {
+    const path = buildPath({
+      endpointName: "journals/comments/latest"
+    });
+    return this.client.get(path, { ...params })
   }
 }
