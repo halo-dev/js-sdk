@@ -484,4 +484,22 @@ export class AdminApiClient {
     });
     return this.client.get(path, { top })
   }
+
+  public testSmtpService(params: {
+    content: string,
+    subject: string,
+    to: string
+  }): Promise<Response<string>> {
+    const path = buildPath({
+      endpointName: "mails/test"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public testConnectToEmailServer(): Promise<Response<string>> {
+    const path = buildPath({
+      endpointName: "mails/test/connection"
+    });
+    return this.client.post(path, {})
+  }
 }
