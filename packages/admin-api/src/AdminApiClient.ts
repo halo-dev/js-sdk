@@ -23,7 +23,9 @@ import {
   JournalWithCmtCount,
   Link,
   Log,
-  Menu
+  Menu,
+  Option,
+  OptionQuery
 } from "./types";
 
 export class AdminApiClient {
@@ -590,4 +592,73 @@ export class AdminApiClient {
     await this.client.post(path, formData)
   }
 
+  public listOptions(): Promise<Response<Array<Option>>> {
+    const path = buildPath({
+      endpointName: "options"
+    });
+    return this.client.get(path, {})
+  }
+
+  public createOption(params: Option): Promise<Response<Option>> {
+    const path = buildPath({
+      endpointName: "options"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public getOption(id: number): Promise<Response<Option>> {
+    const path = buildPath({
+      endpointName: `options/${id}`
+    });
+    return this.client.get(path, {})
+  }
+
+  public updateOption(params: Option): Promise<Response<Option>> {
+    const path = buildPath({
+      endpointName: `options/${params.id}`
+    });
+    return this.client.put(path, { ...params })
+  }
+
+  public async deleteOption(params: Option): Promise<void> {
+    const path = buildPath({
+      endpointName: `options/${params.id}`
+    });
+    await this.client.delete(path, {})
+  }
+
+  public listOptionsListView(params: OptionQuery): Promise<Response<Array<Option>>> {
+    const path = buildPath({
+      endpointName: "options/list_view"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public listOptionsMapView(): Promise<Response<Map<string, any>>> {
+    const path = buildPath({
+      endpointName: "options/map_view"
+    });
+    return this.client.get(path, {})
+  }
+
+  public listOptionsMapViewByKeys(params: Array<string>): Promise<Response<Map<string, any>>> {
+    const path = buildPath({
+      endpointName: "options/map_view/keys"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public async saveOptionsMapView(params: any): Promise<void> {
+    const path = buildPath({
+      endpointName: "options/map_view/saving"
+    });
+    await this.client.post(path, { ...params })
+  }
+
+  public async saveOptions(params: Array<Option>): Promise<void> {
+    const path = buildPath({
+      endpointName: "options/saving"
+    });
+    await this.client.post(path, [...params])
+  }
 }

@@ -246,3 +246,18 @@ export type Menu = {
   team?: string;
   children?: Array<Menu>
 }
+
+export type OptionType =
+  | "INTERNAL"
+  | "CUSTOM";
+
+export type Option = {
+  id?: number;
+  key: string;
+  value?: any;
+  type?: OptionType;
+}
+
+export interface OptionQuery extends PageQuery {
+  type?: OptionType;
+}
