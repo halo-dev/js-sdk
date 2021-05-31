@@ -11,7 +11,7 @@ describe("Halo admin api test", () => {
         type: "customizeAuth",
         headerName: "Admin-Authorization",
         getToken() {
-          return "73693a742e7645b781013d66d9c8f749"
+          return "2a306784371a44818cbb5fb45c35592d"
         }
       }
     });
@@ -41,4 +41,8 @@ describe("Halo admin api test", () => {
     console.log(result)
   })
 
+  it("listAttachments", async () => {
+    let result = await client.listMenusTreeView();
+    console.log(result)
+  })
 });

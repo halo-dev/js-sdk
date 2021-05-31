@@ -144,7 +144,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   }
 
   private buildRequestUrl(path: string, params: Data): string {
-    return `${this.baseUrl}${path}?${qs.stringify(params)}`;
+    return `${this.baseUrl}${path}?${qs.stringify(params, { indices: false })}`;
   }
 
   private async buildData<T extends Data>(params: T): Promise<T> {

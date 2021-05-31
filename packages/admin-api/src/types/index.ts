@@ -234,3 +234,15 @@ export type Log = {
   ipAddress: string;
   createTime: number;
 }
+
+export type Menu = {
+  id?: number;
+  name: string;
+  url: string;
+  priority?: number;
+  target?: string;
+  icon?: string;
+  parentId?: number;
+  team?: string;
+  children?: Array<Menu>
+}

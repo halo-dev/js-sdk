@@ -22,7 +22,8 @@ import {
   JournalQuery,
   JournalWithCmtCount,
   Link,
-  Log
+  Log,
+  Menu
 } from "./types";
 
 export class AdminApiClient {
@@ -502,4 +503,82 @@ export class AdminApiClient {
     });
     return this.client.post(path, {})
   }
+
+  public listAllMenus(): Promise<Response<Array<Menu>>> {
+    const path = buildPath({
+      endpointName: "menus"
+    });
+    return this.client.get(path, {})
+  }
+
+  public createMenu(params: Menu): Promise<Response<Menu>> {
+    const path = buildPath({
+      endpointName: "menus"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public createMenus(params: Array<Menu>): Promise<Response<Array<Menu>>> {
+    const path = buildPath({
+      endpointName: "menus/batch"
+    });
+    return this.client.post(path, [...params])
+  }
+
+  public getMenu(menuId: number): Promise<Response<Menu>> {
+    const path = buildPath({
+      endpointName: `menus/${menuId}`
+    });
+    return this.client.post(path, {})
+  }
+
+  public updateMenu(params: Menu): Promise<Response<Menu>> {
+    const path = buildPath({
+      endpointName: `menus/${params.id}`
+    });
+    return this.client.put(path, { ...params })
+  }
+
+  public updateMenus(params: Array<Menu>): Promise<Response<Array<Menu>>> {
+    const path = buildPath({
+      endpointName: "menus/batch"
+    });
+    return this.client.put(path, [...params])
+  }
+
+  public async deleteMenu(menuId: number): Promise<void> {
+    const path = buildPath({
+      endpointName: `menus/${menuId}`
+    });
+    await this.client.delete(path, {})
+  }
+
+  public async deleteMenus(menuIds: Array<number>): Promise<void> {
+    const path = buildPath({
+      endpointName: "menus/batch"
+    });
+    await this.client.delete(path, [...menuIds])
+  }
+
+  public listMenusTreeViewByTeam(team: string, sort?: Array<string>): Promise<Response<Array<Menu>>> {
+    const path = buildPath({
+      endpointName: "menus/team/tree_view"
+    });
+    return this.client.get(path, { team, sort })
+  }
+
+  public listMenuTeams(): Promise<Response<Array<string>>> {
+    const path = buildPath({
+      endpointName: "menus/teams"
+    });
+    return this.client.get(path, {})
+  }
+
+  public listMenusTreeView(sort?: Array<string>): Promise<Response<Array<Menu>>> {
+    const path = buildPath({
+      endpointName: "menus/tree_view"
+    });
+    return this.client.get(path, { sort })
+  }
+
 }
