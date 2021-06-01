@@ -295,3 +295,94 @@ export interface PostCommentWithPost extends BaseComment {
 export interface CommentQuery extends PageQuery {
   status?: CommentQuery;
 }
+
+export interface PostQuery extends PageQuery {
+  categoryId?: number;
+  status?: PostStatus;
+  more?: boolean;
+}
+
+export type BaseMetaParam = {
+  postId: number;
+  key: string;
+  value: string;
+}
+
+export type BaseMeta = {
+  id: number;
+  postId: number;
+  key: string;
+  value: string;
+  createTime: number;
+}
+
+export interface PostMetaParam extends BaseMetaParam {
+
+}
+
+export type Tag = {
+  id: number;
+  name: string;
+  slug: string;
+  thumbnail: string;
+  createTime: string;
+  fullPath: string;
+}
+
+export type PostParam = {
+  title: string;
+  status?: PostStatus;
+  slug?: string;
+  editorType?: PostEditorType;
+  originalContent?: string;
+  summary?: string;
+  thumbnail?: string;
+  disallowComment?: boolean;
+  password?: string;
+  template?: string;
+  topPriority?: number;
+  createTime?: number;
+  metaKeywords?: string;
+  metaDescription?: string;
+  tagIds?: Array<number>;
+  categoryIds?: Array<number>;
+  metas?: Array<PostMetaParam>
+}
+
+export interface BasePostDetail extends BasePostSimple {
+  originalContent: string;
+  formatContent: string;
+  commentCount: string;
+}
+
+export type Post = {
+  id: number;
+  title: string;
+  status: PostStatus;
+  url: string;
+  slug: string;
+  editorType: PostEditorType;
+  originalContent: string;
+  formatContent: string;
+  summary: string;
+  thumbnail: string;
+  visits: number;
+  disallowComment: boolean;
+  password: string;
+  template: string;
+  topPriority: number;
+  likes: number;
+  editTime: number;
+  metaKeywords: string;
+  metaDescription: string;
+  wordCount: number;
+}
+
+export interface PostDetail extends BasePostDetail {
+  tagIds: Array<number>;
+  tags: Array<Tag>;
+  categoryIds: Array<number>;
+  categories: Array<Category>;
+  metaIds: Array<number>;
+  metas: Array<BaseMeta>;
+}

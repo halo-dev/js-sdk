@@ -30,7 +30,15 @@ import {
   Photo,
   PhotoQuery,
   PostCommentWithPost,
-  CommentQuery
+  CommentQuery,
+  PostQuery,
+  BasePostSimple,
+  PostParam,
+  Post,
+  PostDetail,
+  PostStatus,
+  BasePostMinimal,
+  PageQuery
 } from "./types";
 
 export class AdminApiClient {
@@ -798,4 +806,99 @@ export class AdminApiClient {
     return this.client.delete(path, postCommentIds)
   }
 
+  public listPosts(params: PostQuery): Promise<Page<BasePostSimple>> {
+    const path = buildPath({
+      endpointName: "posts"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public getPost(postId: number): Promise<Page<PostDetail>> {
+    const path = buildPath({
+      endpointName: `posts/${postId}`
+    });
+    return this.client.get(path, {})
+  }
+
+  public getPostPreviewLink(postId: number): Promise<Response<string>> {
+    const path = buildPath({
+      endpointName: `posts/${postId}/preview`
+    });
+    return this.client.get(path, {})
+  }
+
+  public latestPosts(top?: number): Promise<Response<Array<BasePostMinimal>>> {
+    const path = buildPath({
+      endpointName: "posts/latest"
+    });
+    return this.client.get(path, { top })
+  }
+
+  public listPostsByStatus(status: PostStatus, query?: PostQuery): Promise<Page<BasePostSimple>> {
+    const path = buildPath({
+      endpointName: `posts/status/${status}`
+    });
+    return this.client.get(path, { ...query })
+  }
+
+  public createPost(params: PostParam): Promise<Response<PostDetail>> {
+    const path = buildPath({
+      endpointName: "posts"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public updatePost(params: {
+    postId: number;
+    autoSave?: boolean;
+    post: PostParam;
+  }): Promise<Response<PostDetail>> {
+    const path = buildPath({
+      endpointName: `posts/${params.postId}`
+    });
+    return this.client.put(path, { ...params })
+  }
+
+  public updatePostStatus(postId: number, status: PostStatus): Promise<Response<BasePostMinimal>> {
+    const path = buildPath({
+      endpointName: `posts/${postId}/status/${status}`
+    });
+    return this.client.put(path, {})
+  }
+
+  public updatePostsStatus(postIds: Array<number>, status: PostStatus): Promise<Response<Array<Post>>> {
+    const path = buildPath({
+      endpointName: `posts/status/${status}`
+    });
+    return this.client.put(path, postIds)
+  }
+
+  public updatePostDraft(postId: number, content?: string): Promise<Response<BasePostMinimal>> {
+    const path = buildPath({
+      endpointName: `posts/${postId}/status/draft/content`
+    });
+    return this.client.put(path, { content })
+  }
+
+
+  public async likePost(postId: number): Promise<void> {
+    const path = buildPath({
+      endpointName: `posts/${postId}/likes`
+    });
+    await this.client.put(path, {})
+  }
+
+  public deletePost(postId: number): Promise<Response<Post>> {
+    const path = buildPath({
+      endpointName: `posts/${postId}`
+    });
+    return this.client.delete(path, {})
+  }
+
+  public deletePosts(postIds: Array<number>): Promise<Response<Array<Post>>> {
+    const path = buildPath({
+      endpointName: "posts"
+    });
+    return this.client.delete(path, postIds)
+  }
 }
