@@ -154,8 +154,19 @@ export type CommentStatus =
   | "AUDITING"
   | "RECYCLE";
 
-export interface BaseComment {
+export type BaseCommentParam = {
   id?: number;
+  author: string;
+  email: string;
+  authorUrl?: string;
+  content: string;
+  postId?: number;
+  parentId?: number;
+  allowNotification?: boolean;
+}
+
+export interface BaseComment {
+  id: number;
   author: string;
   email: string;
   ipAddress: string;
@@ -175,7 +186,7 @@ export type JournalType =
   | "PUBLIC"
   | "INTIMATE";
 
-export interface JournalCommentParam extends PageQuery {
+export interface JournalCommentQuery extends PageQuery {
   status?: CommentStatus
 }
 
@@ -193,7 +204,7 @@ export interface JournalCommentWithJournal extends BaseComment {
 }
 
 export interface JournalQuery extends PageQuery {
-  type: JournalType
+  type?: JournalType
 }
 
 export interface JournalWithCmtCount extends Journal {
@@ -275,4 +286,12 @@ export type Photo = {
 
 export interface PhotoQuery extends PageQuery {
   team?: string;
+}
+
+export interface PostCommentWithPost extends BaseComment {
+  post: BasePostMinimal;
+}
+
+export interface CommentQuery extends PageQuery {
+  status?: CommentQuery;
 }

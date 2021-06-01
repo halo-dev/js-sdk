@@ -14,7 +14,8 @@ import {
   CategoryParam,
   CategoryTree,
   BaseComment,
-  JournalCommentParam,
+  BaseCommentParam,
+  JournalCommentQuery,
   JournalCommentWithJournal,
   CommentStatus,
   Journal,
@@ -27,7 +28,9 @@ import {
   Option,
   OptionQuery,
   Photo,
-  PhotoQuery
+  PhotoQuery,
+  PostCommentWithPost,
+  CommentQuery
 } from "./types";
 
 export class AdminApiClient {
@@ -324,14 +327,14 @@ export class AdminApiClient {
     return this.client.get(path, { sort })
   }
 
-  public async listJournalComments(params: JournalCommentParam): Promise<Page<JournalCommentWithJournal>> {
+  public async listJournalComments(params: JournalCommentQuery): Promise<Page<JournalCommentWithJournal>> {
     const path = buildPath({
       endpointName: "journals/comments"
     });
     return this.client.get(path, { ...params })
   }
 
-  public createJournalComment(params: BaseComment): Promise<Response<BaseComment>> {
+  public createJournalComment(params: BaseCommentParam): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: "journals/comments"
     });
@@ -712,4 +715,87 @@ export class AdminApiClient {
     });
     return this.client.get(path, {})
   }
+
+  public listPostComments(params: CommentQuery): Promise<Page<PostCommentWithPost>> {
+    const path = buildPath({
+      endpointName: "posts/comments"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public listPostCommentsWithListView(params: {
+    postId: number;
+    sort?: Array<string>;
+    page?: number;
+  }): Promise<Page<BaseComment>> {
+    const path = buildPath({
+      endpointName: `posts/comments/${params.postId}/list_view`
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public listPostCommentsWithTreeView(params: {
+    postId: number;
+    sort?: Array<string>;
+    page?: number;
+  }): Promise<Page<BaseComment>> {
+    const path = buildPath({
+      endpointName: `posts/comments/${params.postId}/tree_view`
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public latestPostComments(params: {
+    top?: number;
+    status?: CommentStatus;
+  }): Promise<Response<Array<PostCommentWithPost>>> {
+    const path = buildPath({
+      endpointName: "posts/comments/latest"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public createPostComment(params: BaseCommentParam): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: "posts/comments"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public updatePostComment(params: BaseCommentParam): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `posts/comments/${params.id}`
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public updatePostCommentStatus(commentId: number, status: CommentStatus): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `posts/comments/${commentId}/status/${status}`
+    });
+    return this.client.put(path, {})
+  }
+
+  public updatePostCommentsStatus(commentIds: Array<number>,
+    status: CommentStatus): Promise<Response<Array<BaseComment>>> {
+    const path = buildPath({
+      endpointName: `posts/comments/status/${status}`
+    });
+    return this.client.put(path, commentIds)
+  }
+
+  public deletePostComment(commentId: number): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `posts/comments/${commentId}`
+    });
+    return this.client.delete(path, {})
+  }
+
+  public deletePostComments(postCommentIds: Array<number>): Promise<Response<Array<BaseComment>>> {
+    const path = buildPath({
+      endpointName: "posts/comments"
+    });
+    return this.client.delete(path, postCommentIds)
+  }
+
 }
