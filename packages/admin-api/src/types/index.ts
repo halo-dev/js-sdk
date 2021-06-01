@@ -261,3 +261,18 @@ export type Option = {
 export interface OptionQuery extends PageQuery {
   type?: OptionType;
 }
+
+export type Photo = {
+  id?: number;
+  name: string;
+  thumbnail: string;
+  takeTime?: number;
+  url: string;
+  team?: string;
+  location?: string;
+  description?: string;
+}
+
+export interface PhotoQuery extends PageQuery {
+  team?: string;
+}

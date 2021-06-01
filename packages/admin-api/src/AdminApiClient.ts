@@ -25,7 +25,9 @@ import {
   Log,
   Menu,
   Option,
-  OptionQuery
+  OptionQuery,
+  Photo,
+  PhotoQuery
 } from "./types";
 
 export class AdminApiClient {
@@ -660,5 +662,54 @@ export class AdminApiClient {
       endpointName: "options/saving"
     });
     await this.client.post(path, [...params])
+  }
+
+  public listPhotos(params: PhotoQuery): Promise<Page<Photo>> {
+    const path = buildPath({
+      endpointName: "photos"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public createPhoto(params: Photo): Promise<Response<Photo>> {
+    const path = buildPath({
+      endpointName: "photos"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public getPhoto(photoId: number): Promise<Response<Photo>> {
+    const path = buildPath({
+      endpointName: `photos/${photoId}`
+    });
+    return this.client.get(path, {})
+  }
+
+  public updatePhoto(params: Photo): Promise<Response<Photo>> {
+    const path = buildPath({
+      endpointName: `photos/${params.id}`
+    });
+    return this.client.put(path, { ...params })
+  }
+
+  public async deletePhoto(photoId: number): Promise<void> {
+    const path = buildPath({
+      endpointName: `photos/${photoId}`
+    });
+    await this.client.delete(path, {})
+  }
+
+  public latestPhotos(sort?: Array<string>): Promise<Response<Array<Photo>>> {
+    const path = buildPath({
+      endpointName: "photos/latest"
+    });
+    return this.client.get(path, { sort })
+  }
+
+  public listPhotoTeams(): Promise<Response<Array<string>>> {
+    const path = buildPath({
+      endpointName: "photos/teams"
+    });
+    return this.client.get(path, {})
   }
 }
