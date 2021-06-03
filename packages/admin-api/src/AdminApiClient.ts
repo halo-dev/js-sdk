@@ -38,7 +38,8 @@ import {
   PostDetail,
   PostStatus,
   BasePostMinimal,
-  PageQuery
+  SheetCommentWithSheet,
+  BaseCommentWithParent
 } from "./types";
 
 export class AdminApiClient {
@@ -900,5 +901,97 @@ export class AdminApiClient {
       endpointName: "posts"
     });
     return this.client.delete(path, postIds)
+  }
+
+  public listSheetComments(params: CommentQuery): Promise<Page<SheetCommentWithSheet>> {
+    const path = buildPath({
+      endpointName: "sheets/comments"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public getSheetComment(commentId: number): Promise<Response<SheetCommentWithSheet>> {
+    const path = buildPath({
+      endpointName: `sheets/comments/${commentId}`
+    });
+    return this.client.get(path, {})
+  }
+
+  public listSheetCommentWithListView(params: {
+    sheetId: number;
+    sort?: Array<string>;
+    page?: number;
+  }): Promise<Page<BaseCommentWithParent>> {
+    const path = buildPath({
+      endpointName: `sheets/comments/${params.sheetId}/list_view`
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public listSheetCommentWithTreeView(params: {
+    sheetId: number;
+    sort?: Array<string>;
+    page?: number;
+  }): Promise<Page<BaseComment>> {
+    const path = buildPath({
+      endpointName: `sheets/comments/${params.sheetId}/tree_view`
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public latestSheetComments(params: {
+    top?: number;
+    status?: CommentStatus;
+  }): Promise<Response<Array<SheetCommentWithSheet>>> {
+    const path = buildPath({
+      endpointName: "sheets/comments/latest"
+    });
+    return this.client.get(path, { ...params })
+  }
+
+  public createSheetComment(params: BaseCommentParam): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: "sheets/comments"
+    });
+    return this.client.post(path, { ...params })
+  }
+
+  public updateSheetComment(params: BaseCommentParam): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `sheets/comments/${params.id}`
+    });
+    return this.client.put(path, { ...params })
+  }
+
+  public updateSheetCommentStatus(params: {
+    commentId: number;
+    status: CommentStatus;
+  }): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `​sheets​/comments​/${params.commentId}​/status​/${params.status}`
+    });
+    return this.client.put(path, {})
+  }
+
+  public updateSheetCommentsStatus(commentIds: Array<number>,
+    status: CommentStatus): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `​sheets​/comments​​/status​/${status}`
+    });
+    return this.client.put(path, commentIds)
+  }
+
+  public deleteSheetComments(commentIds: Array<number>): Promise<Response<Array<BaseComment>>> {
+    const path = buildPath({
+      endpointName: "sheets​/comments​​"
+    });
+    return this.client.delete(path, commentIds)
+  }
+
+  public deleteSheetComment(commentId: number): Promise<Response<BaseComment>> {
+    const path = buildPath({
+      endpointName: `sheets​/comments​​/${commentId}`
+    });
+    return this.client.delete(path, {})
   }
 }

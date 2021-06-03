@@ -182,6 +182,10 @@ export interface BaseComment {
   children?: BaseComment;
 }
 
+export interface BaseCommentWithParent extends BaseComment {
+  parent: BaseCommentWithParent;
+}
+
 export type JournalType =
   | "PUBLIC"
   | "INTIMATE";
@@ -385,4 +389,8 @@ export interface PostDetail extends BasePostDetail {
   categories: Array<Category>;
   metaIds: Array<number>;
   metas: Array<BaseMeta>;
+}
+
+export interface SheetCommentWithSheet extends BaseComment {
+  sheet: BasePostMinimal;
 }
