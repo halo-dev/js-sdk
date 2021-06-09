@@ -1,11 +1,11 @@
 {
-  "name": "@halo/rest-api-client",
-  "version": "1.0.0",
+  "name": "@guching/rest-api-client",
+  "version": "1.0.1",
   "publishConfig": {
     "access": "public"
   },
   "description": "Halo REST API client for JavaScript",
-  "private": true,
+  "private": false,
   "main": "lib/index.js",
   "module": "esm/index.js",
   "browser": "lib/index.browser.js",

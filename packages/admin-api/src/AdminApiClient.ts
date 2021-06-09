@@ -1,4 +1,5 @@
-import { HaloRestAPIClient, HttpClient, FormData } from "../../rest-api-client";
+// import { HaloRestAPIClient, HttpClient, FormData } from "../../rest-api-client";
+import { HaloRestAPIClient, HttpClient, FormData } from "@guching/rest-api-client";
 import { buildPath } from "./url";
 import {
   InstallParam,
@@ -86,9 +87,9 @@ export class AdminApiClient {
 
   public sendResetPasswordCode(params: {
     username: string
-    email: string,
-    code?: string,
-    password?: string,
+    email: string
+    code?: string
+    password?: string
   }): void {
     const path = buildPath({
       endpointName: "password/code",
@@ -98,9 +99,9 @@ export class AdminApiClient {
 
   public resetPassword(params: {
     username: string
-    email: string,
-    code?: string,
-    password?: string,
+    email: string
+    code?: string
+    password?: string
   }): void {
     const path = buildPath({
       endpointName: "password/reset",
@@ -292,8 +293,8 @@ export class AdminApiClient {
   }
 
   public listCategories(params: {
-    sort: Array<string>;
-    more: boolean;
+    sort: Array<string>
+    more: boolean
   }): Promise<Response<Array<Category>>> {
     const path = buildPath({
       endpointName: "categories"
@@ -365,8 +366,8 @@ export class AdminApiClient {
   }
 
   public listJournalCommentAsView(params: {
-    journalId: number,
-    sort?: Array<string>,
+    journalId: number
+    sort?: Array<string>
     page?: number
   }): Promise<Page<BaseComment>> {
     const path = buildPath({
@@ -376,8 +377,8 @@ export class AdminApiClient {
   }
 
   public listJournalCommentAsTree(params: {
-    journalId: number,
-    sort?: Array<string>,
+    journalId: number
+    sort?: Array<string>
     page?: number
   }): Promise<Page<BaseComment>> {
     const path = buildPath({
@@ -387,7 +388,7 @@ export class AdminApiClient {
   }
 
   public latestJournalComment(params: {
-    top?: number,
+    top?: number
     status?: CommentStatus
   }): Promise<Response<Array<BaseComment>>> {
     const path = buildPath({
@@ -411,8 +412,8 @@ export class AdminApiClient {
   }
 
   public updateJournal(params: {
-    journalId: number,
-    sourceContent: string,
+    journalId: number
+    sourceContent: string
     type?: JournalType
   }): Promise<Response<Journal>> {
     const path = buildPath({
@@ -478,8 +479,8 @@ export class AdminApiClient {
   }
 
   public listLogs(params: {
-    page: number,
-    size: number,
+    page: number
+    size: number
     sort: Array<string>
   }): Promise<Page<Log>> {
     const path = buildPath({
@@ -503,8 +504,8 @@ export class AdminApiClient {
   }
 
   public testSmtpService(params: {
-    content: string,
-    subject: string,
+    content: string
+    subject: string
     to: string
   }): Promise<Response<string>> {
     const path = buildPath({
@@ -733,9 +734,9 @@ export class AdminApiClient {
   }
 
   public listPostCommentsWithListView(params: {
-    postId: number;
-    sort?: Array<string>;
-    page?: number;
+    postId: number
+    sort?: Array<string>
+    page?: number
   }): Promise<Page<BaseComment>> {
     const path = buildPath({
       endpointName: `posts/comments/${params.postId}/list_view`
@@ -744,9 +745,9 @@ export class AdminApiClient {
   }
 
   public listPostCommentsWithTreeView(params: {
-    postId: number;
-    sort?: Array<string>;
-    page?: number;
+    postId: number
+    sort?: Array<string>
+    page?: number
   }): Promise<Page<BaseComment>> {
     const path = buildPath({
       endpointName: `posts/comments/${params.postId}/tree_view`
@@ -755,8 +756,8 @@ export class AdminApiClient {
   }
 
   public latestPostComments(params: {
-    top?: number;
-    status?: CommentStatus;
+    top?: number
+    status?: CommentStatus
   }): Promise<Response<Array<PostCommentWithPost>>> {
     const path = buildPath({
       endpointName: "posts/comments/latest"
@@ -850,9 +851,9 @@ export class AdminApiClient {
   }
 
   public updatePost(params: {
-    postId: number;
-    autoSave?: boolean;
-    post: PostParam;
+    postId: number
+    autoSave?: boolean
+    post: PostParam
   }): Promise<Response<PostDetail>> {
     const path = buildPath({
       endpointName: `posts/${params.postId}`
@@ -918,9 +919,9 @@ export class AdminApiClient {
   }
 
   public listSheetCommentWithListView(params: {
-    sheetId: number;
-    sort?: Array<string>;
-    page?: number;
+    sheetId: number
+    sort?: Array<string>
+    page?: number
   }): Promise<Page<BaseCommentWithParent>> {
     const path = buildPath({
       endpointName: `sheets/comments/${params.sheetId}/list_view`
@@ -929,9 +930,9 @@ export class AdminApiClient {
   }
 
   public listSheetCommentWithTreeView(params: {
-    sheetId: number;
-    sort?: Array<string>;
-    page?: number;
+    sheetId: number
+    sort?: Array<string>
+    page?: number
   }): Promise<Page<BaseComment>> {
     const path = buildPath({
       endpointName: `sheets/comments/${params.sheetId}/tree_view`
@@ -940,8 +941,8 @@ export class AdminApiClient {
   }
 
   public latestSheetComments(params: {
-    top?: number;
-    status?: CommentStatus;
+    top?: number
+    status?: CommentStatus
   }): Promise<Response<Array<SheetCommentWithSheet>>> {
     const path = buildPath({
       endpointName: "sheets/comments/latest"
@@ -964,8 +965,8 @@ export class AdminApiClient {
   }
 
   public updateSheetCommentStatus(params: {
-    commentId: number;
-    status: CommentStatus;
+    commentId: number
+    status: CommentStatus
   }): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `​sheets​/comments​/${params.commentId}​/status​/${params.status}`

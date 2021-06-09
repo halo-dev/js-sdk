@@ -2,11 +2,15 @@
   "extends": "../tsconfig-base.json",
   "compilerOptions": {
     "lib": ["es2015", "dom"],
-    "outDir": "./dist",
+    "allowJs": true,
+    "checkJs": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "outDir": "./lib",
     "rootDir": "./src",
-    "resolveJsonModule": true
+    "typeRoots": ["node_modules/@types", "types", "../../node_modules/@types",]
   },
-  "references": [
-    { "path": "../rest-api-client" }
-  ]
+  "include": ["src/"],
+  "exclude": ["node_modules"],
 }

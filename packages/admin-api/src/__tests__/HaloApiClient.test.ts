@@ -1,17 +1,17 @@
 import { AdminApiClient } from "../AdminApiClient";
-import { HaloRestAPIClient } from "../../../rest-api-client";
+import { HaloRestAPIClient } from "@guching/rest-api-client";
 
 describe("Halo admin api test", () => {
   let client: AdminApiClient;
 
   beforeEach(() => {
-    let haloRestApiClient = new HaloRestAPIClient({
+    const haloRestApiClient = new HaloRestAPIClient({
       baseUrl: "http://127.0.0.1:8090",
       auth: {
         type: "customizeAuth",
         headerName: "Admin-Authorization",
         getToken() {
-          return "2a306784371a44818cbb5fb45c35592d"
+          return "b84681a66bd14865a0179367d3406b04"
         }
       }
     });
@@ -19,22 +19,22 @@ describe("Halo admin api test", () => {
   })
 
   it("getEnvironment", async () => {
-    let result = await client.getEnvironment();
+    const result = await client.getEnvironment();
     console.log(result)
   })
 
   it("getLogFile", async () => {
-    let result = await client.getLogFile(10);
+    const result = await client.getLogFile(10);
     expect(result).toStrictEqual({ status: 200, message: 'OK', devMessage: null, data: '' })
   })
 
   it("isInstalled", async () => {
-    let result = await client.isInstalled();
+    const result = await client.isInstalled();
     console.log(result)
   })
 
   it("listAttachments", async () => {
-    let result = await client.listAttachments({
+    const result = await client.listAttachments({
       page: 1,
       size: 20
     });
@@ -42,7 +42,7 @@ describe("Halo admin api test", () => {
   })
 
   it("listAttachments", async () => {
-    let result = await client.listMenusTreeView();
+    const result = await client.listMenusTreeView();
     console.log(result)
   })
 });
