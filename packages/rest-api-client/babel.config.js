@@ -1,6 +1,6 @@
 module.exports = {
   presets: [
-    '@babel/env',
-    '@babel/typescript'
-  ]
-}
+    ["@babel/preset-env", { targets: { node: "current" } }],
+    "@babel/preset-typescript",
+  ],
+};
