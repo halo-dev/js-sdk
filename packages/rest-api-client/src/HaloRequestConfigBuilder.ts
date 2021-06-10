@@ -19,15 +19,15 @@ const THRESHOLD_AVOID_REQUEST_URL_TOO_LARGE = 4096;
 export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private baseUrl: string;
   private headers: any;
-  private auth: DiscriminatedAuth;
+  private auth?: DiscriminatedAuth;
   private clientCertAuth?:
     | {
-      pfx: Buffer;
-      password: string;
+      pfx: Buffer
+      password: string
     }
     | {
-      pfxFilePath: string;
-      password: string;
+      pfxFilePath: string
+      password: string
     };
   private proxy?: ProxyConfig;
   private requestToken: string | null;
@@ -40,20 +40,20 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     proxy,
     userAgent,
   }: {
-    baseUrl: string;
-    auth: DiscriminatedAuth;
-    basicAuth?: BasicAuth;
+    baseUrl: string
+    auth?: DiscriminatedAuth
+    basicAuth?: BasicAuth
     clientCertAuth?:
     | {
-      pfx: Buffer;
-      password: string;
+      pfx: Buffer
+      password: string
     }
     | {
-      pfxFilePath: string;
-      password: string;
-    };
-    proxy?: ProxyConfig;
-    userAgent?: string;
+      pfxFilePath: string
+      password: string
+    }
+    proxy?: ProxyConfig
+    userAgent?: string
   }) {
     this.baseUrl = baseUrl;
     this.auth = auth;
@@ -148,7 +148,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   }
 
   private async buildData<T extends Data>(params: T): Promise<T> {
-    if (this.auth.type === "session") {
+    if (this.auth && this.auth.type === "session") {
       const requestToken = await this.getRequestToken();
       if (params instanceof FormData) {
         params.append(SESSION_TOKEN_KEY, requestToken);
@@ -163,8 +163,8 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   }
 
   private buildHeaders(params: {
-    basicAuth?: BasicAuth;
-    userAgent?: string;
+    basicAuth?: BasicAuth
+    userAgent?: string
   }): any {
     const { basicAuth, userAgent } = params;
     const basicAuthHeaders = basicAuth
@@ -176,6 +176,9 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
       : {};
     const platformDepsHeaders = platformDeps.buildHeaders({ userAgent });
     const commonHeaders = { ...platformDepsHeaders, ...basicAuthHeaders };
+    if (!this.auth) {
+      return
+    }
 
     switch (this.auth.type) {
       case "password": {

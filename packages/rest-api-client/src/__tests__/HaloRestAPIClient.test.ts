@@ -56,6 +56,7 @@ describe("HaloRestAPIClient", () => {
   describe("version", () => {
     it("should provide this library version", () => {
       expect(HaloRestAPIClient.version).toBe(
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         require("../../package.json").version
       );
     });

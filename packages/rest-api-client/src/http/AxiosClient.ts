@@ -15,8 +15,8 @@ export class AxiosClient implements HttpClient {
     responseHandler,
     requestConfigBuilder,
   }: {
-    responseHandler: ResponseHandler;
-    requestConfigBuilder: RequestConfigBuilder;
+    responseHandler: ResponseHandler
+    requestConfigBuilder: RequestConfigBuilder
   }) {
     this.responseHandler = responseHandler;
     this.requestConfigBuilder = requestConfigBuilder;
