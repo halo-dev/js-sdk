@@ -1,32 +1,32 @@
 type AdminTokenAuth = {
-  type: "adminToken";
-  adminToken: string;
+  type: "adminToken"
+  adminToken: string
 };
 
 type ApiTokenAuth = {
-  type: "apiToken";
-  apiToken: string | string[];
+  type: "apiToken"
+  apiToken: string | string[]
 };
 
 type PasswordAuth = {
-  type: "password";
-  username: string;
-  password: string;
+  type: "password"
+  username: string
+  password: string
 };
 
 type SessionAuth = {
-  type: "session";
+  type: "session"
 };
 
 type OAuthTokenAuth = {
-  type: "oAuthToken";
-  oAuthToken: string;
+  type: "oAuthToken"
+  oAuthToken: string
 };
 
 export type CustomizeAuth = {
-  type: "customizeAuth",
-  headerName: string;
-  getToken(): string;
+  type: "customizeAuth"
+  headerName: string
+  getToken(): string
 }
 
 export type DiscriminatedAuth =
@@ -38,8 +38,8 @@ export type DiscriminatedAuth =
   | CustomizeAuth;
 
 export type BasicAuth = {
-  username: string;
-  password: string;
+  username: string
+  password: string
 };
 
 export const SESSION_TOKEN_KEY = "__REQUEST_TOKEN__";

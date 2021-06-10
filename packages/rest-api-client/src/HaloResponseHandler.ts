@@ -7,7 +7,6 @@ import {
 import { HaloRestAPIError, HaloErrorResponse } from "./error/HaloRestAPIError";
 
 export class HaloResponseHandler implements ResponseHandler {
-  constructor() { }
 
   handle<T>(response: Promise<HttpResponse<T>>): Promise<T> {
     return response.then(

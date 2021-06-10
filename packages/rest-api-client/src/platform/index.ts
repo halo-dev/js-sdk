@@ -2,14 +2,14 @@ import { DiscriminatedAuth } from "../types/auth";
 type PlatformDeps = {
   readFileFromPath: (
     filePath: string
-  ) => Promise<{ name: string; data: unknown }>;
-  getRequestToken: () => Promise<string>;
-  getDefaultAuth: () => DiscriminatedAuth;
-  buildPlatformDependentConfig: (params: object) => object;
-  buildHeaders: (params: { userAgent?: string }) => Record<string, string>;
-  buildFormDataValue: (data: unknown) => unknown;
-  buildBaseUrl: (baseUrl?: string) => string;
-  getVersion: () => string;
+  ) => Promise<{ name: string, data: unknown }>
+  getRequestToken: () => Promise<string>
+  getDefaultAuth: () => DiscriminatedAuth
+  buildPlatformDependentConfig: (params: object) => object
+  buildHeaders: (params: { userAgent?: string }) => Record<string, string>
+  buildFormDataValue: (data: unknown) => unknown
+  buildBaseUrl: (baseUrl?: string) => string
+  getVersion: () => string
 };
 
 export const platformDeps: PlatformDeps = {

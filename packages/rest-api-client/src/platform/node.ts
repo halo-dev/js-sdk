@@ -4,6 +4,7 @@ import { basename } from "path";
 import { UnsupportedPlatformError } from "./UnsupportedPlatformError";
 import https from "https";
 import os from "os";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require("../../package.json");
 
 const readFile = promisify(fs.readFile);
@@ -24,14 +25,14 @@ export const getDefaultAuth = () => {
 
 export const buildPlatformDependentConfig = (params: {
   clientCertAuth?:
-    | {
-        pfx: Buffer;
-        password: string;
-      }
-    | {
-        pfxFilePath: string;
-        password: string;
-      };
+  | {
+    pfx: Buffer
+    password: string
+  }
+  | {
+    pfxFilePath: string
+    password: string
+  }
 }) => {
   const clientCertAuth = params.clientCertAuth;
 
@@ -52,9 +53,8 @@ export const buildPlatformDependentConfig = (params: {
 export const buildHeaders = (params: { userAgent?: string }) => {
   const { userAgent } = params;
   return {
-    "User-Agent": `Node.js/${process.version}(${os.type()}) ${
-      packageJson.name
-    }@${packageJson.version}${userAgent ? ` ${userAgent}` : ""}`,
+    "User-Agent": `Node.js/${process.version}(${os.type()}) ${packageJson.name
+      }@${packageJson.version}${userAgent ? ` ${userAgent}` : ""}`,
   };
 };
 

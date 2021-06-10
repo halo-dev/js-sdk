@@ -1,8 +1,8 @@
 import module from "module";
-// eslint-disable-next-line node/no-unsupported-features/node-builtins
 const require = module.createRequire(import.meta.url);
 
 export const {
   HaloRestAPIClient,
   HaloRestAPIError,
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
 } = require(".");

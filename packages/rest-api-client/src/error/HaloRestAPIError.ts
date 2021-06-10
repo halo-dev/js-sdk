@@ -1,9 +1,9 @@
 import { ErrorResponse } from "../http/HttpClientInterface";
 
 type SingleErrorResponseData = {
-  status: string | number;
-  message: string;
-  data?: any;
+  status: string | number
+  message: string
+  data?: any
 };
 
 type HaloErrorResponseData = SingleErrorResponseData;
@@ -16,7 +16,7 @@ export class HaloRestAPIError extends Error {
   headers: any;
 
   private static buildErrorResponseDate(error: HaloErrorResponse): {
-    data: SingleErrorResponseData;
+    data: SingleErrorResponseData
   } {
     // improvable
     return { data: error.data };
