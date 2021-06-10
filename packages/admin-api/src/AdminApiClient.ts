@@ -969,7 +969,7 @@ export class AdminApiClient {
     status: CommentStatus
   }): Promise<Response<BaseComment>> {
     const path = buildPath({
-      endpointName: `​sheets​/comments​/${params.commentId}​/status​/${params.status}`
+      endpointName: `sheets/comments/${params.commentId}/status/${params.status}`
     });
     return this.client.put(path, {})
   }
@@ -977,7 +977,7 @@ export class AdminApiClient {
   public updateSheetCommentsStatus(commentIds: Array<number>,
     status: CommentStatus): Promise<Response<BaseComment>> {
     const path = buildPath({
-      endpointName: `​sheets​/comments​​/status​/${status}`
+      endpointName: `sheets/comments/status/${status}`
     });
     return this.client.put(path, commentIds)
   }
@@ -991,7 +991,7 @@ export class AdminApiClient {
 
   public deleteSheetComment(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
-      endpointName: `sheets​/comments​​/${commentId}`
+      endpointName: `sheets/comments/${commentId}`
     });
     return this.client.delete(path, {})
   }

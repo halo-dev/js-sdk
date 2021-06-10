@@ -1,10 +1,9 @@
 {
   "name": "@guching/admin-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A halo admin api client",
   "main": "lib/index.js",
   "module": "esm/index.js",
-  "browser": "lib/index.browser.js",
   "types": "lib/index.d.ts",
   "engines": {
     "node": ">=12"
@@ -21,7 +20,9 @@
     "start": "yarn build --watch"
   },
   "files": [
-    "dist"
+    "esm",
+    "lib",
+    "umd"
   ],
   "repository": {
     "type": "git",
@@ -51,6 +52,6 @@
     ]
   },
   "dependencies": {
-    "@guching/rest-api-client": "^1.0.0"
+    "@guching/rest-api-client": "^1.0.1"
   }
 }

@@ -12,7 +12,7 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
-    "no-console": "warn",
+    "no-console": "off",
     "no-debugger": "warn",
     "no-constant-condition": "off",
     "no-var": "off",
@@ -33,5 +33,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
 };
