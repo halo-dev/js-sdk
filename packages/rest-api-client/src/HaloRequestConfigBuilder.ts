@@ -11,6 +11,7 @@ import {
 } from "./http/HttpClientInterface";
 import { BasicAuth, DiscriminatedAuth, SESSION_TOKEN_KEY } from "./types/auth";
 import { platformDeps } from "./platform/";
+import { TokenProvider } from './auth'
 
 type Data = Params | FormData | Array<any>;
 
@@ -20,6 +21,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private baseUrl: string;
   private headers: any;
   private auth?: DiscriminatedAuth;
+  private tokenProvider?: TokenProvider
   private clientCertAuth?:
     | {
       pfx: Buffer
@@ -39,6 +41,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     clientCertAuth,
     proxy,
     userAgent,
+    tokenProvider
   }: {
     baseUrl: string
     auth?: DiscriminatedAuth
@@ -54,6 +57,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     }
     proxy?: ProxyConfig
     userAgent?: string
+    tokenProvider?: TokenProvider
   }) {
     this.baseUrl = baseUrl;
     this.auth = auth;
@@ -61,6 +65,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     this.clientCertAuth = clientCertAuth;
     this.proxy = proxy;
     this.requestToken = null;
+    this.tokenProvider = tokenProvider
   }
 
   public async build(
@@ -69,6 +74,17 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     params: Data,
     options?: { responseType: "arraybuffer" }
   ) {
+    if (this.tokenProvider) {
+      const provider = this.tokenProvider
+      const data = {
+        authHeader: this.tokenProvider.getAuthHeader(),
+        async getToken() {
+          const token = await provider.getToken()
+          return token.access_token
+        }
+      }
+      this.headers[data.authHeader] = await data.getToken()
+    }
     const requestConfig: RequestConfig = {
       method,
       headers: this.headers,
@@ -176,6 +192,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
       : {};
     const platformDepsHeaders = platformDeps.buildHeaders({ userAgent });
     const commonHeaders = { ...platformDepsHeaders, ...basicAuthHeaders };
+
     if (!this.auth) {
       return
     }
@@ -215,7 +232,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
       case "customizeAuth": {
         return {
           ...commonHeaders,
-          [this.auth.headerName]: this.auth.getToken(),
+          [this.auth.authHeader]: this.auth.getToken(),
         };
       }
       default: {

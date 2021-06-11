@@ -4,6 +4,7 @@ import { AccessToken, Credentials } from "./CredentialsInterface";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 import { platformDeps } from "../platform/";
 import { HttpResponse } from "../http/HttpClientInterface";
+
 export class HttpAuthenticator {
   private baseUrl: string;
   private responseHandler: HaloResponseHandler;

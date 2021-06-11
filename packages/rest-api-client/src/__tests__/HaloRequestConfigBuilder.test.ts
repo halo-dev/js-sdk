@@ -519,7 +519,7 @@ describe("Headers", () => {
       baseUrl,
       auth: {
         type: "customizeAuth",
-        headerName: "Admin-Authorization",
+        authHeader: "Admin-Authorization",
         getToken() {
           return adminToken
         }

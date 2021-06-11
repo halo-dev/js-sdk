@@ -5,32 +5,40 @@ import { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
 import { HaloResponseHandler } from "./HaloResponseHandler";
 import { platformDeps } from "./platform/index";
 import { UnsupportedPlatformError } from "./platform/UnsupportedPlatformError";
+import { TokenProvider } from './auth/TokenProvider'
 
 type OmitTypePropertyFromUnion<T> = T extends unknown ? Omit<T, "type"> : never;
 type Auth = OmitTypePropertyFromUnion<DiscriminatedAuth>;
 
 type Options = {
-  baseUrl?: string;
-  auth?: Auth;
-  guestSpaceId?: number | string;
-  basicAuth?: BasicAuth;
+  baseUrl?: string
+  auth?: Auth
+  guestSpaceId?: number | string
+  basicAuth?: BasicAuth
   clientCertAuth?:
   | {
-    pfx: Buffer;
-    password: string;
+    pfx: Buffer
+    password: string
   }
   | {
-    pfxFilePath: string;
-    password: string;
-  };
-  proxy?: ProxyConfig;
-  featureFlags?: {
-    enableAbortSearchError: boolean;
-  };
-  userAgent?: string;
+    pfxFilePath: string
+    password: string
+  }
+  proxy?: ProxyConfig
+  userAgent?: string
+  tokenProvider?: TokenProvider
 };
 
-const buildDiscriminatedAuth = (auth: Auth): DiscriminatedAuth => {
+const buildDiscriminatedAuth = (auth: Auth, tokenProvider?: TokenProvider): DiscriminatedAuth => {
+  if (tokenProvider) {
+    return {
+      type: "customizeAuth",
+      authHeader: tokenProvider.getAuthHeader(),
+      getToken() {
+        return ""
+      }
+    }
+  }
   if ("username" in auth) {
     return { type: "password", ...auth };
   }
@@ -60,16 +68,17 @@ const buildDiscriminatedAuth = (auth: Auth): DiscriminatedAuth => {
 
 export class HaloRestAPIClient {
   private baseUrl?: string;
+  private tokenProvider?: TokenProvider;
   private httpClient: DefaultHttpClient;
 
   constructor(options: Options = {}) {
     this.baseUrl = platformDeps.buildBaseUrl(options.baseUrl);
-
-    const auth = buildDiscriminatedAuth(options.auth ?? {});
+    this.tokenProvider = options.tokenProvider
+    const auth = buildDiscriminatedAuth(options.auth ?? {}, options.tokenProvider);
     const requestConfigBuilder = new HaloRequestConfigBuilder({
       ...options,
       baseUrl: this.baseUrl,
-      auth,
+      auth
     });
     const responseHandler = new HaloResponseHandler();
     this.httpClient = new DefaultHttpClient({
@@ -88,5 +97,13 @@ export class HaloRestAPIClient {
 
   public buildHttpClient() {
     return this.httpClient;
+  }
+
+  public getTokenProvider() {
+    return this.tokenProvider
+  }
+
+  public setTokenProvider(tokenProvider: TokenProvider) {
+    this.tokenProvider = tokenProvider
   }
 }

@@ -6,4 +6,5 @@ injectPlatformDeps(nodeDeps);
 
 export { HaloRestAPIClient } from "./HaloRestAPIClient";
 export { HttpClient } from "./http/HttpClientInterface";
+export * from './auth'
 export { FormData }

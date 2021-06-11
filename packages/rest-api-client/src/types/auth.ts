@@ -25,7 +25,7 @@ type OAuthTokenAuth = {
 
 export type CustomizeAuth = {
   type: "customizeAuth"
-  headerName: string
+  authHeader: string
   getToken(): string
 }
 
