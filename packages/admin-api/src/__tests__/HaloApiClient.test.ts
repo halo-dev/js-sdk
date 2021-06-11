@@ -9,7 +9,7 @@ describe("Halo admin api test", () => {
       baseUrl: "http://127.0.0.1:8090",
       auth: {
         type: "customizeAuth",
-        headerName: "Admin-Authorization",
+        authHeader: "Admin-Authorization",
         getToken() {
           return "b84681a66bd14865a0179367d3406b04"
         }

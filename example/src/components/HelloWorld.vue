@@ -20,7 +20,7 @@ export default {
     };
     // auth: {
     //     type: "customizeAuth",
-    //     headerName: "Admin-Authorization",
+    //     authHeader: "Admin-Authorization",
     //     getToken() {
     //       return "4e47f2a5105b4716a948a60877dfd571";
     //     },
