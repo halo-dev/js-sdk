@@ -11,7 +11,7 @@ import {
 } from "./http/HttpClientInterface";
 import { BasicAuth, DiscriminatedAuth, SESSION_TOKEN_KEY } from "./types/auth";
 import { platformDeps } from "./platform/";
-import { TokenProvider } from './auth'
+import { TokenProvider } from "./auth";
 
 type Data = Params | FormData | Array<any>;
 
@@ -21,16 +21,16 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private baseUrl: string;
   private headers: any;
   private auth?: DiscriminatedAuth;
-  private tokenProvider?: TokenProvider
+  private tokenProvider?: TokenProvider;
   private clientCertAuth?:
     | {
-      pfx: Buffer
-      password: string
-    }
+        pfx: Buffer;
+        password: string;
+      }
     | {
-      pfxFilePath: string
-      password: string
-    };
+        pfxFilePath: string;
+        password: string;
+      };
   private proxy?: ProxyConfig;
   private requestToken: string | null;
 
@@ -41,23 +41,23 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     clientCertAuth,
     proxy,
     userAgent,
-    tokenProvider
+    tokenProvider,
   }: {
-    baseUrl: string
-    auth?: DiscriminatedAuth
-    basicAuth?: BasicAuth
+    baseUrl: string;
+    auth?: DiscriminatedAuth;
+    basicAuth?: BasicAuth;
     clientCertAuth?:
-    | {
-      pfx: Buffer
-      password: string
-    }
-    | {
-      pfxFilePath: string
-      password: string
-    }
-    proxy?: ProxyConfig
-    userAgent?: string
-    tokenProvider?: TokenProvider
+      | {
+          pfx: Buffer;
+          password: string;
+        }
+      | {
+          pfxFilePath: string;
+          password: string;
+        };
+    proxy?: ProxyConfig;
+    userAgent?: string;
+    tokenProvider?: TokenProvider;
   }) {
     this.baseUrl = baseUrl;
     this.auth = auth;
@@ -65,7 +65,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     this.clientCertAuth = clientCertAuth;
     this.proxy = proxy;
     this.requestToken = null;
-    this.tokenProvider = tokenProvider
+    this.tokenProvider = tokenProvider;
   }
 
   public async build(
@@ -75,15 +75,19 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     options?: { responseType: "arraybuffer" }
   ) {
     if (this.tokenProvider) {
-      const provider = this.tokenProvider
+      const provider = this.tokenProvider;
       const data = {
         authHeader: this.tokenProvider.getAuthHeader(),
         async getToken() {
-          const token = await provider.getToken()
-          return token.access_token
-        }
-      }
-      this.headers[data.authHeader] = await data.getToken()
+          const token = await provider.getToken();
+          if (token) {
+            return token.access_token;
+          }
+          return "";
+        },
+      };
+      console.log(await data.getToken());
+      this.headers[data.authHeader] = await data.getToken();
     }
     const requestConfig: RequestConfig = {
       method,
@@ -179,22 +183,22 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   }
 
   private buildHeaders(params: {
-    basicAuth?: BasicAuth
-    userAgent?: string
+    basicAuth?: BasicAuth;
+    userAgent?: string;
   }): any {
     const { basicAuth, userAgent } = params;
     const basicAuthHeaders = basicAuth
       ? {
-        Authorization: `Basic ${Base64.encode(
-          `${basicAuth.username}:${basicAuth.password}`
-        )}`,
-      }
+          Authorization: `Basic ${Base64.encode(
+            `${basicAuth.username}:${basicAuth.password}`
+          )}`,
+        }
       : {};
     const platformDepsHeaders = platformDeps.buildHeaders({ userAgent });
     const commonHeaders = { ...platformDepsHeaders, ...basicAuthHeaders };
 
     if (!this.auth) {
-      return
+      return {};
     }
 
     switch (this.auth.type) {
@@ -240,6 +244,10 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
         return { ...commonHeaders, "X-Requested-With": "XMLHttpRequest" };
       }
     }
+  }
+
+  public setTokenProvider(tokenProvider: TokenProvider) {
+    this.tokenProvider = tokenProvider;
   }
 
   private async getRequestToken(): Promise<string> {

@@ -1,10 +1,10 @@
 import { TokenProvider } from "../auth/TokenProvider";
-import { FileTokenStore } from '../auth/FileTokenStore'
+import { FileTokenStore } from "../auth/FileTokenStore";
 describe("TokenProvider", () => {
   describe("constructor", () => {
     let tokenProvider: TokenProvider;
     beforeEach(() => {
-      const tokenStore = new FileTokenStore("/home/guqing/token.json");
+      const tokenStore = new FileTokenStore("/Users/guqing/token.json");
       tokenProvider = new TokenProvider(
         {
           username: "guqing",
@@ -21,4 +21,3 @@ describe("TokenProvider", () => {
     });
   });
 });
-

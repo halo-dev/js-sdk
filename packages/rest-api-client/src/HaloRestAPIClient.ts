@@ -4,40 +4,42 @@ import { BasicAuth, DiscriminatedAuth, CustomizeAuth } from "./types/auth";
 import { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
 import { HaloResponseHandler } from "./HaloResponseHandler";
 import { platformDeps } from "./platform/index";
-import { UnsupportedPlatformError } from "./platform/UnsupportedPlatformError";
-import { TokenProvider } from './auth/TokenProvider'
+import { TokenProvider } from "./auth/TokenProvider";
 
 type OmitTypePropertyFromUnion<T> = T extends unknown ? Omit<T, "type"> : never;
 type Auth = OmitTypePropertyFromUnion<DiscriminatedAuth>;
 
 type Options = {
-  baseUrl?: string
-  auth?: Auth
-  guestSpaceId?: number | string
-  basicAuth?: BasicAuth
+  baseUrl?: string;
+  auth?: Auth;
+  guestSpaceId?: number | string;
+  basicAuth?: BasicAuth;
   clientCertAuth?:
-  | {
-    pfx: Buffer
-    password: string
-  }
-  | {
-    pfxFilePath: string
-    password: string
-  }
-  proxy?: ProxyConfig
-  userAgent?: string
-  tokenProvider?: TokenProvider
+    | {
+        pfx: Buffer;
+        password: string;
+      }
+    | {
+        pfxFilePath: string;
+        password: string;
+      };
+  proxy?: ProxyConfig;
+  userAgent?: string;
+  tokenProvider?: TokenProvider;
 };
 
-const buildDiscriminatedAuth = (auth: Auth, tokenProvider?: TokenProvider): DiscriminatedAuth => {
+const buildDiscriminatedAuth = (
+  auth: Auth,
+  tokenProvider?: TokenProvider
+): DiscriminatedAuth | undefined => {
   if (tokenProvider) {
     return {
       type: "customizeAuth",
       authHeader: tokenProvider.getAuthHeader(),
       getToken() {
-        return ""
-      }
-    }
+        return "";
+      },
+    };
   }
   if ("username" in auth) {
     return { type: "password", ...auth };
@@ -52,34 +54,30 @@ const buildDiscriminatedAuth = (auth: Auth, tokenProvider?: TokenProvider): Disc
     return { type: "oAuthToken", ...auth };
   }
   if ("type" in auth && auth["type"] == "customizeAuth") {
-    return auth as CustomizeAuth
+    return auth as CustomizeAuth;
   }
-  try {
-    return platformDeps.getDefaultAuth();
-  } catch (e) {
-    if (e instanceof UnsupportedPlatformError) {
-      throw new Error(
-        `session authentication is not supported in ${e.platform} environment.`
-      );
-    }
-    throw e;
-  }
+  return undefined;
 };
 
 export class HaloRestAPIClient {
   private baseUrl?: string;
   private tokenProvider?: TokenProvider;
   private httpClient: DefaultHttpClient;
+  private requestConfigBuilder: HaloRequestConfigBuilder;
 
   constructor(options: Options = {}) {
     this.baseUrl = platformDeps.buildBaseUrl(options.baseUrl);
-    this.tokenProvider = options.tokenProvider
-    const auth = buildDiscriminatedAuth(options.auth ?? {}, options.tokenProvider);
+    this.tokenProvider = options.tokenProvider;
+    const auth = buildDiscriminatedAuth(
+      options.auth ?? {},
+      options.tokenProvider
+    );
     const requestConfigBuilder = new HaloRequestConfigBuilder({
       ...options,
       baseUrl: this.baseUrl,
-      auth
+      auth,
     });
+    this.requestConfigBuilder = requestConfigBuilder;
     const responseHandler = new HaloResponseHandler();
     this.httpClient = new DefaultHttpClient({
       responseHandler,
@@ -100,10 +98,11 @@ export class HaloRestAPIClient {
   }
 
   public getTokenProvider() {
-    return this.tokenProvider
+    return this.tokenProvider;
   }
 
   public setTokenProvider(tokenProvider: TokenProvider) {
-    this.tokenProvider = tokenProvider
+    this.tokenProvider = tokenProvider;
+    this.requestConfigBuilder.setTokenProvider(tokenProvider);
   }
 }

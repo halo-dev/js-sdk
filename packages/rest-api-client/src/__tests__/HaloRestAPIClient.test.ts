@@ -22,7 +22,6 @@ describe("HaloRestAPIClient", () => {
       global.server = originalServer;
     });
     describe("Header", () => {
-      const baseUrl = "https://example.com";
       it("should use a location object in browser environment if baseUrl param is not specified", async () => {
         injectPlatformDeps(browserDeps);
         const client = new HaloRestAPIClient();
@@ -38,16 +37,6 @@ describe("HaloRestAPIClient", () => {
         };
         expect(() => new HaloRestAPIClient({ auth })).toThrow(
           "in Node.js environment, baseUrl is required"
-        );
-      });
-
-      it("should raise an error if trying to use session auth in Node.js environment", () => {
-        expect(() => {
-          new HaloRestAPIClient({
-            baseUrl,
-          });
-        }).toThrow(
-          "session authentication is not supported in Node.js environment."
         );
       });
     });
