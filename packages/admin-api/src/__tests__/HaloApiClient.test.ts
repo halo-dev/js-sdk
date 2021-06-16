@@ -32,17 +32,4 @@ describe("Halo admin api test", () => {
     const result = await client.isInstalled();
     console.log(result)
   })
-
-  it("listAttachments", async () => {
-    const result = await client.listAttachments({
-      page: 1,
-      size: 20
-    });
-    console.log(result)
-  })
-
-  it("listAttachments", async () => {
-    const result = await client.listMenusTreeView();
-    console.log(result)
-  })
 });
