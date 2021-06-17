@@ -392,3 +392,38 @@ export interface PostDetail extends BasePostDetail {
 export interface SheetCommentWithSheet extends BaseComment {
   sheet: BasePostMinimal
 }
+
+export interface Sheet extends BasePostSimple {
+  commentCount: number
+}
+
+export interface SheetDetail extends BasePostDetail {
+  metaIds: Array<number>
+  metas: Array<BaseMeta>
+}
+
+export type IndependentSheet = {
+  id: number
+  title: string
+  fullPath: string
+  routeName: string
+  available: boolean
+}
+
+export type SheetParam = {
+  title: string
+  status?: PostStatus
+  slug?: string
+  editorType?: PostEditorType
+  originalContent?: string
+  summary?: string
+  thumbnail?: string
+  disallowComment?: boolean
+  password?: string
+  template?: string
+  topPriority?: number
+  createTime?: number
+  metaKeywords?: string
+  metaDescription?: string
+  metas?: Array<BaseMetaParam>
+}

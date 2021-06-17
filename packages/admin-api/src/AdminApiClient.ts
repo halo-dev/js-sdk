@@ -21,7 +21,8 @@ import {
   PhotoClient,
   PostCommentClient,
   PostClient,
-  SheetCommentClient
+  SheetCommentClient,
+  SheetClient
 } from './clients'
 
 export class AdminApiClient {
@@ -42,6 +43,7 @@ export class AdminApiClient {
   private _postComment: PostCommentClient
   private _post: PostClient
   private _sheetComment: SheetCommentClient
+  private _sheet: SheetClient
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();
@@ -61,6 +63,7 @@ export class AdminApiClient {
     this._postComment = new PostCommentClient(this.client)
     this._post = new PostClient(this.client)
     this._sheetComment = new SheetCommentClient(this.client)
+    this._sheet = new SheetClient(this.client)
   }
 
   public getEnvironment(): Promise<Response<Environment>> {
@@ -184,5 +187,9 @@ export class AdminApiClient {
 
   public get sheetComment() {
     return this._sheetComment
+  }
+
+  public get sheet() {
+    return this._sheet
   }
 }
