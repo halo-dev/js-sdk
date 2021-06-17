@@ -25,6 +25,10 @@ export interface Page<T> extends Response<Page<T>> {
   content: T
 }
 
+export type MFAType =
+  | "NONE"
+  | "TFA_TOTP"
+
 export interface UserParam {
   username: string
   nickname: string
@@ -32,6 +36,18 @@ export interface UserParam {
   password: string
   avatar: string
   description: string
+}
+
+export interface User {
+  id: number
+  username: string
+  nickname: string
+  email: string
+  avatar: string
+  description: string
+  mfaType: MFAType
+  createTime: number
+  updateTime: number
 }
 
 export interface InstallParam extends UserParam {
@@ -426,4 +442,22 @@ export type SheetParam = {
   metaKeywords?: string
   metaDescription?: string
   metas?: Array<BaseMetaParam>
+}
+
+export type Statistic = {
+  postCount: number
+  commentCount: number
+  categoryCount: number
+  attachmentCount: number
+  tagCount: number
+  journalCount: number
+  birthday: number
+  establishDays: number
+  linkCount: number
+  visitCount: number
+  likeCount: number
+}
+
+export interface StatisticWithUser extends Statistic {
+  user: User
 }
