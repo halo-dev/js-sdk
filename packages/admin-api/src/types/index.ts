@@ -467,3 +467,74 @@ export type TagParam = {
   slug?: string
   thumbnail?: string
 }
+export type UpdateStrategy =
+  | "BRANCH"
+  | "RELEASE"
+
+export type Author = {
+  name: string
+  website: string
+  avatar: string
+}
+
+export type InputType =
+  | "TEXT"
+  | "NUMBER"
+  | "RADIO"
+  | "SELECT"
+  | "TEXTAREA"
+  | "COLOR"
+  | "ATTACHMENT"
+  | "SWITCH"
+
+export type DataType =
+  | "STRING"
+  | "LONG"
+  | "DOUBLE"
+  | "BOOL"
+
+export type ThemeProperty = {
+  id: string
+  name: string
+  website: string
+  branch: string
+  repo: string
+  updateStrategy: UpdateStrategy
+  description: string
+  logo: string
+  version: string
+  require: string
+  author: Author
+  themePath: string
+  folderName: string
+  hasOptions: boolean
+  isActivated: boolean
+  screenshots: string
+  postMetaField: Array<string>
+  sheetMetaField: Array<string>
+}
+
+export type Item = {
+  name: string
+  label: string
+  type: InputType
+  dataType: DataType
+  defaultValue: any
+  placeholder: string
+  description: string
+  options: Array<Option>
+}
+
+export type Group = {
+  name: string
+  label: string
+  items: Array<Item>
+}
+
+export type ThemeFile = {
+  name: string
+  path: string
+  isFile: boolean
+  editable: boolean
+  node: Array<ThemeFile>
+}
