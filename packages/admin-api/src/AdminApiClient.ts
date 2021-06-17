@@ -23,7 +23,8 @@ import {
   PostClient,
   SheetCommentClient,
   SheetClient,
-  StatisticClient
+  StatisticClient,
+  TagClient
 } from './clients'
 
 export class AdminApiClient {
@@ -46,6 +47,7 @@ export class AdminApiClient {
   private _sheetComment: SheetCommentClient
   private _sheet: SheetClient
   private _statistic: StatisticClient
+  private _tag: TagClient
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();
@@ -67,6 +69,7 @@ export class AdminApiClient {
     this._sheetComment = new SheetCommentClient(this.client)
     this._sheet = new SheetClient(this.client)
     this._statistic = new StatisticClient(this.client)
+    this._tag = new TagClient(this.client)
   }
 
   public getEnvironment(): Promise<Response<Environment>> {
@@ -198,5 +201,9 @@ export class AdminApiClient {
 
   public get statistic() {
     return this._statistic
+  }
+
+  public get tag() {
+    return this._tag
   }
 }

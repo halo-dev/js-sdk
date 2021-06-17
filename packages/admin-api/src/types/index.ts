@@ -461,3 +461,9 @@ export type Statistic = {
 export interface StatisticWithUser extends Statistic {
   user: User
 }
+
+export type TagParam = {
+  name: string
+  slug?: string
+  thumbnail?: string
+}
