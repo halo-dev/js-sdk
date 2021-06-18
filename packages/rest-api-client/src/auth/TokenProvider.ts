@@ -1,8 +1,15 @@
-import { Credentials, TokenType } from "./CredentialsInterface";
+import { AccessToken, Credentials, TokenType } from "./CredentialsInterface";
 import { HttpAuthenticator } from "./HttpAuthenticator";
+import { InMemeryTokenStore } from "./InMemeryTokenStore";
 import { TokenStore } from "./TokenStore";
 
-export class TokenProvider {
+export interface TokenProvider {
+  getToken(): Promise<AccessToken>
+  clearToken(): void
+  getAuthHeader(): string
+}
+
+export class DefaultTokenProvider implements TokenProvider {
   private credentials: Credentials;
   private headerName: string;
   private httpAuthenticator: HttpAuthenticator;
@@ -11,11 +18,15 @@ export class TokenProvider {
   constructor(
     credentials: Credentials,
     baseUrl: string,
-    tokenStarage: TokenStore,
+    tokenStore?: TokenStore,
     tokenType?: TokenType
   ) {
     this.credentials = credentials;
-    this.tokenStore = tokenStarage;
+    if (tokenStore) {
+      this.tokenStore = tokenStore;
+    } else {
+      this.tokenStore = new InMemeryTokenStore()
+    }
     this.headerName = this.buildTokenHeader(tokenType);
     this.httpAuthenticator = new HttpAuthenticator(baseUrl);
   }

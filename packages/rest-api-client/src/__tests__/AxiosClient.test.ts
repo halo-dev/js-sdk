@@ -1,5 +1,5 @@
 import { HaloRestAPIClient } from "../HaloRestAPIClient";
-import { TokenProvider, FileTokenStore } from "../auth";
+import { DefaultTokenProvider, FileTokenStore } from "../auth";
 describe("Halo admin api test", () => {
   let client: any;
   let haloRestApiClient: HaloRestAPIClient;
@@ -10,8 +10,8 @@ describe("Halo admin api test", () => {
     client = haloRestApiClient.buildHttpClient();
   });
   it("test set token provider", async () => {
-    const tokenStore = new FileTokenStore("/Users/guqing/token.json");
-    const tokenProvider = new TokenProvider(
+    const tokenStore = new FileTokenStore("/home/guqing/token.json");
+    const tokenProvider = new DefaultTokenProvider(
       {
         username: "guqing",
         password: "12345678",
