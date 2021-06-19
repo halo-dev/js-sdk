@@ -1,6 +1,6 @@
 {
   "name": "@guching/admin-api",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "A halo admin api client",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -52,6 +52,6 @@
     ]
   },
   "dependencies": {
-    "@guching/rest-api-client": "^1.0.1"
+    "@guching/rest-api-client": "^1.0.3"
   }
 }

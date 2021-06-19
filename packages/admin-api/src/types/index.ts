@@ -54,6 +54,10 @@ export interface InstallParam extends UserParam {
   url: string;
 }
 
+export type LoginPreCheck = {
+  needMFACode: boolean;
+};
+
 export type Environment = {
   database: string;
   mode: ModeType;

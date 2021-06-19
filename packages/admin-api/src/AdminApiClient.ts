@@ -1,6 +1,6 @@
 import { HaloRestAPIClient, HttpClient } from "@guching/rest-api-client";
 import { buildPath } from "./url";
-import { Environment, Response, AccessToken } from "./types";
+import { Environment, Response, AccessToken, LoginPreCheck } from "./types";
 import {
   AttachmentClient,
   BackupClient,
@@ -131,6 +131,16 @@ export class AdminApiClient {
       endpointName: `refresh/${refreshToken}`,
     });
     return this.client.post(path, {});
+  }
+
+  public needMFACode(params: {
+    username: string;
+    password: string;
+  }): Promise<Response<LoginPreCheck>> {
+    const path = buildPath({
+      endpointName: "login/precheck",
+    });
+    return this.client.post(path, { ...params });
   }
 
   public get attachment() {
