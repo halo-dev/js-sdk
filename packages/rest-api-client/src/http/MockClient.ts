@@ -7,11 +7,11 @@ import FormData from "form-data";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 
 type Log = {
-  method: "get" | "post" | "put" | "delete"
-  path: string
+  method: "get" | "post" | "put" | "delete";
+  path: string;
   params: {
-    [key: string]: any
-  }
+    [key: string]: any;
+  };
 };
 
 export class MockClient implements HttpClient {
@@ -24,8 +24,8 @@ export class MockClient implements HttpClient {
     responseHandler,
     requestConfigBuilder,
   }: {
-    responseHandler: ResponseHandler
-    requestConfigBuilder: RequestConfigBuilder
+    responseHandler: ResponseHandler;
+    requestConfigBuilder: RequestConfigBuilder;
   }) {
     this.responseHandler = responseHandler;
     this.requestConfigBuilder = requestConfigBuilder;

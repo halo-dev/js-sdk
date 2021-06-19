@@ -16,8 +16,8 @@ export class AxiosClient implements HttpClient {
     responseHandler,
     requestConfigBuilder,
   }: {
-    responseHandler: ResponseHandler
-    requestConfigBuilder: RequestConfigBuilder
+    responseHandler: ResponseHandler;
+    requestConfigBuilder: RequestConfigBuilder;
   }) {
     this.responseHandler = responseHandler;
     this.requestConfigBuilder = requestConfigBuilder;
@@ -81,28 +81,32 @@ export class AxiosClient implements HttpClient {
   }
 
   private async sendRequest(requestConfig: RequestConfig) {
-    console.log(requestConfig)
-    const tokenProvider = this.requestConfigBuilder.getTokenProvider()
+    console.log(requestConfig);
+    const tokenProvider = this.requestConfigBuilder.getTokenProvider();
     if (tokenProvider) {
-      const token = await tokenProvider.getToken()
-      Axios.interceptors.response.use(config => {
-        return config
-      }, async (error) => {
-        const response = error.response
-        const status = response ? response.status : -1
-        console.log('Server response status', status)
+      const token = await tokenProvider.getToken();
+      Axios.interceptors.response.use(
+        (config) => {
+          return config;
+        },
+        async (error) => {
+          const response = error.response;
+          const status = response ? response.status : -1;
+          console.log("Server response status", status);
 
-        const data = response ? response.data : null
-        if (data && data.status === 401 && this.retryCount < 3) {
-          if (token) {
-            this.retryCount++
-            tokenProvider.clearToken()
-            const newAccessToken = await tokenProvider.getToken()
-            response.config.headers[tokenProvider.getAuthHeader()] = newAccessToken.access_token
-            return Axios(response.config)
+          const data = response ? response.data : null;
+          if (data && data.status === 401 && this.retryCount < 3) {
+            if (token) {
+              this.retryCount++;
+              tokenProvider.clearToken();
+              const newAccessToken = await tokenProvider.getToken();
+              response.config.headers[tokenProvider.getAuthHeader()] =
+                newAccessToken.access_token;
+              return Axios(response.config);
+            }
           }
         }
-      })
+      );
     }
     return this.responseHandler.handle(
       // eslint-disable-next-line new-cap
