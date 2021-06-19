@@ -24,13 +24,13 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private tokenProvider?: TokenProvider;
   private clientCertAuth?:
     | {
-        pfx: Buffer;
-        password: string;
-      }
+      pfx: Buffer;
+      password: string;
+    }
     | {
-        pfxFilePath: string;
-        password: string;
-      };
+      pfxFilePath: string;
+      password: string;
+    };
   private proxy?: ProxyConfig;
   private requestToken: string | null;
 
@@ -47,14 +47,14 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     auth?: DiscriminatedAuth;
     basicAuth?: BasicAuth;
     clientCertAuth?:
-      | {
-          pfx: Buffer;
-          password: string;
-        }
-      | {
-          pfxFilePath: string;
-          password: string;
-        };
+    | {
+      pfx: Buffer;
+      password: string;
+    }
+    | {
+      pfxFilePath: string;
+      password: string;
+    };
     proxy?: ProxyConfig;
     userAgent?: string;
     tokenProvider?: TokenProvider;
@@ -189,10 +189,10 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     const { basicAuth, userAgent } = params;
     const basicAuthHeaders = basicAuth
       ? {
-          Authorization: `Basic ${Base64.encode(
-            `${basicAuth.username}:${basicAuth.password}`
-          )}`,
-        }
+        Authorization: `Basic ${Base64.encode(
+          `${basicAuth.username}:${basicAuth.password}`
+        )}`,
+      }
       : {};
     const platformDepsHeaders = platformDeps.buildHeaders({ userAgent });
     const commonHeaders = { ...platformDepsHeaders, ...basicAuthHeaders };
@@ -248,6 +248,10 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
 
   public setTokenProvider(tokenProvider: TokenProvider) {
     this.tokenProvider = tokenProvider;
+  }
+
+  public getTokenProvider() {
+    return this.tokenProvider;
   }
 
   private async getRequestToken(): Promise<string> {

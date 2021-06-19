@@ -1,11 +1,11 @@
-import { TokenProvider } from "../auth/TokenProvider";
+import { TokenProvider, DefaultTokenProvider } from "../auth/TokenProvider";
 import { FileTokenStore } from "../auth/FileTokenStore";
 describe("TokenProvider", () => {
   describe("constructor", () => {
     let tokenProvider: TokenProvider;
     beforeEach(() => {
-      const tokenStore = new FileTokenStore("/Users/guqing/token.json");
-      tokenProvider = new TokenProvider(
+      const tokenStore = new FileTokenStore("/home/guqing/token.json");
+      tokenProvider = new DefaultTokenProvider(
         {
           username: "guqing",
           password: "12345678",

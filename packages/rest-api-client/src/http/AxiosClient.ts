@@ -10,6 +10,7 @@ import FormData from "form-data";
 export class AxiosClient implements HttpClient {
   private responseHandler: ResponseHandler;
   private requestConfigBuilder: RequestConfigBuilder;
+  private retryCount = 0;
 
   constructor({
     responseHandler,
@@ -79,8 +80,30 @@ export class AxiosClient implements HttpClient {
     return this.sendRequest(requestConfig);
   }
 
-  private sendRequest(requestConfig: RequestConfig) {
+  private async sendRequest(requestConfig: RequestConfig) {
     console.log(requestConfig)
+    const tokenProvider = this.requestConfigBuilder.getTokenProvider()
+    if (tokenProvider) {
+      const token = await tokenProvider.getToken()
+      Axios.interceptors.response.use(config => {
+        return config
+      }, async (error) => {
+        const response = error.response
+        const status = response ? response.status : -1
+        console.log('Server response status', status)
+
+        const data = response ? response.data : null
+        if (data && data.status === 401 && this.retryCount < 3) {
+          if (token) {
+            this.retryCount++
+            tokenProvider.clearToken()
+            const newAccessToken = await tokenProvider.getToken()
+            response.config.headers[tokenProvider.getAuthHeader()] = newAccessToken.access_token
+            return Axios(response.config)
+          }
+        }
+      })
+    }
     return this.responseHandler.handle(
       // eslint-disable-next-line new-cap
       Axios({

@@ -1,4 +1,6 @@
 import FormData from "form-data";
+import { TokenProvider } from "../auth/TokenProvider";
+
 export interface HttpClient {
   get: <T extends object>(path: string, params: object) => Promise<T>
   getData: (path: string, params: object) => Promise<ArrayBuffer>
@@ -55,4 +57,5 @@ export interface RequestConfigBuilder {
     params: Params | FormData | Array<any>,
     options?: { responseType: "arraybuffer" }
   ) => Promise<RequestConfig>
+  getTokenProvider(): TokenProvider | undefined
 }

@@ -1,5 +1,6 @@
 import { AdminApiClient } from "../AdminApiClient";
 import { HaloRestAPIClient } from "@guching/rest-api-client";
+import Axios from 'axios'
 
 describe("Halo admin api test", () => {
   let client: AdminApiClient;
@@ -11,25 +12,36 @@ describe("Halo admin api test", () => {
         type: "customizeAuth",
         authHeader: "Admin-Authorization",
         getToken() {
-          return "b84681a66bd14865a0179367d3406b04"
+          return "5b868ef2645c4629854699bfa35dde13"
         }
       }
     });
     client = new AdminApiClient(haloRestApiClient);
   })
 
-  it("getEnvironment", async () => {
-    const result = await client.getEnvironment();
-    console.log(result)
-  })
+  // it("getEnvironment", async () => {
+  //   const result = await client.getEnvironment();
+  //   console.log(result)
+  // })
 
-  it("getLogFile", async () => {
-    const result = await client.getLogFile(10);
-    expect(result).toStrictEqual({ status: 200, message: 'OK', devMessage: null, data: '' })
-  })
+  // it("getLogFile", async () => {
+  //   const result = await client.getLogFile(10);
+  //   expect(result).toStrictEqual({ status: 200, message: 'OK', devMessage: null, data: '' })
+  // })
 
-  it("isInstalled", async () => {
-    const result = await client.isInstalled();
-    console.log(result)
+  // it("isInstalled", async () => {
+  //   const result = await client.isInstalled();
+  //   console.log(result)
+  // })
+  it("test axios interceptor", async () => {
+    Axios.interceptors.request.use(config => {
+      console.log('请求拦截器-1')
+      return config
+    })
+    Axios.interceptors.request.use(config => {
+      console.log('请求拦截器-2')
+      return config
+    })
+    await client.isInstalled();
   })
 });
