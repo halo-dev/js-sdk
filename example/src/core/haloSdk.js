@@ -3,8 +3,11 @@ import {
   LocalStorageTokenStore,
   DefaultTokenProvider
 } from "@guching/rest-api-client";
+import encryptUtil from "../utils/encrypt";
 
-const userCredentials = localStorage.getItem("UserCredentials");
+const userCredentials = encryptUtil.decrypt(
+  localStorage.getItem("UserCredentials")
+);
 
 const localStorageTokenStore = new LocalStorageTokenStore();
 
@@ -32,7 +35,9 @@ if (userCredentials) {
 const haloAdminClient = new AdminApiClient(haloRestApiClient);
 
 export const doAuthorize = credentials => {
-  localStorage.setItem("UserCredentials", { ...credentials });
+  const encodedCredentials = encryptUtil.encrypt({ ...credentials });
+
+  localStorage.setItem("UserCredentials", encodedCredentials);
   const tokenProvider = buildTokenProvider(credentials);
   haloRestApiClient.setTokenProvider(tokenProvider);
   return tokenProvider.getToken();
