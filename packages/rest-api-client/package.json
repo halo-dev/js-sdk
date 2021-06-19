@@ -1,6 +1,6 @@
 {
   "name": "@guching/rest-api-client",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "publishConfig": {
     "access": "public"
   },
@@ -58,7 +58,8 @@
     "axios": "^0.20.0",
     "form-data": "^4.0.0",
     "js-base64": "^3.6.0",
-    "qs": "^6.10.1"
+    "qs": "^6.10.1",
+    "store": "^2.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -70,6 +71,7 @@
     "@rollup/plugin-typescript": "^6.0.0",
     "@types/jest": "^26.0.23",
     "@types/qs": "^6.9.6",
+    "@types/store": "^2.0.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.26.1",
     "axios-mock-adapter": "^1.18.2",
