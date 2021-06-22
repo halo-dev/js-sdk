@@ -1,6 +1,6 @@
 import { injectPlatformDeps } from "./platform/";
 import * as nodeDeps from "./platform/node";
-import FormData from 'form-data';
+import FormData from "form-data";
 
 injectPlatformDeps(nodeDeps);
 

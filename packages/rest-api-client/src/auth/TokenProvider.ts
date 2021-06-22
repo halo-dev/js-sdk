@@ -4,9 +4,9 @@ import { InMemeryTokenStore } from "./InMemeryTokenStore";
 import { TokenStore } from "./TokenStore";
 
 export interface TokenProvider {
-  getToken(): Promise<AccessToken>
-  clearToken(): void
-  getAuthHeader(): string
+  getToken(): Promise<AccessToken>;
+  clearToken(): void;
+  getAuthHeader(): string;
 }
 
 export class DefaultTokenProvider implements TokenProvider {
@@ -25,7 +25,7 @@ export class DefaultTokenProvider implements TokenProvider {
     if (tokenStore) {
       this.tokenStore = tokenStore;
     } else {
-      this.tokenStore = new InMemeryTokenStore()
+      this.tokenStore = new InMemeryTokenStore();
     }
     this.headerName = this.buildTokenHeader(tokenType);
     this.httpAuthenticator = new HttpAuthenticator(baseUrl);
@@ -47,7 +47,9 @@ export class DefaultTokenProvider implements TokenProvider {
     }
 
     if (Date.now() > storagedToken.expired_at) {
-      console.info(`Token has expired at ${storagedToken.expired_at}, ready to refresh token.`);
+      console.info(
+        `Token has expired at ${storagedToken.expired_at}, ready to refresh token.`
+      );
       // token过期
       const refreshedToken = await this.httpAuthenticator.refreshToken(
         storagedToken.refresh_token
@@ -55,15 +57,15 @@ export class DefaultTokenProvider implements TokenProvider {
       this.tokenStore.set(refreshedToken.data);
       storagedToken = refreshedToken.data;
     }
-    return storagedToken
+    return storagedToken;
   }
 
   public clearToken(): void {
-    this.tokenStore.clear()
+    this.tokenStore.clear();
   }
 
   public getAuthHeader(): string {
-    return this.headerName
+    return this.headerName;
   }
 
   private buildTokenHeader(tokenType?: TokenType): string {

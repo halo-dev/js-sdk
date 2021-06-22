@@ -14,10 +14,6 @@ export default {
     msg: String
   },
   created() {
-    global.server = {
-      host: "example.com",
-      protocol: "https:"
-    };
     // auth: {
     //     type: "customizeAuth",
     //     authHeader: "Admin-Authorization",
