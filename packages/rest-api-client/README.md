@@ -1,6 +1,6 @@
 # Halo SDK
 
-A collection of tools for interacting with Halo's APIs.
+A http tools for halo restful api.
 
 ### Run
 
@@ -18,4 +18,4 @@ yarn test # Run lint and tests
 
 ### License
 
-[MIT license](./LICENSE)
+[MIT license](/LICENSE)

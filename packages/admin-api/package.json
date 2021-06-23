@@ -1,0 +1,57 @@
+{
+  "name": "@halo-dev/admin-api",
+  "version": "1.0.0-alpha.1",
+  "description": "A halo admin api client",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=12"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "scripts": {
+    "build": "tsc --build --force",
+    "lint": "eslint --ext .ts src",
+    "test": "jest --rootDir src",
+    "test:ci": "jest --rootDir src --runInBand",
+    "start": "yarn build --watch"
+  },
+  "files": [
+    "esm",
+    "lib",
+    "umd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halo-dev/halo-js-sdk.git",
+    "directory": "packages/admin-api"
+  },
+  "keywords": [
+    "halo"
+  ],
+  "maintainers": [
+    {
+      "name": "guqing",
+      "email": "1484563614@qq.com",
+      "url": "https://github.com/guqing"
+    }
+  ],
+  "author": "halo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/halo-dev/halo-js-sdk/issues"
+  },
+  "homepage": "https://github.com/halo-dev/halo-js-sdk#readme",
+  "lint-staged": {
+    "*.{js,ts}": [
+      "yarn lint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@halo-dev/rest-api-client": "^1.0.0-alpha.1"
+  }
+}

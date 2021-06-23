@@ -1,19 +1,19 @@
 {
-  "name": "halo-js-sdk",
+  "name": "@halo/js-sdk",
   "version": "1.0.0",
-  "description": "Halo JavaSript SDK",
-  "main": "dist/halo-js-sdk.cjs.js",
-  "module": "dist/halo-js-sdk.esm.js",
-  "browser": "dist/halo-js-sdk.iife.js",
-  "types": "dist/types/index.d.ts",
-  "source": "src/index.ts",
-  "files": [
-    "src",
-    "dist"
+  "description": "packages for halo javaSript sdk",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
   ],
   "scripts": {
-    "dev": "rollup -c -w",
-    "build": "rollup -c",
+    "build": "tsc --build packages --force",
+    "preinitial:release": "yarn prerelease",
+    "prerelease": "npm-run-all -s build -p lint test",
+    "pretest": "jest --rootDir __tests__",
+    "start": "yarn build --watch",
+    "pretest:ci": "yarn pretest",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
   },
   "repository": {
@@ -21,15 +21,16 @@
     "url": "https://github.com/halo-dev/halo-js-sdk.git"
   },
   "keywords": [
-    "hola"
+    "halo"
   ],
   "maintainers": [
     {
-      "name": "JaxsonWang",
-      "email": "i@iiong.com",
-      "url": "https://iiong.com"
+      "name": "guqing",
+      "email": "1484563614@qq.com",
+      "url": "https://github.com/guqing"
     }
   ],
+  "author": "halo",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/halo-dev/halo-js-sdk/issues"
@@ -41,9 +42,6 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "axios": "^0.20.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
@@ -54,12 +52,16 @@
     "@rollup/plugin-typescript": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
-    "axios-mock-adapter": "^1.18.2",
+    "@types/jest": "^26.0.23",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.6",
+    "@types/node": "^13.13.52",
     "lint-staged": "^10.4.0",
     "rollup": "^2.28.2",
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "standard-version": "^9.0.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "lerna": "^4.0.0"
   }
 }
