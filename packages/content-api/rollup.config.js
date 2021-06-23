@@ -9,7 +9,7 @@ const production = process.env.NODE_ENV === "production";
 const extensions = [".js", ".ts", ".json"];
 
 export default {
-  input: "./src/AdminApiClient.ts",
+  input: "./src/ContentApiClient.ts",
   plugins: [
     terser(),
     resolve({
@@ -31,7 +31,7 @@ export default {
 
   output: {
     extend: true,
-    file: `./dist/AdminApiClient${production ? ".min" : ""}.js`,
+    file: `./dist/ContentApiClient${production ? ".min" : ""}.js`,
     format: "umd",
     name: "window",
     sourcemap: production ? false : "inline",
