@@ -1,4 +1,4 @@
-import { HttpClient, FormData } from "@guching/rest-api-client";
+import { HttpClient, FormData } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
 import {
   Response,

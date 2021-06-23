@@ -1,4 +1,4 @@
-import { HaloRestAPIClient, HttpClient } from "@guching/rest-api-client";
+import { HaloRestAPIClient, HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "./url";
 import { Environment, Response, AccessToken, LoginPreCheck } from "./types";
 import {

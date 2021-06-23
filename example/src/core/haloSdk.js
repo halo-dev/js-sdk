@@ -1,8 +1,10 @@
-import { AdminApiClient, HaloRestAPIClient } from "@guching/admin-api";
 import {
+  AdminApiClient,
+  HaloRestAPIClient,
   LocalStorageTokenStore,
   DefaultTokenProvider
-} from "@guching/rest-api-client";
+} from "@halo-dev/admin-api";
+
 import encryptUtil from "../utils/encrypt";
 
 const userCredentials = encryptUtil.decrypt(

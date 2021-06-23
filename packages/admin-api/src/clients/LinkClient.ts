@@ -1,4 +1,4 @@
-import { HttpClient } from "@guching/rest-api-client";
+import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
 import {
   Response,

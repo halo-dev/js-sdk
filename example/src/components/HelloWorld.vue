@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import { AdminApiClient } from "@guching/admin-api";
-import { HaloRestAPIClient } from "@guching/rest-api-client";
+import { AdminApiClient } from "@halo-dev/admin-api";
+import { HaloRestAPIClient } from "@halo-dev/rest-api-client";
 
 export default {
   name: "HelloWorld",

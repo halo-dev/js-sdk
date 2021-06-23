@@ -1,4 +1,4 @@
-import { HaloRestAPIClient, HttpClient } from "@guching/rest-api-client";
+import { HaloRestAPIClient, HttpClient } from "@halo-dev/rest-api-client";
 import {
   ArchiveClient,
   CategoryClient,

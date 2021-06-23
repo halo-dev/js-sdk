@@ -1,4 +1,4 @@
-import { HttpClient } from "@guching/rest-api-client";
+import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
 import {
   Response,
@@ -55,14 +55,14 @@ export class OptionClient {
     return this.client.get(path, { ...params })
   }
 
-  public listAsMapView(): Promise<Response<Map<string, any>>> {
+  public listAsMapView(): Promise<Response<Record<string, any>>> {
     const path = buildPath({
       endpointName: "options/map_view"
     });
     return this.client.get(path, {})
   }
 
-  public listAsMapViewByKeys(params: Array<string>): Promise<Response<Map<string, any>>> {
+  public listAsMapViewByKeys(params: Array<string>): Promise<Response<Record<string, any>>> {
     const path = buildPath({
       endpointName: "options/map_view/keys"
     });

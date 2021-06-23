@@ -1,5 +1,5 @@
 import { AdminApiClient } from "../AdminApiClient";
-import { HaloRestAPIClient } from "@guching/rest-api-client";
+import { HaloRestAPIClient } from "@halo-dev/rest-api-client";
 import Axios from 'axios'
 
 describe("Halo admin api test", () => {
