@@ -81,7 +81,6 @@ export class AxiosClient implements HttpClient {
   }
 
   private async sendRequest(requestConfig: RequestConfig) {
-    console.log(requestConfig);
     const tokenProvider = this.requestConfigBuilder.getTokenProvider();
     if (tokenProvider) {
       const token = await tokenProvider.getToken();
