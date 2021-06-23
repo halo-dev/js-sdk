@@ -1,6 +1,6 @@
-# Halo SDK
+# Halo SDK Admin Api Client
 
-A http tools for halo restful api.
+A collection of tools for interacting with Halo's Admin APIs.
 
 ### Run
 

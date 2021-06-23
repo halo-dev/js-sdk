@@ -2,17 +2,6 @@
 
 A collection of tools for interacting with Halo's APIs.
 
----
-
-comming...
-
-### TODO
-
-- [x] 打包业务
-- [ ] 主要业务
-- [ ] 单元测试
-- [ ] 发布依赖
-
 ### Run
 
 ```bash
