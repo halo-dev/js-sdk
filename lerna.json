@@ -1,4 +1,4 @@
 {
-  "npmClient": "npm",
+  "npmClient": "yarn",
   "version": "independent"
 }
