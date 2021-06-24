@@ -5,9 +5,9 @@ import {
   CommentWithHasChildren,
   ContentQuery,
   Page, PageQuery,
-  Response, SheetDetail, SheetList
+  Response, SheetDetail, SheetList,
+  BaseCommentQuery
 } from "../types";
-import { CommentQuery } from "../../../admin-api/lib/types";
 
 export class SheetClient {
   private client: HttpClient;
@@ -37,7 +37,7 @@ export class SheetClient {
     return this.client.get(path, { slug, ...params });
   }
 
-  public listTopComments(sheetId: number, params?: CommentQuery): Promise<Page<CommentWithHasChildren>> {
+  public listTopComments(sheetId: number, params?: BaseCommentQuery): Promise<Page<CommentWithHasChildren>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/comments/top_view`,
     });
@@ -51,14 +51,14 @@ export class SheetClient {
     return this.client.get(path, { sort });
   }
 
-  public listCommentsAsTree(sheetId: number, params?: CommentQuery): Promise<Page<BaseComment>> {
+  public listCommentsAsTree(sheetId: number, params?: BaseCommentQuery): Promise<Page<BaseComment>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/comments/tree_view`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public listComments(sheetId: number, params?: CommentQuery): Promise<Page<BaseCommentWithParent>> {
+  public listComments(sheetId: number, params?: BaseCommentQuery): Promise<Page<BaseCommentWithParent>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/comments/list_view`,
     });
