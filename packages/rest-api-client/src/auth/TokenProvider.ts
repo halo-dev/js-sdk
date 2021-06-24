@@ -1,13 +1,6 @@
-import { AccessToken, Credentials, TokenType } from "./CredentialsInterface";
+import { Credentials, TokenType, TokenProvider, TokenStore } from "../types";
 import { HttpAuthenticator } from "./HttpAuthenticator";
 import { InMemeryTokenStore } from "./InMemeryTokenStore";
-import { TokenStore } from "./TokenStore";
-
-export interface TokenProvider {
-  getToken(): Promise<AccessToken>;
-  clearToken(): void;
-  getAuthHeader(): string;
-}
 
 export class DefaultTokenProvider implements TokenProvider {
   private credentials: Credentials;

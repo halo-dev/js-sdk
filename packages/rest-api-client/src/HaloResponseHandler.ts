@@ -3,7 +3,7 @@ import {
   HttpClientError,
   HttpResponse,
   ResponseHandler,
-} from "./http/HttpClientInterface";
+} from "./types";
 import { HaloRestAPIError, HaloErrorResponse } from "./error/HaloRestAPIError";
 
 export class HaloResponseHandler implements ResponseHandler {

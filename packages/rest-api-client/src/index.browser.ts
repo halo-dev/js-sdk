@@ -5,7 +5,24 @@ import FormData from "form-data";
 injectPlatformDeps(browserDeps);
 
 export { HaloRestAPIClient } from "./HaloRestAPIClient";
-export { HttpClient } from "./http/HttpClientInterface";
-export * from "./auth";
-export * from "./types/auth";
+
+export {
+  CustomizeAuth,
+  DiscriminatedAuth,
+  BasicAuth,
+  AccessToken,
+  TokenType,
+  Credentials,
+  TokenProvider,
+  TokenStore,
+  HttpClient,
+  ResponseHandler
+} from "./types";
+
+export {
+  FileTokenStore,
+  LocalStorageTokenStore,
+  DefaultTokenProvider
+} from "./auth";
+
 export { FormData };

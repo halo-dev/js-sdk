@@ -1,5 +1,4 @@
-import { TokenStore } from "../auth/TokenStore";
-import { AccessToken } from "../auth/CredentialsInterface";
+import { TokenStore, AccessToken } from "../types";
 
 export class InMemeryTokenStore implements TokenStore {
   private accessToken?: AccessToken = undefined;

@@ -1,5 +1,4 @@
-import { TokenStore } from "../auth/TokenStore";
-import { AccessToken } from "../auth/CredentialsInterface";
+import { AccessToken, TokenStore } from "../types";
 import store from "store";
 
 export class LocalStorageTokenStore implements TokenStore {

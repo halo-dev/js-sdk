@@ -1,5 +1,5 @@
-import { TokenStore } from "../auth/TokenStore";
-import { AccessToken } from "../auth/CredentialsInterface";
+import { TokenStore } from "../types";
+import { AccessToken } from "../types";
 import * as fs from "fs";
 
 export class FileTokenStore implements TokenStore {

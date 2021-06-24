@@ -1,4 +1,5 @@
-import { TokenProvider, DefaultTokenProvider } from "../auth/TokenProvider";
+import { TokenProvider } from "../types";
+import { DefaultTokenProvider } from "../auth"
 import { FileTokenStore } from "../auth/FileTokenStore";
 describe("TokenProvider", () => {
   describe("constructor", () => {
