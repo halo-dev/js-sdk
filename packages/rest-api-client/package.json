@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/halo-dev/halo-js-sdk.git",
+    "url": "git+https://github.com/halo-dev/js-sdk.git",
     "directory": "packages/rest-api-client"
   },
   "files": [
@@ -42,12 +42,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/halo-dev/halo-js-sdk/issues"
+    "url": "https://github.com/halo-dev/js-sdk/issues"
   },
   "engines": {
     "node": ">=12"
   },
-  "homepage": "https://github.com/halo-dev/halo-js-sdk#readme",
+  "homepage": "https://github.com/halo-dev/js-sdk#readme",
   "lint-staged": {
     "*.{js,ts}": [
       "yarn lint --fix",
