@@ -1,7 +1,7 @@
 {
-  "name": "@halo/js-sdk",
+  "name": "@halo-dev/js-sdk",
   "version": "1.0.0",
-  "description": "packages for halo javaSript sdk",
+  "description": "Packages for Halo JavaScript SDK.",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -18,10 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/halo-dev/halo-js-sdk.git"
+    "url": "https://github.com/halo-dev/js-sdk.git"
   },
   "keywords": [
-    "halo"
+    "halo",
+    "halo-sdk"
   ],
   "maintainers": [
     {
@@ -30,12 +31,12 @@
       "url": "https://github.com/guqing"
     }
   ],
-  "author": "halo",
+  "author": "halo-dev",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/halo-dev/halo-js-sdk/issues"
+    "url": "https://github.com/halo-dev/js-sdk/issues"
   },
-  "homepage": "https://github.com/halo-dev/halo-js-sdk#readme",
+  "homepage": "https://github.com/halo-dev/js-sdk#readme",
   "lint-staged": {
     "*.{js,ts}": [
       "yarn lint --fix",
