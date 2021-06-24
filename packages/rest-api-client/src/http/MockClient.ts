@@ -2,7 +2,7 @@ import {
   HttpClient,
   RequestConfigBuilder,
   ResponseHandler,
-} from "./HttpClientInterface";
+} from "../types";
 import FormData from "form-data";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 

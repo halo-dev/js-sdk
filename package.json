@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "description": "Packages for Halo JavaScript SDK.",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
   "scripts": {
+    "build:ci": "lerna bootstrap && yarn build",
     "build": "tsc --build packages --force",
     "preinitial:release": "yarn prerelease",
     "prerelease": "npm-run-all -s build -p lint test",

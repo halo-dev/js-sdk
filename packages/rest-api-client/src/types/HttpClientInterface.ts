@@ -1,5 +1,5 @@
 import FormData from "form-data";
-import { TokenProvider } from "../auth/TokenProvider";
+import { TokenProvider } from "./CredentialsInterface";
 
 export interface HttpClient {
   get: <T extends object>(path: string, params: object) => Promise<T>;

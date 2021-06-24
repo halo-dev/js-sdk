@@ -1,10 +1,9 @@
 import { DefaultHttpClient } from "./http/";
-import { ProxyConfig } from "./http/HttpClientInterface";
+import { ProxyConfig, TokenProvider } from "./types";
 import { BasicAuth, DiscriminatedAuth, CustomizeAuth } from "./types/auth";
 import { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
 import { HaloResponseHandler } from "./HaloResponseHandler";
 import { platformDeps } from "./platform/index";
-import { TokenProvider } from "./auth/TokenProvider";
 
 type OmitTypePropertyFromUnion<T> = T extends unknown ? Omit<T, "type"> : never;
 type Auth = OmitTypePropertyFromUnion<DiscriminatedAuth>;
@@ -15,14 +14,14 @@ type Options = {
   guestSpaceId?: number | string;
   basicAuth?: BasicAuth;
   clientCertAuth?:
-    | {
-        pfx: Buffer;
-        password: string;
-      }
-    | {
-        pfxFilePath: string;
-        password: string;
-      };
+  | {
+    pfx: Buffer;
+    password: string;
+  }
+  | {
+    pfxFilePath: string;
+    password: string;
+  };
   proxy?: ProxyConfig;
   userAgent?: string;
   tokenProvider?: TokenProvider;

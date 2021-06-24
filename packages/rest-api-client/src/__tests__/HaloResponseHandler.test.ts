@@ -1,4 +1,4 @@
-import { HttpResponse } from "../http/HttpClientInterface";
+import { HttpResponse } from "../types";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 
 describe("HaloResponseHandler", () => {

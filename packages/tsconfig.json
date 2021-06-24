@@ -2,7 +2,8 @@
   "files": [],
   "include": [],
   "references": [
-    { "path": "./admin-api"},
-    { "path": "./rest-api-client"}
+    { "path": "./rest-api-client" },
+    { "path": "./admin-api" },
+    { "path": "./content-api" }
   ]
 }

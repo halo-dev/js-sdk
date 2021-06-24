@@ -1,9 +1,7 @@
 import Axios from "axios";
-import { RequestConfig } from "../http/HttpClientInterface";
-import { AccessToken, Credentials } from "./CredentialsInterface";
+import { AccessToken, Credentials, HttpResponse, RequestConfig } from "../types";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 import { platformDeps } from "../platform/";
-import { HttpResponse } from "../http/HttpClientInterface";
 
 export class HttpAuthenticator {
   private baseUrl: string;

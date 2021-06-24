@@ -4,7 +4,7 @@ import {
   RequestConfigBuilder,
   RequestConfig,
   ResponseHandler,
-} from "./HttpClientInterface";
+} from "../types";
 import FormData from "form-data";
 
 export class AxiosClient implements HttpClient {

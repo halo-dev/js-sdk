@@ -12,6 +12,8 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-fallthrough": "off",
     "no-console": "off",
     "no-debugger": "warn",
     "no-constant-condition": "off",
