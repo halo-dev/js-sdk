@@ -1,13 +1,18 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
 import {
-  BaseCommentParam, BaseCommentQuery,
-  BaseCommentTree, BaseCommentWithParent,
-  BasePostSimple, CommentWithHasChildren,
-  Page, PageQuery, PostList,
-  Response
+  BaseCommentParam,
+  BaseCommentQuery,
+  BaseCommentTree,
+  BaseCommentWithParent,
+  BasePostSimple,
+  CommentWithHasChildren,
+  Page,
+  PageQuery,
+  PostList,
+  Response,
+  PostDetail
 } from "../types";
-import { PostDetail } from "../../../admin-api/lib/types";
 
 export class PostClient {
   private client: HttpClient;

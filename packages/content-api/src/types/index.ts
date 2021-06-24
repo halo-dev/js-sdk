@@ -237,6 +237,15 @@ export interface BasePostDetail extends BasePostSimple {
   commentCount: number
 }
 
+export interface PostDetail extends BasePostDetail {
+  tagIds: Array<number>
+  tags: Array<Tag>
+  categoryIds: Array<number>
+  categories: Array<Category>
+  metaIds: Array<number>
+  metas: Array<BaseMeta>
+}
+
 export interface SheetDetail extends BasePostDetail {
   metaIds: Array<number>
   metas: Array<BaseMeta>

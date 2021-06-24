@@ -1,11 +1,16 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
 import {
-  BaseComment, BaseCommentParam, BaseCommentWithParent,
+  BaseComment,
+  BaseCommentParam,
+  BaseCommentWithParent,
   CommentWithHasChildren,
   ContentQuery,
-  Page, PageQuery,
-  Response, SheetDetail, SheetList,
+  Page,
+  PageQuery,
+  Response,
+  SheetDetail,
+  SheetList,
   BaseCommentQuery
 } from "../types";
 
