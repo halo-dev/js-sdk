@@ -1,6 +1,6 @@
 {
   "name": "@halo-dev/content-api",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "A halo content api client",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -52,6 +52,13 @@
     ]
   },
   "dependencies": {
-    "@halo-dev/rest-api-client": "^1.0.0-alpha.1"
+    "@halo-dev/rest-api-client": "^1.0.0-alpha.2"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
   }
 }
