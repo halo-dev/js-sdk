@@ -23,13 +23,13 @@ HaloLogger.log = (...args) => {
 /**
  * The log levels supported by the logger.
  * The log levels in order of most verbose to least verbose are:
- * - verbose
+ * - debug
  * - info
  * - warning
  * - error
  */
-export type HaloLogLevel = "verbose" | "info" | "warning" | "error";
-const HALO_LOG_LEVELS = ["verbose", "info", "warning", "error"];
+export type HaloLogLevel = "debug" | "info" | "warning" | "error";
+const HALO_LOG_LEVELS = ["debug", "info", "warning", "error"];
 
 type HaloDebugger = Debugger & { level: HaloLogLevel };
 
@@ -55,7 +55,7 @@ if (logLevelFromEnv) {
  * Immediately enables logging at the specified log level.
  * @param level - The log level to enable for logging.
  * Options from most verbose to least verbose are:
- * - verbose
+ * - debug
  * - info
  * - warning
  * - error
@@ -88,7 +88,7 @@ export function getLogLevel(): HaloLogLevel | undefined {
 }
 
 const levelMap = {
-  verbose: 400,
+  debug: 400,
   info: 300,
   warning: 200,
   error: 100,
@@ -119,7 +119,7 @@ export interface HaloLogger {
    * intended for use by developers / system administrators
    * for diagnosing specific failures.
    */
-  verbose: Debugger;
+  debug: Debugger;
 }
 
 /**
@@ -134,7 +134,7 @@ export function createClientLogger(namespace: string): HaloLogger {
     error: createLogger(clientRootLogger, "error"),
     warning: createLogger(clientRootLogger, "warning"),
     info: createLogger(clientRootLogger, "info"),
-    verbose: createLogger(clientRootLogger, "verbose"),
+    debug: createLogger(clientRootLogger, "debug"),
   };
 }
 
