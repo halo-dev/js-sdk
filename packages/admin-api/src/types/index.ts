@@ -498,7 +498,7 @@ export type ThemeProperty = {
   themePath: string;
   folderName: string;
   hasOptions: boolean;
-  isActivated: boolean;
+  activated: boolean;
   screenshots: string;
   postMetaField: Array<string>;
   sheetMetaField: Array<string>;
