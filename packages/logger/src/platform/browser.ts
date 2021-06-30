@@ -7,7 +7,7 @@ export const log = (...args: any[]) => {
       console.warn(...args);
     } else if (firstArg.includes(":info")) {
       console.info(...args);
-    } else if (firstArg.includes(":verbose")) {
+    } else if (firstArg.includes(":debug")) {
       console.debug(...args);
     } else {
       console.debug(...args);
