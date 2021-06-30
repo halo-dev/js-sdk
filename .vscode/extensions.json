@@ -1,42 +1,8 @@
-[
-  {
-    "metadata": {
-      "id": "eaa2127d-cb69-4ab9-8505-a60c9ee5f28b",
-      "publisherId": "oderwat.indent-rainbow",
-      "publisherDisplayName": "oderwat"
-    },
-    "name": "indent-rainbow",
-    "publisher": "oderwat",
-    "version": "7.4.0"
-  },
-  {
-    "metadata": {
-      "id": "96fa4707-6983-4489-b7c5-d5ffdfdcce90",
-      "publisherId": "esbenp.prettier-vscode",
-      "publisherDisplayName": "esbenp"
-    },
-    "name": "prettier-vscode",
-    "publisher": "esbenp",
-    "version": "5.7.1"
-  },
-  {
-    "metadata": {
-      "id": "2f5dd8cb-d251-4d70-abfe-ddebcb077483",
-      "publisherId": "octref.vetur",
-      "publisherDisplayName": "octref"
-    },
-    "name": "vetur",
-    "publisher": "octref",
-    "version": "0.28.0"
-  },
-  {
-    "metadata": {
-      "id": "876e8f93-74d0-4f4f-91b7-34a09f19f444",
-      "publisherId": "VisualStudioExptTeam.vscodeintellicode",
-      "publisherDisplayName": "VisualStudioExptTeam"
-    },
-    "name": "vscodeintellicode",
-    "publisher": "VisualStudioExptTeam",
-    "version": "1.2.10"
-  }
-]
+{
+  "recommendations": [
+    "oderwat.indent-rainbow",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "VisualStudioExptTeam.vscodeintellicode"
+  ]
+}
