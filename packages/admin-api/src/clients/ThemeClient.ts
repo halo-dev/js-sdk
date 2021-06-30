@@ -16,7 +16,7 @@ export class ThemeClient {
     return this.client.get(path, {});
   }
 
-  public getById(themeId: number): Promise<Response<ThemeProperty>> {
+  public getById(themeId: string): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/${themeId}`,
     });
@@ -24,7 +24,7 @@ export class ThemeClient {
   }
 
   public deleteById(
-    themeId: number,
+    themeId: string,
     deleteSettings?: boolean
   ): Promise<Response<ThemeProperty>> {
     const path = buildPath({
@@ -33,7 +33,7 @@ export class ThemeClient {
     return this.client.delete(path, {});
   }
 
-  public active(themeId: number): Promise<Response<ThemeProperty>> {
+  public active(themeId: string): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/activation`,
     });
@@ -47,14 +47,14 @@ export class ThemeClient {
     return this.client.get(path, {});
   }
 
-  public fetchConfigById(themeId: number): Promise<Response<Array<Group>>> {
+  public fetchConfigById(themeId: string): Promise<Response<Array<Group>>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/configurations`,
     });
     return this.client.get(path, {});
   }
 
-  public listFilesById(themeId: number): Promise<Response<Array<ThemeFile>>> {
+  public listFilesById(themeId: string): Promise<Response<Array<ThemeFile>>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/files`,
     });
@@ -76,7 +76,7 @@ export class ThemeClient {
   }
 
   public getContentById(
-    themeId: number,
+    themeId: string,
     filepath: string
   ): Promise<Response<string>> {
     const path = buildPath({
@@ -86,7 +86,7 @@ export class ThemeClient {
   }
 
   public async updateContentById(
-    themeId: number,
+    themeId: string,
     params: {
       path?: string;
       content?: string;
@@ -99,7 +99,7 @@ export class ThemeClient {
   }
 
   public listSettingsById(
-    themeId: number
+    themeId: string
   ): Promise<Response<Map<String, any>>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/settings`,
@@ -115,7 +115,7 @@ export class ThemeClient {
   }
 
   public async saveSettingsById(
-    themeId: number,
+    themeId: string,
     settings: Map<String, Object>
   ): Promise<void> {
     const path = buildPath({
@@ -166,7 +166,7 @@ export class ThemeClient {
     return this.client.get(path, { uri });
   }
 
-  public updateThemeByFetching(themeId: number) {
+  public updateThemeByFetching(themeId: string) {
     const path = buildPath({
       endpointName: `themes/fetching/${themeId}`,
     });
@@ -197,7 +197,7 @@ export class ThemeClient {
   }
 
   public updateThemeByUpload(
-    themeId: number,
+    themeId: string,
     data: unknown
   ): Promise<Response<ThemeProperty>> {
     const path = buildPath({
