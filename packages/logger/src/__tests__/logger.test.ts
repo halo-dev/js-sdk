@@ -1,9 +1,9 @@
-import * as Logger from "../index";
+import * as Logger from "../logger/index";
 import * as assert from "assert";
 
 const testLogger = Logger.createClientLogger("test");
 
-describe("HaloLogger", function () {
+describe("HaloLogger", function() {
   it("is not enabled", () => {
     // HaloLogger is only used to enable a way to redirect logs.
     // This test ensures logs aren't redirected to the root logger.

@@ -1,13 +1,10 @@
 {
   "name": "@guching/logger",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Halo SDK for JavaScript - Logger",
   "main": "./lib/index.js",
   "module": "./esm/index.js",
-  "browser": {
-    "./esm/log.js": "./esm/log.browser.js",
-    "process": false
-  },
+  "browser": "lib/index.browser.js",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -16,7 +13,7 @@
   },
   "private": false,
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc --build --force",
     "test": " jest --rootDir=src",
     "lint": "eslint --ext .ts src"
   },

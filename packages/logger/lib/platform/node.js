@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.log = void 0;
 const util_1 = __importDefault(require("util"));
 const os_1 = require("os");
-function log(message, ...args) {
+const log = (message, ...args) => {
     process.stderr.write(`${util_1.default.format(message, ...args)}${os_1.EOL}`);
-}
+};
 exports.log = log;
-//# sourceMappingURL=log.js.map
+//# sourceMappingURL=node.js.map

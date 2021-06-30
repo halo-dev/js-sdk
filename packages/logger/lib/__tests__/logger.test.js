@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Logger = __importStar(require("../index"));
+const Logger = __importStar(require("../logger/index"));
 const assert = __importStar(require("assert"));
 const testLogger = Logger.createClientLogger("test");
 describe("HaloLogger", function () {

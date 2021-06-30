@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.log = void 0;
-function log(...args) {
+const log = (...args) => {
     if (args.length > 0) {
         const firstArg = String(args[0]);
         if (firstArg.includes(":error")) {
@@ -20,6 +20,6 @@ function log(...args) {
             console.debug(...args);
         }
     }
-}
+};
 exports.log = log;
-//# sourceMappingURL=log.browser.js.map
+//# sourceMappingURL=browser.js.map

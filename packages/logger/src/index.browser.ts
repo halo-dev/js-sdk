@@ -1,7 +1,7 @@
 import { injectPlatformDeps } from "./platform/";
-import * as nodeDeps from "./platform/node";
+import * as browserDeps from "./platform/browser";
 
-injectPlatformDeps(nodeDeps);
+injectPlatformDeps(browserDeps);
 
 export * from "./logger/debug";
 export * from "./logger/index";

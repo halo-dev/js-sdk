@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const log_1 = require("./log");
+const platform_1 = require("../platform");
 const debugEnvVariable = (typeof process !== "undefined" && process.env && process.env.DEBUG) ||
     undefined;
 let enabledString;
@@ -16,8 +16,11 @@ const debugObj = Object.assign((namespace) => {
     enable,
     enabled,
     disable,
-    log: log_1.log,
+    log
 });
+function log(...args) {
+    return platform_1.platformDeps.log(args);
+}
 function enable(namespaces) {
     enabledString = namespaces;
     enabledNamespaces = [];
@@ -25,7 +28,7 @@ function enable(namespaces) {
     const wildcard = /\*/g;
     const namespaceList = namespaces
         .split(",")
-        .map((ns) => ns.trim().replace(wildcard, ".*?"));
+        .map(ns => ns.trim().replace(wildcard, ".*?"));
     for (const ns of namespaceList) {
         if (ns.startsWith("-")) {
             skippedNamespaces.push(new RegExp(`^${ns.substr(1)}$`));
@@ -65,7 +68,7 @@ function createDebugger(namespace) {
         destroy,
         log: debugObj.log,
         namespace,
-        extend,
+        extend
     });
     function debug(...args) {
         if (!newDebugger.enabled) {

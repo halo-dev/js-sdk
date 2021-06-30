@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const debug_1 = __importDefault(require("../debug"));
+const debug_1 = __importDefault(require("../logger/debug"));
 const sinon_1 = require("sinon");
 const chai_1 = require("chai");
 describe("debug", function () {

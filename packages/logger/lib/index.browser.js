@@ -23,8 +23,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const platform_1 = require("./platform/");
-const nodeDeps = __importStar(require("./platform/node"));
-platform_1.injectPlatformDeps(nodeDeps);
+const browserDeps = __importStar(require("./platform/browser"));
+platform_1.injectPlatformDeps(browserDeps);
 __exportStar(require("./logger/debug"), exports);
 __exportStar(require("./logger/index"), exports);
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.browser.js.map

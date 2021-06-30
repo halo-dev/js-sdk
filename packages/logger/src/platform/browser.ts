@@ -1,4 +1,4 @@
-export function log(...args: any[]): void {
+export const log = (...args: any[]) => {
   if (args.length > 0) {
     const firstArg = String(args[0]);
     if (firstArg.includes(":error")) {
@@ -13,4 +13,4 @@ export function log(...args: any[]): void {
       console.debug(...args);
     }
   }
-}
+};

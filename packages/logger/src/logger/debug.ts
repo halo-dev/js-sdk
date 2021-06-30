@@ -1,4 +1,4 @@
-import { log } from "./log";
+import { platformDeps } from "../platform";
 
 /**
  * A simple mechanism for enabling logging.
@@ -83,9 +83,13 @@ const debugObj: Debug = Object.assign(
     enable,
     enabled,
     disable,
-    log,
+    log
   }
 );
+
+function log(...args: any[]) {
+  return platformDeps.log(args);
+}
 
 function enable(namespaces: string): void {
   enabledString = namespaces;
@@ -94,7 +98,7 @@ function enable(namespaces: string): void {
   const wildcard = /\*/g;
   const namespaceList = namespaces
     .split(",")
-    .map((ns) => ns.trim().replace(wildcard, ".*?"));
+    .map(ns => ns.trim().replace(wildcard, ".*?"));
   for (const ns of namespaceList) {
     if (ns.startsWith("-")) {
       skippedNamespaces.push(new RegExp(`^${ns.substr(1)}$`));
@@ -137,7 +141,7 @@ function createDebugger(namespace: string): Debugger {
     destroy,
     log: debugObj.log,
     namespace,
-    extend,
+    extend
   });
 
   function debug(...args: any[]): void {

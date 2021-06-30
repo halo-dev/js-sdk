@@ -1,6 +1,6 @@
 import util from "util";
 import { EOL } from "os";
 
-export function log(message: unknown, ...args: any[]): void {
+export const log = (message: unknown, ...args: any[]) => {
   process.stderr.write(`${util.format(message, ...args)}${EOL}`);
-}
+};
