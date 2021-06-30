@@ -7,7 +7,7 @@ import {
   JournalCommentWithJournal,
   BaseComment,
   BaseCommentParam,
-  CommentStatus
+  CommentStatus,
 } from "../types";
 
 export class JournalCommentClient {
@@ -17,63 +17,68 @@ export class JournalCommentClient {
     this.client = client;
   }
 
-  public async list(params: JournalCommentQuery): Promise<Page<JournalCommentWithJournal>> {
+  public async list(
+    params: JournalCommentQuery
+  ): Promise<Page<JournalCommentWithJournal>> {
     const path = buildPath({
-      endpointName: "journals/comments"
+      endpointName: "journals/comments",
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 
   public create(params: BaseCommentParam): Promise<Response<BaseComment>> {
     const path = buildPath({
-      endpointName: "journals/comments"
+      endpointName: "journals/comments",
     });
-    return this.client.post(path, { ...params })
+    return this.client.post(path, { ...params });
   }
 
   public deleteById(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
-      endpointName: `journals/comments/${commentId}`
+      endpointName: `journals/comments/${commentId}`,
     });
-    return this.client.delete(path, {})
+    return this.client.delete(path, {});
   }
 
-  public updateById(commentId: number, status: CommentStatus): Promise<Response<BaseComment>> {
+  public updateById(
+    commentId: number,
+    status: CommentStatus
+  ): Promise<Response<BaseComment>> {
     const path = buildPath({
-      endpointName: `journals/comments/${commentId}/status/${status}`
+      endpointName: `journals/comments/${commentId}/status/${status}`,
     });
-    return this.client.put(path, {})
+    return this.client.put(path, {});
   }
 
   public listAsView(params: {
-    journalId: number
-    sort?: Array<string>
-    page?: number
+    journalId: number;
+    sort?: Array<string>;
+    page?: number;
   }): Promise<Page<BaseComment>> {
     const path = buildPath({
-      endpointName: `journals/comments/${params.journalId}/list_view`
+      endpointName: `journals/comments/${params.journalId}/list_view`,
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 
   public listAsTree(params: {
-    journalId: number
-    sort?: Array<string>
-    page?: number
+    journalId: number;
+    sort?: Array<string>;
+    page?: number;
   }): Promise<Page<BaseComment>> {
     const path = buildPath({
-      endpointName: `journals/comments/${params.journalId}/tree_view`
+      endpointName: `journals/comments/${params.journalId}/tree_view`,
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 
   public latest(params: {
-    top?: number
-    status?: CommentStatus
+    top?: number;
+    status?: CommentStatus;
   }): Promise<Response<Array<BaseComment>>> {
     const path = buildPath({
-      endpointName: "journals/comments/latest"
+      endpointName: "journals/comments/latest",
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 }

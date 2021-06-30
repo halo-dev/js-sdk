@@ -25,14 +25,14 @@ export const getDefaultAuth = () => {
 
 export const buildPlatformDependentConfig = (params: {
   clientCertAuth?:
-  | {
-    pfx: Buffer
-    password: string
-  }
-  | {
-    pfxFilePath: string
-    password: string
-  }
+    | {
+        pfx: Buffer;
+        password: string;
+      }
+    | {
+        pfxFilePath: string;
+        password: string;
+      };
 }) => {
   const clientCertAuth = params.clientCertAuth;
 
@@ -53,8 +53,9 @@ export const buildPlatformDependentConfig = (params: {
 export const buildHeaders = (params: { userAgent?: string }) => {
   const { userAgent } = params;
   return {
-    "User-Agent": `Node.js/${process.version}(${os.type()}) ${packageJson.name
-      }@${packageJson.version}${userAgent ? ` ${userAgent}` : ""}`,
+    "User-Agent": `Node.js/${process.version}(${os.type()}) ${
+      packageJson.name
+    }@${packageJson.version}${userAgent ? ` ${userAgent}` : ""}`,
   };
 };
 

@@ -11,7 +11,7 @@ import {
   PageQuery,
   PostList,
   Response,
-  PostDetail
+  PostDetail,
 } from "../types";
 
 export class PostClient {
@@ -28,27 +28,36 @@ export class PostClient {
     return this.client.get(path, { ...params });
   }
 
-  public search(keyword: string, pageQuery?: PageQuery): Promise<Page<BasePostSimple>> {
+  public search(
+    keyword: string,
+    pageQuery?: PageQuery
+  ): Promise<Page<BasePostSimple>> {
     const path = buildPath({
       endpointName: "posts/search",
     });
     return this.client.get(path, { keyword, ...pageQuery });
   }
 
-  public getById(postId: number, params?: {
-    formatDisabled: boolean
-    sourceDisabled: boolean
-  }): Promise<Response<PostDetail>> {
+  public getById(
+    postId: number,
+    params?: {
+      formatDisabled: boolean;
+      sourceDisabled: boolean;
+    }
+  ): Promise<Response<PostDetail>> {
     const path = buildPath({
       endpointName: `posts/${postId}`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public getBySlug(slug: string, params: {
-    formatDisabled: boolean
-    sourceDisabled: boolean
-  }): Promise<Response<PostDetail>> {
+  public getBySlug(
+    slug: string,
+    params: {
+      formatDisabled: boolean;
+      sourceDisabled: boolean;
+    }
+  ): Promise<Response<PostDetail>> {
     const path = buildPath({
       endpointName: "posts/slug",
     });
@@ -69,28 +78,41 @@ export class PostClient {
     return this.client.get(path, {});
   }
 
-  public listTopComments(postId: number, params?: BaseCommentQuery): Promise<Page<CommentWithHasChildren>> {
+  public listTopComments(
+    postId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<CommentWithHasChildren>> {
     const path = buildPath({
       endpointName: `posts/${postId}/comments/top_view`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public listChildrenComments(postId: number, commentParentId: number, sort?: Array<string>): Promise<Page<CommentWithHasChildren>> {
+  public listChildrenComments(
+    postId: number,
+    commentParentId: number,
+    sort?: Array<string>
+  ): Promise<Page<CommentWithHasChildren>> {
     const path = buildPath({
       endpointName: `posts/${postId}/comments/${commentParentId}/children`,
     });
     return this.client.get(path, { sort });
   }
 
-  public listCommentsAsTree(postId: number, params?: BaseCommentQuery): Promise<Page<BaseCommentTree>> {
+  public listCommentsAsTree(
+    postId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<BaseCommentTree>> {
     const path = buildPath({
       endpointName: `posts/${postId}/comments/tree_view`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public listComments(postId: number, params?: BaseCommentQuery): Promise<Page<BaseCommentWithParent>> {
+  public listComments(
+    postId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<BaseCommentWithParent>> {
     const path = buildPath({
       endpointName: `posts/${postId}/comments/list_view`,
     });

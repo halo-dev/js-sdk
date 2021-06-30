@@ -12,7 +12,14 @@ export interface PageQuery {
   sort?: Array<string>;
 }
 
-export interface Page<T> extends Response<Page<T>> {
+export interface Page<T = any> {
+  status: number | string;
+  message?: string;
+  devMessage?: any;
+  data: PageEntity<T>;
+}
+
+export type PageEntity<T = any> = {
   hasContent: boolean;
   hasNext: boolean;
   hasPrevious: boolean;
@@ -22,8 +29,8 @@ export interface Page<T> extends Response<Page<T>> {
   pages: number;
   rpp: number;
   total: number;
-  content: T;
-}
+  content: Array<T>;
+};
 
 export type MFAType = "NONE" | "TFA_TOTP";
 

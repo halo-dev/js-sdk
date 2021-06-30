@@ -1,10 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Response,
-  Option,
-  OptionQuery,
-} from "../types";
+import { Response, Option, OptionQuery } from "../types";
 
 export class OptionClient {
   private client: HttpClient;
@@ -15,71 +11,76 @@ export class OptionClient {
 
   public list(): Promise<Response<Array<Option>>> {
     const path = buildPath({
-      endpointName: "options"
+      endpointName: "options",
     });
-    return this.client.get(path, {})
+    return this.client.get(path, {});
   }
 
   public create(params: Option): Promise<Response<Option>> {
     const path = buildPath({
-      endpointName: "options"
+      endpointName: "options",
     });
-    return this.client.post(path, { ...params })
+    return this.client.post(path, { ...params });
   }
 
   public getById(id: number): Promise<Response<Option>> {
     const path = buildPath({
-      endpointName: `options/${id}`
+      endpointName: `options/${id}`,
     });
-    return this.client.get(path, {})
+    return this.client.get(path, {});
   }
 
-  public updateById(optionId: number, params: Option): Promise<Response<Option>> {
+  public updateById(
+    optionId: number,
+    params: Option
+  ): Promise<Response<Option>> {
     const path = buildPath({
-      endpointName: `options/${optionId}`
+      endpointName: `options/${optionId}`,
     });
-    return this.client.put(path, { ...params })
+    return this.client.put(path, { ...params });
   }
 
   public async deleteById(optionId: number): Promise<void> {
     const path = buildPath({
-      endpointName: `options/${optionId}`
+      endpointName: `options/${optionId}`,
     });
-    await this.client.delete(path, {})
+    await this.client.delete(path, {});
   }
 
   public listAsView(params: OptionQuery): Promise<Response<Array<Option>>> {
     const path = buildPath({
-      endpointName: "options/list_view"
+      endpointName: "options/list_view",
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 
   public listAsMapView(): Promise<Response<Record<string, any>>> {
     const path = buildPath({
-      endpointName: "options/map_view"
+      endpointName: "options/map_view",
     });
-    return this.client.get(path, {})
+    return this.client.get(path, {});
   }
 
-  public listAsMapViewByKeys(params: Array<string>): Promise<Response<Record<string, any>>> {
+  public listAsMapViewByKeys(
+    params: Array<string>
+  ): Promise<Response<Record<string, any>>> {
     const path = buildPath({
-      endpointName: "options/map_view/keys"
+      endpointName: "options/map_view/keys",
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 
   public async saveMapView(params: any): Promise<void> {
     const path = buildPath({
-      endpointName: "options/map_view/saving"
+      endpointName: "options/map_view/saving",
     });
-    await this.client.post(path, { ...params })
+    await this.client.post(path, { ...params });
   }
 
   public async save(params: Array<Option>): Promise<void> {
     const path = buildPath({
-      endpointName: "options/saving"
+      endpointName: "options/saving",
     });
-    await this.client.post(path, [...params])
+    await this.client.post(path, [...params]);
   }
 }

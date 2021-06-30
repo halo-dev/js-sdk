@@ -16,13 +16,13 @@ export {
   TokenProvider,
   TokenStore,
   HttpClient,
-  ResponseHandler
+  ResponseHandler,
 } from "./types";
 
 export {
   FileTokenStore,
   LocalStorageTokenStore,
-  DefaultTokenProvider
+  DefaultTokenProvider,
 } from "./auth";
 
 export { FormData };

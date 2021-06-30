@@ -1,9 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Page,
-  Log,
-} from "../types";
+import { Page, Log } from "../types";
 
 export class LogClient {
   private client: HttpClient;
@@ -13,27 +10,27 @@ export class LogClient {
   }
 
   public list(params: {
-    page: number
-    size: number
-    sort: Array<string>
+    page: number;
+    size: number;
+    sort: Array<string>;
   }): Promise<Page<Log>> {
     const path = buildPath({
-      endpointName: "logs"
+      endpointName: "logs",
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 
   public async clear(): Promise<void> {
     const path = buildPath({
-      endpointName: "logs/clear"
+      endpointName: "logs/clear",
     });
-    await this.client.get(path, {})
+    await this.client.get(path, {});
   }
 
   public latest(top: number): Promise<Array<Log>> {
     const path = buildPath({
-      endpointName: "logs/latest"
+      endpointName: "logs/latest",
     });
-    return this.client.get(path, { top })
+    return this.client.get(path, { top });
   }
 }

@@ -1,12 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Page,
-  PageQuery,
-  PostList,
-  Tag,
-  Response
-} from "../types";
+import { Page, PageQuery, PostList, Tag, Response } from "../types";
 
 export class TagClient {
   private client: HttpClient;
@@ -16,8 +10,8 @@ export class TagClient {
   }
 
   public listAll(params: {
-    sort: Array<string>
-    more: boolean
+    sort: Array<string>;
+    more: boolean;
   }): Promise<Response<Array<Tag>>> {
     const path = buildPath({
       endpointName: "tags",
@@ -25,7 +19,10 @@ export class TagClient {
     return this.client.get(path, { ...params });
   }
 
-  public listPostsBySlug(slug: string, params?: PageQuery): Promise<Page<PostList>> {
+  public listPostsBySlug(
+    slug: string,
+    params?: PageQuery
+  ): Promise<Page<PostList>> {
     const path = buildPath({
       endpointName: `tags/${slug}/posts`,
     });

@@ -36,7 +36,7 @@ export const buildFormDataValue = (data: any) => {
 
 export const buildBaseUrl = (baseUrl?: string) => {
   if (baseUrl) {
-    return baseUrl
+    return baseUrl;
   }
   const { host, protocol } = global.server! || {};
   return `${protocol}//${host}`;

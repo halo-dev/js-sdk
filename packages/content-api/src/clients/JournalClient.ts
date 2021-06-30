@@ -2,14 +2,15 @@ import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
 import {
   BaseComment,
-  BaseCommentParam, BaseCommentQuery,
+  BaseCommentParam,
+  BaseCommentQuery,
   BaseCommentTree,
   BaseCommentWithParent,
   CommentWithHasChildren,
   Journal,
   JournalWithCmtCount,
   Page,
-  Response
+  Response,
 } from "../types";
 
 export class JournalClient {
@@ -26,7 +27,11 @@ export class JournalClient {
     return this.client.get(path, {});
   }
 
-  public listChildrenComments(journalId: number, commentParentId: number, sort?: Array<string>): Promise<Response<Array<BaseComment>>> {
+  public listChildrenComments(
+    journalId: number,
+    commentParentId: number,
+    sort?: Array<string>
+  ): Promise<Response<Array<BaseComment>>> {
     const path = buildPath({
       endpointName: `journals/${journalId}/comments/${commentParentId}/children`,
     });
@@ -47,21 +52,30 @@ export class JournalClient {
     await this.client.post(path, {});
   }
 
-  public listCommentsAsView(journalId: number, params?: BaseCommentQuery): Promise<Page<BaseCommentWithParent>> {
+  public listCommentsAsView(
+    journalId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<BaseCommentWithParent>> {
     const path = buildPath({
       endpointName: `journals/${journalId}/comments/list_view`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public listCommentsAsTopView(journalId: number, params?: BaseCommentQuery): Promise<Page<CommentWithHasChildren>> {
+  public listCommentsAsTopView(
+    journalId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<CommentWithHasChildren>> {
     const path = buildPath({
       endpointName: `journals/${journalId}/comments/top_view`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public listCommentsAsTreeView(journalId: number, params?: BaseCommentQuery): Promise<Page<BaseCommentTree>> {
+  public listCommentsAsTreeView(
+    journalId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<BaseCommentTree>> {
     const path = buildPath({
       endpointName: `journals/${journalId}/comments/tree_view`,
     });

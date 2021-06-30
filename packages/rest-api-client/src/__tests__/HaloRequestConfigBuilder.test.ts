@@ -521,8 +521,8 @@ describe("Headers", () => {
         type: "customizeAuth",
         authHeader: "Admin-Authorization",
         getToken() {
-          return adminToken
-        }
+          return adminToken;
+        },
       },
     });
     const requestConfig = await haloRequestConfigBuilder.build(

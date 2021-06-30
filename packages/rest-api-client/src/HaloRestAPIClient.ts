@@ -14,14 +14,14 @@ type Options = {
   guestSpaceId?: number | string;
   basicAuth?: BasicAuth;
   clientCertAuth?:
-  | {
-    pfx: Buffer;
-    password: string;
-  }
-  | {
-    pfxFilePath: string;
-    password: string;
-  };
+    | {
+        pfx: Buffer;
+        password: string;
+      }
+    | {
+        pfxFilePath: string;
+        password: string;
+      };
   proxy?: ProxyConfig;
   userAgent?: string;
   tokenProvider?: TokenProvider;

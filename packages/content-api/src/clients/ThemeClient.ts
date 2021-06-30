@@ -1,9 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Response,
-  ThemeProperty
-} from "../types";
+import { Response, ThemeProperty } from "../types";
 
 export class ThemeClient {
   private client: HttpClient;

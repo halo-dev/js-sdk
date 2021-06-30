@@ -1,8 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  InstallParam,
-} from "../types";
+import { InstallParam } from "../types";
 
 export class InstallationClient {
   private client: HttpClient;

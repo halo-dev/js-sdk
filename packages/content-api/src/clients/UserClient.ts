@@ -1,8 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Response, User
-} from "../types";
+import { Response, User } from "../types";
 
 export class UserClient {
   private client: HttpClient;

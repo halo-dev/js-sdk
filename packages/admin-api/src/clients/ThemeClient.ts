@@ -1,11 +1,6 @@
 import { HttpClient, FormData } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Group,
-  Response,
-  ThemeFile,
-  ThemeProperty
-} from "../types";
+import { Group, Response, ThemeFile, ThemeProperty } from "../types";
 
 export class ThemeClient {
   private client: HttpClient;
@@ -28,7 +23,10 @@ export class ThemeClient {
     return this.client.get(path, {});
   }
 
-  public deleteById(themeId: number, deleteSettings?: boolean): Promise<Response<ThemeProperty>> {
+  public deleteById(
+    themeId: number,
+    deleteSettings?: boolean
+  ): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/${themeId}?deleteSettings=${deleteSettings}`,
     });
@@ -77,24 +75,32 @@ export class ThemeClient {
     return this.client.get(path, { path: filepath });
   }
 
-  public getContentById(themeId: number, filepath: string): Promise<Response<string>> {
+  public getContentById(
+    themeId: number,
+    filepath: string
+  ): Promise<Response<string>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/files/content`,
     });
     return this.client.get(path, { path: filepath });
   }
 
-  public async updateContentById(themeId: number, params: {
-    path?: string
-    content?: string
-  }): Promise<void> {
+  public async updateContentById(
+    themeId: number,
+    params: {
+      path?: string;
+      content?: string;
+    }
+  ): Promise<void> {
     const path = buildPath({
       endpointName: `themes/${themeId}/files/content`,
     });
     await this.client.put(path, { ...params });
   }
 
-  public listSettingsById(themeId: number): Promise<Response<Map<String, any>>> {
+  public listSettingsById(
+    themeId: number
+  ): Promise<Response<Map<String, any>>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/settings`,
     });
@@ -108,7 +114,10 @@ export class ThemeClient {
     return this.client.get(path, {});
   }
 
-  public async saveSettingsById(themeId: number, settings: Map<String, Object>): Promise<void> {
+  public async saveSettingsById(
+    themeId: number,
+    settings: Map<String, Object>
+  ): Promise<void> {
     const path = buildPath({
       endpointName: `themes/${themeId}/settings`,
     });
@@ -164,10 +173,7 @@ export class ThemeClient {
     return this.client.put(path, {});
   }
 
-  public updateContent(params: {
-    path?: string
-    content?: string
-  }) {
+  public updateContent(params: { path?: string; content?: string }) {
     const path = buildPath({
       endpointName: "themes/files/content",
     });
@@ -185,17 +191,20 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: "themes/upload",
     });
-    const formData = new FormData()
-    formData.append("file", data)
+    const formData = new FormData();
+    formData.append("file", data);
     return this.client.post(path, formData);
   }
 
-  public updateThemeByUpload(themeId: number, data: unknown): Promise<Response<ThemeProperty>> {
+  public updateThemeByUpload(
+    themeId: number,
+    data: unknown
+  ): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/upload/${themeId}`,
     });
-    const formData = new FormData()
-    formData.append("file", data)
+    const formData = new FormData();
+    formData.append("file", data);
     return this.client.post(path, formData);
   }
 }

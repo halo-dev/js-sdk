@@ -1,10 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Response,
-  ArchiveYear,
-  ArchiveMonth
-} from "../types";
+import { Response, ArchiveYear, ArchiveMonth } from "../types";
 
 export class ArchiveClient {
   private client: HttpClient;

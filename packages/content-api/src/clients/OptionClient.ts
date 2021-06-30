@@ -1,9 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Option,
-  Response
-} from "../types";
+import { Option, Response } from "../types";
 
 export class OptionClient {
   private client: HttpClient;
@@ -19,7 +16,9 @@ export class OptionClient {
     return this.client.get(path, {});
   }
 
-  public listAllAsMapView(key?: String): Promise<Response<Record<string, any>>> {
+  public listAllAsMapView(
+    key?: String
+  ): Promise<Response<Record<string, any>>> {
     const path = buildPath({
       endpointName: "options/map_view",
     });

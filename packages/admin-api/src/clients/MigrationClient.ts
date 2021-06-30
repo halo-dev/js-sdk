@@ -10,10 +10,10 @@ export class MigrationClient {
 
   public async migrate(data: unknown): Promise<void> {
     const path = buildPath({
-      endpointName: "migrations/halo"
+      endpointName: "migrations/halo",
     });
-    const formData = new FormData()
-    formData.append("file", data)
-    await this.client.post(path, formData)
+    const formData = new FormData();
+    formData.append("file", data);
+    await this.client.post(path, formData);
   }
 }

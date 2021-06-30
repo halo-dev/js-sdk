@@ -1,10 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Response,
-  Tag,
-  TagParam
-} from "../types";
+import { Response, Tag, TagParam } from "../types";
 
 export class TagClient {
   private client: HttpClient;
@@ -14,8 +10,8 @@ export class TagClient {
   }
 
   public list(params: {
-    sort?: string
-    more?: boolean
+    sort?: string;
+    more?: boolean;
   }): Promise<Response<Array<Tag>>> {
     const path = buildPath({
       endpointName: "tags",

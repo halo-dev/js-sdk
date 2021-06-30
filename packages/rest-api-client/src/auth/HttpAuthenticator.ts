@@ -1,5 +1,10 @@
 import Axios from "axios";
-import { AccessToken, Credentials, HttpResponse, RequestConfig } from "../types";
+import {
+  AccessToken,
+  Credentials,
+  HttpResponse,
+  RequestConfig,
+} from "../types";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 import { platformDeps } from "../platform/";
 

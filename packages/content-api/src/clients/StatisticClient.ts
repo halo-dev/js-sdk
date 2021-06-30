@@ -1,8 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Response, Statistic, StatisticWithUser
-} from "../types";
+import { Response, Statistic, StatisticWithUser } from "../types";
 
 export class StatisticClient {
   private client: HttpClient;

@@ -11,7 +11,7 @@ import {
   Response,
   SheetDetail,
   SheetList,
-  BaseCommentQuery
+  BaseCommentQuery,
 } from "../types";
 
 export class SheetClient {
@@ -28,42 +28,61 @@ export class SheetClient {
     return this.client.get(path, { ...params });
   }
 
-  public getById(sheetId: number, params?: ContentQuery): Promise<Response<SheetDetail>> {
+  public getById(
+    sheetId: number,
+    params?: ContentQuery
+  ): Promise<Response<SheetDetail>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public getBySlug(slug: string, params?: ContentQuery): Promise<Response<SheetDetail>> {
+  public getBySlug(
+    slug: string,
+    params?: ContentQuery
+  ): Promise<Response<SheetDetail>> {
     const path = buildPath({
       endpointName: "sheets/slug",
     });
     return this.client.get(path, { slug, ...params });
   }
 
-  public listTopComments(sheetId: number, params?: BaseCommentQuery): Promise<Page<CommentWithHasChildren>> {
+  public listTopComments(
+    sheetId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<CommentWithHasChildren>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/comments/top_view`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public listChildrenComments(sheetId: number, commentParentId: number, sort?: Array<string>): Promise<Response<Array<BaseComment>>> {
+  public listChildrenComments(
+    sheetId: number,
+    commentParentId: number,
+    sort?: Array<string>
+  ): Promise<Response<Array<BaseComment>>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/comments/${commentParentId}/children`,
     });
     return this.client.get(path, { sort });
   }
 
-  public listCommentsAsTree(sheetId: number, params?: BaseCommentQuery): Promise<Page<BaseComment>> {
+  public listCommentsAsTree(
+    sheetId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<BaseComment>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/comments/tree_view`,
     });
     return this.client.get(path, { ...params });
   }
 
-  public listComments(sheetId: number, params?: BaseCommentQuery): Promise<Page<BaseCommentWithParent>> {
+  public listComments(
+    sheetId: number,
+    params?: BaseCommentQuery
+  ): Promise<Page<BaseCommentWithParent>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/comments/list_view`,
     });

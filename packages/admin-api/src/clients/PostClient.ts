@@ -21,96 +21,110 @@ export class PostClient {
 
   public list(params: PostQuery): Promise<Page<BasePostSimple>> {
     const path = buildPath({
-      endpointName: "posts"
+      endpointName: "posts",
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 
-  public getById(postId: number): Promise<Page<PostDetail>> {
+  public getById(postId: number): Promise<Response<PostDetail>> {
     const path = buildPath({
-      endpointName: `posts/${postId}`
+      endpointName: `posts/${postId}`,
     });
-    return this.client.get(path, {})
+    return this.client.get(path, {});
   }
 
   public getPreviewLinkById(postId: number): Promise<Response<string>> {
     const path = buildPath({
-      endpointName: `posts/${postId}/preview`
+      endpointName: `posts/${postId}/preview`,
     });
-    return this.client.get(path, {})
+    return this.client.get(path, {});
   }
 
   public latest(top?: number): Promise<Response<Array<BasePostMinimal>>> {
     const path = buildPath({
-      endpointName: "posts/latest"
+      endpointName: "posts/latest",
     });
-    return this.client.get(path, { top })
+    return this.client.get(path, { top });
   }
 
-  public listByStatus(status: PostStatus, query?: PostQuery): Promise<Page<BasePostSimple>> {
+  public listByStatus(
+    status: PostStatus,
+    query?: PostQuery
+  ): Promise<Page<BasePostSimple>> {
     const path = buildPath({
-      endpointName: `posts/status/${status}`
+      endpointName: `posts/status/${status}`,
     });
-    return this.client.get(path, { ...query })
+    return this.client.get(path, { ...query });
   }
 
   public create(params: PostParam): Promise<Response<PostDetail>> {
     const path = buildPath({
-      endpointName: "posts"
+      endpointName: "posts",
     });
-    return this.client.post(path, { ...params })
+    return this.client.post(path, { ...params });
   }
 
-  public updateById(postId: number, params: {
-    autoSave?: boolean
-    post: PostParam
-  }): Promise<Response<PostDetail>> {
+  public updateById(
+    postId: number,
+    params: {
+      autoSave?: boolean;
+      post: PostParam;
+    }
+  ): Promise<Response<PostDetail>> {
     const path = buildPath({
-      endpointName: `posts/${postId}`
+      endpointName: `posts/${postId}`,
     });
-    return this.client.put(path, { ...params })
+    return this.client.put(path, { ...params });
   }
 
-  public updateStatusById(postId: number, status: PostStatus): Promise<Response<BasePostMinimal>> {
+  public updateStatusById(
+    postId: number,
+    status: PostStatus
+  ): Promise<Response<BasePostMinimal>> {
     const path = buildPath({
-      endpointName: `posts/${postId}/status/${status}`
+      endpointName: `posts/${postId}/status/${status}`,
     });
-    return this.client.put(path, {})
+    return this.client.put(path, {});
   }
 
-  public updateStatusInBatch(postIds: Array<number>, status: PostStatus): Promise<Response<Array<Post>>> {
+  public updateStatusInBatch(
+    postIds: Array<number>,
+    status: PostStatus
+  ): Promise<Response<Array<Post>>> {
     const path = buildPath({
-      endpointName: `posts/status/${status}`
+      endpointName: `posts/status/${status}`,
     });
-    return this.client.put(path, postIds)
+    return this.client.put(path, postIds);
   }
 
-  public updateDraftById(postId: number, content?: string): Promise<Response<BasePostMinimal>> {
+  public updateDraftById(
+    postId: number,
+    content?: string
+  ): Promise<Response<BasePostMinimal>> {
     const path = buildPath({
-      endpointName: `posts/${postId}/status/draft/content`
+      endpointName: `posts/${postId}/status/draft/content`,
     });
-    return this.client.put(path, { content })
+    return this.client.put(path, { content });
   }
 
   public async like(postId: number): Promise<void> {
     const path = buildPath({
-      endpointName: `posts/${postId}/likes`
+      endpointName: `posts/${postId}/likes`,
     });
-    await this.client.put(path, {})
+    await this.client.put(path, {});
   }
 
   public deleteById(postId: number): Promise<Response<Post>> {
     const path = buildPath({
-      endpointName: `posts/${postId}`
+      endpointName: `posts/${postId}`,
     });
-    return this.client.delete(path, {})
+    return this.client.delete(path, {});
   }
 
   public deleteInBatch(postIds: Array<number>): Promise<Response<Array<Post>>> {
     const path = buildPath({
-      endpointName: "posts"
+      endpointName: "posts",
     });
-    return this.client.delete(path, postIds)
+    return this.client.delete(path, postIds);
   }
-
 }

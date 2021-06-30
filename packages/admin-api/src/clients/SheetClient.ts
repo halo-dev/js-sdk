@@ -9,7 +9,7 @@ import {
   SheetDetail,
   PostStatus,
   BasePostDetail,
-  IndependentSheet
+  IndependentSheet,
 } from "../types";
 
 export class SheetClient {
@@ -28,7 +28,7 @@ export class SheetClient {
 
   public listIndependents(): Promise<Response<IndependentSheet>> {
     const path = buildPath({
-      endpointName: "sheets/independent"
+      endpointName: "sheets/independent",
     });
     return this.client.get(path, {});
   }
@@ -54,21 +54,31 @@ export class SheetClient {
     return this.client.get(path, {});
   }
 
-  public updateById(sheetId: number, params: SheetParam, autoSave?: boolean): Promise<Response<SheetDetail>> {
+  public updateById(
+    sheetId: number,
+    params: SheetParam,
+    autoSave?: boolean
+  ): Promise<Response<SheetDetail>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}?autoSave=${autoSave}`,
     });
     return this.client.put(path, { ...params });
   }
 
-  public async updateStatusById(sheetId: number, status: PostStatus): Promise<void> {
+  public async updateStatusById(
+    sheetId: number,
+    status: PostStatus
+  ): Promise<void> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/${status}`,
     });
     await this.client.put(path, {});
   }
 
-  public updateDraftById(sheetId: number, content?: string): Promise<BasePostDetail> {
+  public updateDraftById(
+    sheetId: number,
+    content?: string
+  ): Promise<BasePostDetail> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/status/draft/content`,
     });

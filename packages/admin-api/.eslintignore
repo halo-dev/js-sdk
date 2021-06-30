@@ -1,5 +1,0 @@
-coverage
-cjs/*
-umd/*
-es/*
-**/node_modules

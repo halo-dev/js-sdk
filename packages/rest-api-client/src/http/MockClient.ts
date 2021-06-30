@@ -1,8 +1,4 @@
-import {
-  HttpClient,
-  RequestConfigBuilder,
-  ResponseHandler,
-} from "../types";
+import { HttpClient, RequestConfigBuilder, ResponseHandler } from "../types";
 import FormData from "form-data";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 

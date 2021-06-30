@@ -1,9 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import {
-  Page, Photo, PhotoQuery,
-  Response
-} from "../types";
+import { Page, Photo, PhotoQuery, Response } from "../types";
 
 export class PhotoClient {
   private client: HttpClient;

@@ -4,6 +4,7 @@ export {
   Response,
   PageQuery,
   Page,
+  PageEntity,
   UserParam,
   User,
   InstallParam,
@@ -64,5 +65,5 @@ export {
   Item,
   Group,
   ThemeFile,
-  MultiFactorAuthParam
+  MultiFactorAuthParam,
 } from "./types";

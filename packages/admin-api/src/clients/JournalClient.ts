@@ -18,39 +18,42 @@ export class JournalClient {
 
   public list(params: JournalQuery): Promise<Page<JournalWithCmtCount>> {
     const path = buildPath({
-      endpointName: "journals"
+      endpointName: "journals",
     });
-    return this.client.get(path, { ...params })
+    return this.client.get(path, { ...params });
   }
 
   public create(params: Journal): Promise<Response<Journal>> {
     const path = buildPath({
-      endpointName: "journals"
+      endpointName: "journals",
     });
-    return this.client.post(path, { ...params })
+    return this.client.post(path, { ...params });
   }
 
-  public updateById(journalId: number, params: {
-    sourceContent: string
-    type?: JournalType
-  }): Promise<Response<Journal>> {
+  public updateById(
+    journalId: number,
+    params: {
+      sourceContent: string;
+      type?: JournalType;
+    }
+  ): Promise<Response<Journal>> {
     const path = buildPath({
-      endpointName: `journals/${journalId}`
+      endpointName: `journals/${journalId}`,
     });
-    return this.client.put(path, { ...params })
+    return this.client.put(path, { ...params });
   }
 
   public async deleteById(journalId: number): Promise<void> {
     const path = buildPath({
-      endpointName: `journals/${journalId}`
+      endpointName: `journals/${journalId}`,
     });
-    await this.client.delete(path, {})
+    await this.client.delete(path, {});
   }
 
   public latest(top: number): Promise<Response<Array<Journal>>> {
     const path = buildPath({
-      endpointName: "journals/latest"
+      endpointName: "journals/latest",
     });
-    return this.client.get(path, { top })
+    return this.client.get(path, { top });
   }
 }

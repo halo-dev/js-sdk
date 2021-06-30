@@ -8,7 +8,7 @@ describe("HaloResponseHandler", () => {
       const response: HttpResponse = {
         data: { status: "success", data: null },
         headers: {
-          "hello": "world",
+          hello: "world",
         },
       };
       await expect(
