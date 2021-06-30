@@ -1,0 +1,69 @@
+{
+  "name": "@halo-dev/logger",
+  "version": "1.0.0-alpha.1",
+  "description": "Halo SDK for JavaScript - Logger",
+  "main": "./lib/index.js",
+  "module": "./esm/index.js",
+  "browser": "lib/index.browser.js",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "scripts": {
+    "build": "tsc --build --force",
+    "test": " jest --rootDir=src",
+    "lint": "eslint --ext .ts src"
+  },
+  "types": "lib/logger.d.ts",
+  "files": [
+    "esm",
+    "lib",
+    "umd",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halo-dev/js-sdk.git",
+    "directory": "packages/logger"
+  },
+  "keywords": [
+    "halo",
+    "log",
+    "logger",
+    "logging",
+    "node.js",
+    "typescript",
+    "javascript",
+    "browser"
+  ],
+  "author": "halo-dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/halo-dev/js-sdk/issues"
+  },
+  "homepage": "https://github.com/halo-dev/js-sdk#readme",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/sinon": "^9.0.4",
+    "chai": "^4.2.0",
+    "assert": "^1.4.1",
+    "sinon": "^9.0.2",
+    "jest": "^26.6.3",
+    "typescript": "^4.0.3"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  }
+}

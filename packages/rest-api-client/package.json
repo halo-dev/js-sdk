@@ -1,6 +1,6 @@
 {
   "name": "@halo-dev/rest-api-client",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "publishConfig": {
     "access": "public"
   },
@@ -47,7 +47,7 @@
   "engines": {
     "node": ">=12"
   },
-  "homepage": "https://github.com/halo-dev/js-sdk#readme",
+  "homepage": "https://github.com/halo-dev/js-sdk/tree/master/packages/rest-api-client#readme",
   "lint-staged": {
     "*.{js,ts}": [
       "yarn lint --fix",
