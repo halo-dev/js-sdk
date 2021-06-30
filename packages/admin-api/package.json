@@ -1,6 +1,6 @@
 {
   "name": "@halo-dev/admin-api",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Halo admin api client.",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -47,7 +47,7 @@
   "bugs": {
     "url": "https://github.com/halo-dev/js-sdk/issues"
   },
-  "homepage": "https://github.com/halo-dev/js-sdk#readme",
+  "homepage": "https://github.com/halo-dev/js-sdk/tree/master/packages/admin-api#readme",
   "lint-staged": {
     "*.{js,ts}": [
       "yarn lint --fix",
@@ -55,7 +55,10 @@
     ]
   },
   "dependencies": {
-    "@halo-dev/rest-api-client": "^1.0.0-alpha.2"
+    "@halo-dev/rest-api-client": "^1.0.0-alpha.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.3"
   },
   "exports": {
     ".": {
