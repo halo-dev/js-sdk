@@ -25,6 +25,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
-      - run: yarn global add lerna
-      - run: lerna bootstrap
+      - run: yarn bootstrap
       - run: yarn build
