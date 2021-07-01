@@ -6,6 +6,7 @@
   "scripts": {
     "build:doc": "typedoc --packages './packages/*'",
     "build:ci": "lerna bootstrap && yarn build && yarn build:doc",
+    "bootstrap": "lerna bootstrap",
     "build": "tsc --build packages --force",
     "preinitial:release": "yarn prerelease",
     "prerelease": "npm-run-all -s build -p lint test",
