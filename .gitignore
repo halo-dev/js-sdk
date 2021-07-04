@@ -64,8 +64,3 @@ typings/
 
 # OSX
 .DS_Store
-
-# lock
-*.lock
-
-package-lock.json
