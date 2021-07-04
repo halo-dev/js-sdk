@@ -6,7 +6,6 @@ import {
   ResponseHandler,
 } from "../types";
 import FormData from "form-data";
-import { logger } from "../logger";
 
 export class AxiosClient implements HttpClient {
   private responseHandler: ResponseHandler;
@@ -92,13 +91,10 @@ export class AxiosClient implements HttpClient {
         async (error) => {
           const response = error.response;
           const status = response ? response.status : -1;
-          logger.info("Server response status", status);
+          console.info("Server response status", status);
 
           const data = response ? response.data : null;
-          if (/登录状态已失效，请重新登录/.test(data.message)) {
-            // refresh token has expired
-            tokenProvider.clearToken();
-          } else if (data && data.status === 401 && this.retryCount < 3) {
+          if (data && data.status === 401 && this.retryCount < 3) {
             if (token) {
               this.retryCount++;
               tokenProvider.clearToken();
