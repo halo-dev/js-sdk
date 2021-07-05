@@ -21,11 +21,11 @@ export function nodeConfig(test = false) {
         delimiters: ["", ""],
         // replace dynamic checks with if (true) since this is for node only.
         // Allows rollup's dead code elimination to be more aggressive.
-        "if (isNode)": "if (true)"
+        "if (isNode)": "if (true)",
       }),
       nodeResolve({ preferBuiltins: true, mainFields: ["module"] }),
-      cjs()
-    ]
+      cjs(),
+    ],
   };
 
   if (production) {
@@ -41,8 +41,8 @@ export function browserConfig(test = false) {
     output: {
       file: "umd/logger.js",
       format: "umd",
-      name: "Halo.Logger",
-      sourcemap: true
+      name: "Logger",
+      sourcemap: true,
     },
     preserveSymlinks: false,
     plugins: [
@@ -50,7 +50,7 @@ export function browserConfig(test = false) {
       replace(),
       nodeResolve({
         mainFields: ["module", "browser"],
-        preferBuiltins: false
+        preferBuiltins: false,
       }),
       cjs({
         namedExports: {
@@ -63,11 +63,11 @@ export function browserConfig(test = false) {
             "fail",
             "deepStrictEqual",
             "notDeepEqual",
-            "throws"
-          ]
-        }
-      })
-    ]
+            "throws",
+          ],
+        },
+      }),
+    ],
   };
   if (production) {
     baseConfig.plugins.push(terser());

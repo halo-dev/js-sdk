@@ -1,5 +1,5 @@
-import debug, { Debugger } from "./debug";
-export { Debugger } from "./debug";
+import debug from "./debug";
+import { Debugger } from "../types";
 
 const registeredLoggers = new Set<HaloDebugger>();
 const logLevelFromEnv =

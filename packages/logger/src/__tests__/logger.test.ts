@@ -1,4 +1,4 @@
-import * as Logger from "../logger/index";
+import { Logger } from "../";
 import * as assert from "assert";
 
 const testLogger = Logger.createClientLogger("test");
