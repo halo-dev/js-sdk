@@ -40,15 +40,24 @@ export class DefaultTokenProvider implements TokenProvider {
     }
 
     if (Date.now() > storagedToken.expired_at) {
-      console.info(
+      console.warn(
         `Token has expired at ${storagedToken.expired_at}, ready to refresh token.`
       );
       // token过期
-      const refreshedToken = await this.httpAuthenticator.refreshToken(
-        storagedToken.refresh_token
-      );
-      this.tokenStore.set(refreshedToken.data);
-      storagedToken = refreshedToken.data;
+      this.httpAuthenticator
+        .refreshToken(storagedToken.refresh_token)
+        .then((res) => {
+          this.tokenStore.set(res.data);
+          storagedToken = res.data;
+        })
+        .catch((err) => {
+          if (/登录状态已失效，请重新登录/.test(err.message)) {
+            console.warn("Refresh token failed.", err.message);
+            storagedToken = undefined;
+          } else {
+            throw err;
+          }
+        });
     }
     return storagedToken;
   }
