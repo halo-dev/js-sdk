@@ -6,6 +6,7 @@ import {
   ResponseHandler,
 } from "../types";
 import FormData from "form-data";
+import logger from "../logger";
 
 export class AxiosClient implements HttpClient {
   private responseHandler: ResponseHandler;
@@ -91,7 +92,7 @@ export class AxiosClient implements HttpClient {
         async (error) => {
           const response = error.response;
           const status = response ? response.status : -1;
-          console.info("Server response status", status);
+          logger.error("Server response status", status);
 
           const data = response ? response.data : null;
           if (data && data.status === 401 && this.retryCount < 3) {
