@@ -88,7 +88,7 @@ function createDebugger(namespace: string): Debugger {
       return;
     }
     if (args.length > 0) {
-      args[0] = `${namespace} ${args[0]}`;
+      args[0] = `[${namespace}] ${args[0]}`;
     }
     newDebugger.log(...args);
   }

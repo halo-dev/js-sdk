@@ -3,4 +3,4 @@ import * as nodeDeps from "./platform/node";
 
 injectPlatformDeps(nodeDeps);
 
-export * as Logger from "./logger/index";
+export * from "./logger/index";

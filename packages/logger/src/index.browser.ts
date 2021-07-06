@@ -3,4 +3,4 @@ import * as browserDeps from "./platform/browser";
 
 injectPlatformDeps(browserDeps);
 
-export * as Logger from "./logger/index";
+export * from "./logger/index";
