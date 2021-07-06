@@ -28,7 +28,7 @@ describe("debug", function () {
     const testMessage = "halo is good!";
     logger(testMessage);
     assert.isTrue(
-      logStub.calledOnceWith(expectedTestMessage("test", testMessage))
+      logStub.calledOnceWith(expectedTestMessage("[test]", testMessage))
     );
   });
 
@@ -44,7 +44,7 @@ describe("debug", function () {
     const testMessage = "halo is good!";
     logger(testMessage);
     assert.isTrue(
-      logStub.calledOnceWith(expectedTestMessage("test", testMessage))
+      logStub.calledOnceWith(expectedTestMessage("[test]", testMessage))
     );
     assert.strictEqual(
       debug.disable(),
@@ -67,7 +67,7 @@ describe("debug", function () {
     logger(testMessage);
     subLogger(testMessage);
     assert.isTrue(
-      logStub.calledOnceWith(expectedTestMessage("test:foo", testMessage))
+      logStub.calledOnceWith(expectedTestMessage("[test:foo]", testMessage))
     );
   });
 
@@ -83,7 +83,7 @@ describe("debug", function () {
     const testMessage = "hello world!";
     subLogger(testMessage);
     assert.isTrue(
-      logStub.calledOnceWith(expectedTestMessage("test:foo", testMessage))
+      logStub.calledOnceWith(expectedTestMessage("[test:foo]", testMessage))
     );
   });
 

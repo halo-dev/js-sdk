@@ -125,7 +125,6 @@ export interface HaloLogger {
 /**
  * Creates a logger for use by the Halo SDKs that inherits from `HaloLogger`.
  * @param namespace - The name of the SDK package.
- * @hidden
  */
 export function createClientLogger(namespace: string): HaloLogger {
   const clientRootLogger: HaloClientLogger = HaloLogger.extend(namespace);
