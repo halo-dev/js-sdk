@@ -17,6 +17,12 @@ export class JournalCommentClient {
     this.client = client;
   }
 
+  /**
+   * Lists journal comments.
+   *
+   * @param params parameter for queries
+   * @returns A page response of journals.
+   */
   public async list(
     params: JournalCommentQuery
   ): Promise<Page<JournalCommentWithJournal>> {
@@ -26,6 +32,12 @@ export class JournalCommentClient {
     return this.client.get(path, { ...params });
   }
 
+  /**
+   * Creates a journal comment.
+   *
+   * @param params comment parameter for creates
+   * @returns A response of created journal comment.
+   */
   public create(params: BaseCommentParam): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: "journals/comments",
@@ -33,6 +45,12 @@ export class JournalCommentClient {
     return this.client.post(path, { ...params });
   }
 
+  /**
+   * Deletes a journal comment by id.
+   *
+   * @param commentId journal comment id.
+   * @returns A response of deleted journal comment.
+   */
   public deleteById(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `journals/comments/${commentId}`,
@@ -40,6 +58,13 @@ export class JournalCommentClient {
     return this.client.delete(path, {});
   }
 
+  /**
+   * Updates journal comment status by id.
+   *
+   * @param commentId journal comment id
+   * @param status comment status
+   * @returns A response of updated journal comment.
+   */
   public updateById(
     commentId: number,
     status: CommentStatus
@@ -50,6 +75,12 @@ export class JournalCommentClient {
     return this.client.put(path, {});
   }
 
+  /**
+   * Lists comment with list view.
+   *
+   * @param params parameter for queries
+   * @returns A page response of journal comments.
+   */
   public listAsView(params: {
     journalId: number;
     sort?: Array<string>;
@@ -61,6 +92,12 @@ export class JournalCommentClient {
     return this.client.get(path, { ...params });
   }
 
+  /**
+   * Lists comment with tree view.
+   *
+   * @param params parameter for queries
+   * @returns A page response of journal comments tree.
+   */
   public listAsTree(params: {
     journalId: number;
     sort?: Array<string>;
@@ -72,6 +109,12 @@ export class JournalCommentClient {
     return this.client.get(path, { ...params });
   }
 
+  /**
+   * Lists latest journal comments.
+   *
+   * @param params parameter for queries
+   * @returns A response of latest journal comments.
+   */
   public latest(params: {
     top?: number;
     status?: CommentStatus;
