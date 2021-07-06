@@ -1,5 +1,6 @@
 export { AdminApiClient } from "./AdminApiClient";
 export * from "@halo-dev/rest-api-client";
+export * from "./clients";
 export {
   Response,
   PageQuery,
