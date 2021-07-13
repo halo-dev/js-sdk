@@ -19,49 +19,50 @@
     <img src="https://img.shields.io/npm/v/@halo-dev/admin-api.svg" alt="npm version"/>
   </a>
 </p>
-<p align="center">一个与Halo api交互的工具集</p>
 
-[English Document](./README_en.md)
+<p align="center">A collection of tools for interacting with Halo's APIs.</p>
 
-## 特性
+[简体中文](./README.md)
 
-- 封装认证以简化开发.
-- 异常处理
-- 使用Halo rest api更方便
-- 使用`TypeScript`编写,更明确的参数和返回值类型，更好的代码提示
+## Feature
 
-## 管理后台API库
+- Encapsulated authentication to simplify development.
+- Exception handling
+- More convenient to request halo rest api.
+- Written using TypeScript, declared api parameter and response types.
 
-### 安装
+## SDK for Admin API
 
-使用`npm`方式安装示例如下：
+### Installation
+
+Install this library using npm as follows
 
 ```shell
 npm install @halo-dev/admin-api --save
 ```
 
-### 使用示例
+### Usage
 
-以下是一个获取后台文章列表的简单示例：
+Here is a simple code for obtaining a list of articles.
 
 ```javascript
 import { AdminApiClient, HaloRestAPIClient } from "@halo-dev/admin-api";
-// halo http 请求客户端.
+// http request tool for halo rest api.
 const haloRestApiClient = new HaloRestAPIClient({
   baseUrl: process.env.HALO_BASE_URL,
   auth: { adminToken: "halo admin token" },
 });
-// 通过 haloRestApiCLient 创建 adminApiClient。
+// create adminApiClient by haloRestApiCLient.
 const haloAdminClient = new AdminApiClient(haloRestApiClient);
-// 获取文章列表
+// obtaining a list of articles.
 haloAdminClient.post.list().then((res) => {
   console.log(res);
 });
 ```
 
-关于如何通过用户名和密码进行自动认证，这里提供了一个示例 [example](https://github.com/halo-dev/js-sdk/tree/master/example)
+Specific use example reference [example](https://github.com/halo-dev/js-sdk/tree/master/example)
 
-由于`@halo-dev/admin-api`依赖`@halo-dev/rest-api-client`，而其是基于`axios`进行`http`通信的，因此如果你有需要的话，可以使用[axios](https://axios-http.com/docs/intro),的拦截器对`halo api`的请求与响应进行一些处理。
+The `@halo-dev/admin-api` package relies on `@halo-dev/rest-api-client`，since `@halo-dev/rest-api-client` is based on [axios](https://axios-http.com/docs/intro), so you can use the `axios` interceptor
 
 ```javascript
 import axios from 'axios';
@@ -87,46 +88,46 @@ axios.interceptors.response.use(function (response) {
  });
 ```
 
- `@halo-dev/content-api`也可以这样使用拦截器。
+The `@halo-dev/content-api`package can also use interceptors like this.
 
-## 前台API库
+## Sdk for Content API
 
-使用`npm`安装示例如下：
+### Installation
 
 ```shell
 npm install @halo-dev/content-api --save
 ```
 
-### 使用示例
+### Usage
 
-同样我们使用一个获取博客前台文章列表的示例如下：
+Here is a simple code for obtaining a list of articles.
 
 ```javascript
 import { ContentApiClient, HaloRestAPIClient } from "@halo-dev/content-api";
-// 创建 halo http 请求客户端
+// http request tool for halo rest api.
 const haloRestApiClient = new HaloRestAPIClient({
   baseUrl: process.env.HALO_BASE_URL,
   auth: { apiToken: process.env.HALO_API_TOKEN },
 });
-// 通过 http 客户端创建 halo 前台 api 客户端
+// create contentApiClient by haloRestApiCLient.
 const haloContentClient = new ContentApiClient(haloRestApiClient);
-// 获取文章列表
+// obtaining a list of articles.
 haloContentClient.post.list().then((res) => {
   console.log(res);
 });
 ```
 
-## Halo Rest API Http通信库
+## Rest Api Client library
 
-### 安装
+### Installation
 
-你可以使用`npm`安装它，示例如下：
+Install this library using npm as follows
 
 ```shell
 npm install @halo-dev/rest-api-client
 ```
 
-使用 `require` 或 `import` 导入
+use `require` or `import` to import the library.
 
 ```javascript
 // CommonJS
@@ -135,7 +136,7 @@ const { HaloRestAPIClient } = require("@halo-dev/rest-api-client");
 import { HaloRestAPIClient } from "@halo-dev/rest-api-client";
 ```
 
-### 使用示例
+### Usage
 
 ```javascript
 const client = new HaloRestAPIClient({
@@ -147,16 +148,16 @@ const client = new HaloRestAPIClient({
   }
 });
 ```
- `auth`参数为认证方式，支持以下几种认证方式，示例如下:
-1. 使用 API token 认证，它适用于 halo 博客前台 api认证
+The `auth` parameter supports the following ways:
+1. Use API token authentication
 ```javascript
 auth: { apiToken: process.env.HALO_API_TOKEN }
 ```
-2. 使用 Admin token 认证，它适用于 halo 后台管理 api 认证
+2. Use Admin token authentication
 ```javascript
 auth: { adminToken: process.env.HALO_ADMIN_TOKEN }
 ```
-3. 使用自定义请求头认证方式
+3. Use custom header auth
 ```javascript
 auth: {
     type: "customizeAuth",
@@ -167,15 +168,13 @@ auth: {
 }
 ```
 
-4. 使用 OAuth2 Bearer token的认证方式，最终会在请求头添加 `Authorization: bearer some-token`
+4. Use OAuth token authentication
 
 ```javascript
 auth: { oAuthToken : process.env.HALO_OAUTH_TOKEN }
 ```
 
-**Basic 认证**
-
-会在请求头添加例如`Authorization: Basic dXNlci1jbGllbi1zZWNyZXQtODg4OA==`这样的pair
+**Basic Auth**
 
 ```javascript
 const client = new HaloRestAPIClient({
@@ -185,7 +184,7 @@ const client = new HaloRestAPIClient({
 });
 ```
 
-另外还支持通过提供一个`TokenProvider`来接管`halo`的认证，这样不需要在考虑如何实现登录和`token`过期怎么续期的逻辑，示例如下：
+In addition to this, it also supports automatic authentication of Token Provider:
 
 ```javascript
 import {
@@ -226,9 +225,7 @@ haloRestApiClient.setTokenProvider(tokenProvider);
 // now you can use haloRestApiClient to build your api client
 ```
 
-完整的例子可以点 [这里](https://github.com/halo-dev/js-sdk/tree/master/example)
-
-### 发送 Http 请求
+### Http Request
 
 ```javascript
 const haloRestApiClient = new HaloRestAPIClient({
@@ -246,32 +243,32 @@ client.get("https://example.halo.run", parameters)
 client.post("https://example.halo.run", parameters)
 ```
 
-## Logger日志库
+## Logger client library
 
-### 安装
+### Installation
 
-使用`npm`安装示例如下：
+Install this library using npm as follows
 
 ```shell
 npm install @halo-dev/logger --save
 ```
 
-### 主要概念
+### Key Concepts
 
- `@halo-dev/logger` 包支持按从最详细到最不详细的顺序指定的以下日志级别:
+The `@halo-dev/logger` package supports the following log levels specified in order of most verbose to least verbose:
 
 - debug
 - info
 - warning
 - error
 
-当以编程方式或通过 `HALO_LOG_LEVEL` 环境变量设置日志级别时，使用小于或等于您选择的日志级别时写入的任何日志都将被显示。
+When setting a log level, either programmatically or via the `HALO_LOG_LEVEL` environment variable, any logs that are written using a log level less than or equal to the one you choose will be emitted.
 
-例如，将日志级别设置为 `warning` 将导致所有日志级别为 `warning` 或 `error` 的日志被显示。
+For example, setting the log level to `warning` will cause all logs that have the log level `warning` or `error` to be emitted.
 
-### 使用示例
+### Usage
 
-#### 示例 1 - 基本使用
+#### example 1 - basic usage
 
 ```javascript
 import * as Logger from "@halo-dev/logger";
@@ -291,7 +288,7 @@ client.post.list()
 });
 ```
 
-#### 示例2 - 覆盖原先日志输出方式
+#### example 2 - redirect log output
 
 ```javascript
 import { HaloLogger, setLogLevel } from "@halo-dev/logger";
