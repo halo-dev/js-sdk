@@ -16,20 +16,20 @@ import {
 } from "./clients";
 
 export class ContentApiClient {
-  private client: HttpClient;
-  private _archive: ArchiveClient;
-  private _category: CategoryClient;
-  private _journal: JournalClient;
-  private _link: LinkClient;
-  private _menu: MenuClient;
-  private _option: OptionClient;
-  private _photo: PhotoClient;
-  private _post: PostClient;
-  private _sheet: SheetClient;
-  private _statistic: StatisticClient;
-  private _tag: TagClient;
-  private _theme: ThemeClient;
-  private _user: UserClient;
+  private readonly client: HttpClient;
+  private readonly _archive: ArchiveClient;
+  private readonly _category: CategoryClient;
+  private readonly _journal: JournalClient;
+  private readonly _link: LinkClient;
+  private readonly _menu: MenuClient;
+  private readonly _option: OptionClient;
+  private readonly _photo: PhotoClient;
+  private readonly _post: PostClient;
+  private readonly _sheet: SheetClient;
+  private readonly _statistic: StatisticClient;
+  private readonly _tag: TagClient;
+  private readonly _theme: ThemeClient;
+  private readonly _user: UserClient;
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();

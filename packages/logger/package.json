@@ -51,7 +51,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.19",
+    "@types/chai": "^4.2.21",
     "@types/sinon": "^9.0.11",
     "assert": "^1.5.0",
     "chai": "^4.3.4",

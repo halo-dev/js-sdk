@@ -26,28 +26,28 @@ import {
 } from "./clients";
 
 export class AdminApiClient {
-  private client: HttpClient;
-  private _attachment: AttachmentClient;
-  private _backup: BackupClient;
-  private _category: CategoryClient;
-  private _installation: InstallationClient;
-  private _journalComment: JournalCommentClient;
-  private _journal: JournalClient;
-  private _link: LinkClient;
-  private _log: LogClient;
-  private _mail: MailClient;
-  private _menu: MenuClient;
-  private _migration: MigrationClient;
-  private _option: OptionClient;
-  private _photo: PhotoClient;
-  private _postComment: PostCommentClient;
-  private _post: PostClient;
-  private _sheetComment: SheetCommentClient;
-  private _sheet: SheetClient;
-  private _statistic: StatisticClient;
-  private _tag: TagClient;
-  private _theme: ThemeClient;
-  private _user: UserClient;
+  private readonly client: HttpClient;
+  private readonly _attachment: AttachmentClient;
+  private readonly _backup: BackupClient;
+  private readonly _category: CategoryClient;
+  private readonly _installation: InstallationClient;
+  private readonly _journalComment: JournalCommentClient;
+  private readonly _journal: JournalClient;
+  private readonly _link: LinkClient;
+  private readonly _log: LogClient;
+  private readonly _mail: MailClient;
+  private readonly _menu: MenuClient;
+  private readonly _migration: MigrationClient;
+  private readonly _option: OptionClient;
+  private readonly _photo: PhotoClient;
+  private readonly _postComment: PostCommentClient;
+  private readonly _post: PostClient;
+  private readonly _sheetComment: SheetCommentClient;
+  private readonly _sheet: SheetClient;
+  private readonly _statistic: StatisticClient;
+  private readonly _tag: TagClient;
+  private readonly _theme: ThemeClient;
+  private readonly _user: UserClient;
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();

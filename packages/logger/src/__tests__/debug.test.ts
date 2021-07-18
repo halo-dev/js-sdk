@@ -2,7 +2,7 @@ import debug, { Debugger } from "../logger/debug";
 import { stub } from "sinon";
 import { assert } from "chai";
 
-describe("debug", function() {
+describe("debug", function () {
   let logger: Debugger;
   let logStub: sinon.SinonStub<any[], void>;
 
