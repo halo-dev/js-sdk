@@ -9,16 +9,14 @@ export class OptionClient {
     this.client = client;
   }
 
-  public listAll(): Promise<Response<Array<Option>>> {
+  public list(): Promise<Response<Array<Option>>> {
     const path = buildPath({
       endpointName: "options/list_view",
     });
     return this.client.get(path, {});
   }
 
-  public listAllAsMapView(
-    key?: String
-  ): Promise<Response<Record<string, any>>> {
+  public listAsMapView(key?: String): Promise<Response<Record<string, any>>> {
     const path = buildPath({
       endpointName: "options/map_view",
     });

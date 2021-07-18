@@ -23,24 +23,21 @@ export class OptionClient {
     return this.client.post(path, { ...params });
   }
 
-  public getById(id: number): Promise<Response<Option>> {
+  public get(id: number): Promise<Response<Option>> {
     const path = buildPath({
       endpointName: `options/${id}`,
     });
     return this.client.get(path, {});
   }
 
-  public updateById(
-    optionId: number,
-    params: Option
-  ): Promise<Response<Option>> {
+  public update(optionId: number, params: Option): Promise<Response<Option>> {
     const path = buildPath({
       endpointName: `options/${optionId}`,
     });
     return this.client.put(path, { ...params });
   }
 
-  public async deleteById(optionId: number): Promise<void> {
+  public async delete(optionId: number): Promise<void> {
     const path = buildPath({
       endpointName: `options/${optionId}`,
     });

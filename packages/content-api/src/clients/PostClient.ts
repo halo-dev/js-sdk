@@ -38,7 +38,7 @@ export class PostClient {
     return this.client.get(path, { keyword, ...pageQuery });
   }
 
-  public getById(
+  public get(
     postId: number,
     params?: {
       formatDisabled: boolean;

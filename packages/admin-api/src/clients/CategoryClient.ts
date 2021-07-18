@@ -44,7 +44,7 @@ export class CategoryClient {
    * @param categoryId category id
    * @returns A response of category detail.
    */
-  public getById(categoryId: number): Promise<Response<Category>> {
+  public get(categoryId: number): Promise<Response<Category>> {
     const path = buildPath({
       endpointName: `categories/${categoryId}`,
     });
@@ -58,7 +58,7 @@ export class CategoryClient {
    * @param params category update parameter
    * @returns A response of updated category.
    */
-  public updateById(
+  public update(
     categoryId: number,
     params: CategoryParam
   ): Promise<Response<Category>> {
@@ -73,7 +73,7 @@ export class CategoryClient {
    *
    * @param categoryId category id
    */
-  public async deleteById(categoryId: number): Promise<void> {
+  public async delete(categoryId: number): Promise<void> {
     const path = buildPath({
       endpointName: `categories/${categoryId}`,
     });

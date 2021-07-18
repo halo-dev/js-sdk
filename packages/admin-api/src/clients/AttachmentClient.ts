@@ -15,7 +15,7 @@ export class AttachmentClient {
    * @param attachmentId attachment id
    * @returns Returns attachment detail response.
    */
-  public getById(attachmentId: number): Promise<Response<Attachment>> {
+  public get(attachmentId: number): Promise<Response<Attachment>> {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
     });
@@ -56,9 +56,7 @@ export class AttachmentClient {
    * @param attachmentId attachment id
    * @returns Returns attachment detail of deleted
    */
-  public deleteById(
-    attachmentId: number
-  ): Promise<Response<Array<Attachment>>> {
+  public delete(attachmentId: number): Promise<Response<Array<Attachment>>> {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
     });
@@ -72,7 +70,7 @@ export class AttachmentClient {
    * @param name a new attachment name
    * @returns Returns an updated attachment response.
    */
-  public updateById(
+  public update(
     attachmentId: number,
     name: string
   ): Promise<Response<Attachment>> {

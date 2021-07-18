@@ -51,7 +51,7 @@ export class JournalCommentClient {
    * @param commentId journal comment id.
    * @returns A response of deleted journal comment.
    */
-  public deleteById(commentId: number): Promise<Response<BaseComment>> {
+  public delete(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `journals/comments/${commentId}`,
     });
@@ -65,7 +65,7 @@ export class JournalCommentClient {
    * @param status comment status
    * @returns A response of updated journal comment.
    */
-  public updateById(
+  public update(
     commentId: number,
     status: CommentStatus
   ): Promise<Response<BaseComment>> {

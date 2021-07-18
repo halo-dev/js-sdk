@@ -28,7 +28,7 @@ export class SheetClient {
     return this.client.get(path, { ...params });
   }
 
-  public getById(
+  public get(
     sheetId: number,
     params?: ContentQuery
   ): Promise<Response<SheetDetail>> {

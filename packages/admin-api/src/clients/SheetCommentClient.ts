@@ -25,7 +25,7 @@ export class SheetCommentClient {
     return this.client.get(path, { ...params });
   }
 
-  public getById(commentId: number): Promise<Response<SheetCommentWithSheet>> {
+  public get(commentId: number): Promise<Response<SheetCommentWithSheet>> {
     const path = buildPath({
       endpointName: `sheets/comments/${commentId}`,
     });
@@ -71,7 +71,7 @@ export class SheetCommentClient {
     return this.client.post(path, { ...params });
   }
 
-  public updateById(
+  public update(
     commentId: number,
     params: BaseCommentParam
   ): Promise<Response<BaseComment>> {
@@ -110,7 +110,7 @@ export class SheetCommentClient {
     return this.client.delete(path, commentIds);
   }
 
-  public deleteById(commentId: number): Promise<Response<BaseComment>> {
+  public delete(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `sheets/comments/${commentId}`,
     });

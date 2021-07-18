@@ -40,7 +40,7 @@ export class SheetClient {
     return this.client.post(path, { ...params });
   }
 
-  public getById(sheetId: number): Promise<Response<SheetDetail>> {
+  public get(sheetId: number): Promise<Response<SheetDetail>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}`,
     });
@@ -54,7 +54,7 @@ export class SheetClient {
     return this.client.get(path, {});
   }
 
-  public updateById(
+  public update(
     sheetId: number,
     params: SheetParam,
     autoSave?: boolean
@@ -85,7 +85,7 @@ export class SheetClient {
     return this.client.put(path, { content });
   }
 
-  public deleteById(sheetId: number): Promise<Response<SheetDetail>> {
+  public delete(sheetId: number): Promise<Response<SheetDetail>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}`,
     });

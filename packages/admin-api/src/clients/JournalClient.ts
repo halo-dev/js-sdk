@@ -49,7 +49,7 @@ export class JournalClient {
    * @param params parameter for updates
    * @returns A response of updated journal.
    */
-  public updateById(
+  public update(
     journalId: number,
     params: {
       sourceContent: string;
@@ -66,7 +66,7 @@ export class JournalClient {
    * Deletes a journal by id.
    * @param journalId journal id
    */
-  public async deleteById(journalId: number): Promise<void> {
+  public async delete(journalId: number): Promise<void> {
     const path = buildPath({
       endpointName: `journals/${journalId}`,
     });

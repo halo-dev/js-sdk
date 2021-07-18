@@ -9,7 +9,7 @@ export class MenuClient {
     this.client = client;
   }
 
-  public listAll(): Promise<Response<Array<Menu>>> {
+  public list(): Promise<Response<Array<Menu>>> {
     const path = buildPath({
       endpointName: "menus",
     });
@@ -30,14 +30,14 @@ export class MenuClient {
     return this.client.post(path, [...params]);
   }
 
-  public getById(menuId: number): Promise<Response<Menu>> {
+  public get(menuId: number): Promise<Response<Menu>> {
     const path = buildPath({
       endpointName: `menus/${menuId}`,
     });
     return this.client.post(path, {});
   }
 
-  public updateById(menuId: number, params: Menu): Promise<Response<Menu>> {
+  public update(menuId: number, params: Menu): Promise<Response<Menu>> {
     const path = buildPath({
       endpointName: `menus/${menuId}`,
     });
@@ -51,7 +51,7 @@ export class MenuClient {
     return this.client.put(path, [...params]);
   }
 
-  public async deleteById(menuId: number): Promise<void> {
+  public async delete(menuId: number): Promise<void> {
     const path = buildPath({
       endpointName: `menus/${menuId}`,
     });

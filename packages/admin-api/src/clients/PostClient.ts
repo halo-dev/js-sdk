@@ -26,7 +26,7 @@ export class PostClient {
     return this.client.get(path, { ...params });
   }
 
-  public getById(postId: number): Promise<Response<PostDetail>> {
+  public get(postId: number): Promise<Response<PostDetail>> {
     const path = buildPath({
       endpointName: `posts/${postId}`,
     });
@@ -64,7 +64,7 @@ export class PostClient {
     return this.client.post(path, { ...params });
   }
 
-  public updateById(
+  public update(
     postId: number,
     params: {
       autoSave?: boolean;
@@ -114,7 +114,7 @@ export class PostClient {
     await this.client.put(path, {});
   }
 
-  public deleteById(postId: number): Promise<Response<Post>> {
+  public delete(postId: number): Promise<Response<Post>> {
     const path = buildPath({
       endpointName: `posts/${postId}`,
     });

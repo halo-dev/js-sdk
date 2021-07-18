@@ -23,21 +23,21 @@ export class PhotoClient {
     return this.client.post(path, { ...params });
   }
 
-  public getById(photoId: number): Promise<Response<Photo>> {
+  public get(photoId: number): Promise<Response<Photo>> {
     const path = buildPath({
       endpointName: `photos/${photoId}`,
     });
     return this.client.get(path, {});
   }
 
-  public updateById(photoId: number, params: Photo): Promise<Response<Photo>> {
+  public update(photoId: number, params: Photo): Promise<Response<Photo>> {
     const path = buildPath({
       endpointName: `photos/${photoId}`,
     });
     return this.client.put(path, { ...params });
   }
 
-  public async deleteById(photoId: number): Promise<void> {
+  public async delete(photoId: number): Promise<void> {
     const path = buildPath({
       endpointName: `photos/${photoId}`,
     });

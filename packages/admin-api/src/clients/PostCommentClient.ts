@@ -63,7 +63,7 @@ export class PostCommentClient {
     return this.client.post(path, { ...params });
   }
 
-  public updateById(
+  public update(
     commentId: number,
     params: BaseCommentParam
   ): Promise<Response<BaseComment>> {
@@ -93,7 +93,7 @@ export class PostCommentClient {
     return this.client.put(path, commentIds);
   }
 
-  public deleteById(commentId: number): Promise<Response<BaseComment>> {
+  public delete(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `posts/comments/${commentId}`,
     });
