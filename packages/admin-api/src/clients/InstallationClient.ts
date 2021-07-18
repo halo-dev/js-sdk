@@ -1,6 +1,6 @@
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
-import { InstallParam } from "../types";
+import { InstallParam, Response } from "../types";
 
 export class InstallationClient {
   private client: HttpClient;
@@ -9,7 +9,13 @@ export class InstallationClient {
     this.client = client;
   }
 
-  public install(params: InstallParam) {
+  /**
+   * Initializes the blog.
+   *
+   * @param params installation parameter
+   * @returns A response of installation status message.
+   */
+  public install(params: InstallParam): Promise<Response<string>> {
     const path = buildPath({
       endpointName: "installations",
     });

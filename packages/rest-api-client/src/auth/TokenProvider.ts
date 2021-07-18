@@ -1,6 +1,7 @@
 import { Credentials, TokenType, TokenProvider, TokenStore } from "../types";
 import { HttpAuthenticator } from "./HttpAuthenticator";
 import { InMemeryTokenStore } from "./InMemeryTokenStore";
+import logger from "../logger";
 
 export class DefaultTokenProvider implements TokenProvider {
   private credentials: Credentials;
@@ -27,28 +28,37 @@ export class DefaultTokenProvider implements TokenProvider {
   public async getToken() {
     let storagedToken = await this.tokenStore.get();
     if (!storagedToken || Object.keys(storagedToken).length < 1) {
-      console.info("Token does not exist, ready to re-acquire.");
+      logger.info("Token does not exist, ready to re-acquire.");
       const response = await this.httpAuthenticator.authenticate(
         this.credentials
       );
       const token = response.data;
       const expireTime = Date.now() + 1000 * token.expired_in;
       token.expired_at = expireTime;
-      console.info("Get a new token and ready to store.");
+      logger.info("Get a new token and ready to store.");
       this.tokenStore.set(token);
       storagedToken = token;
     }
 
     if (Date.now() > storagedToken.expired_at) {
-      console.info(
+      logger.warning(
         `Token has expired at ${storagedToken.expired_at}, ready to refresh token.`
       );
       // token过期
-      const refreshedToken = await this.httpAuthenticator.refreshToken(
-        storagedToken.refresh_token
-      );
-      this.tokenStore.set(refreshedToken.data);
-      storagedToken = refreshedToken.data;
+      this.httpAuthenticator
+        .refreshToken(storagedToken.refresh_token)
+        .then((res) => {
+          this.tokenStore.set(res.data);
+          storagedToken = res.data;
+        })
+        .catch((err) => {
+          if (/登录状态已失效，请重新登录/.test(err.message)) {
+            console.warn("Refresh token failed.", err.message);
+            storagedToken = undefined;
+          } else {
+            throw err;
+          }
+        });
     }
     return storagedToken;
   }
