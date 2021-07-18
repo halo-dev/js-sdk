@@ -67,4 +67,5 @@ export {
   Group,
   ThemeFile,
   MultiFactorAuthParam,
+  Environment
 } from "./types";
