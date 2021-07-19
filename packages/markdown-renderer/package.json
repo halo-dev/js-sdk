@@ -1,0 +1,88 @@
+{
+  "name": "@halo-dev/markdown-renderer",
+  "version": "1.0.0",
+  "description": "Halo markdown renderer.",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=12"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "scripts": {
+    "build": "tsc --build --force",
+    "lint": "eslint --ext .ts src",
+    "test": "jest --rootDir src",
+    "test:ci": "jest --rootDir src --runInBand",
+    "start": "yarn build --watch"
+  },
+  "files": [
+    "esm",
+    "lib",
+    "umd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halo-dev/js-sdk.git",
+    "directory": "packages/markdown-renderer"
+  },
+  "keywords": [
+    "halo",
+    "halo-sdk",
+    "markdown",
+    "markdown-it",
+    "markdown-renderer"
+  ],
+  "maintainers": [
+    {
+      "name": "ryanwang",
+      "email": "i@ryanc.cc",
+      "url": "https://github.com/ruibaby"
+    }
+  ],
+  "author": "halo-dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/halo-dev/js-sdk/issues"
+  },
+  "homepage": "https://github.com/halo-dev/js-sdk/tree/master/packages/markdown-renderer#readme",
+  "lint-staged": {
+    "*.{js,ts}": [
+      "yarn lint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "markdown-it": "^12.1.0",
+    "markdown-it-attrs": "^4.0.0",
+    "markdown-it-container": "^3.0.0",
+    "markdown-it-emoji": "^2.0.0",
+    "markdown-it-footnote": "^3.0.3",
+    "markdown-it-highlight": "^0.2.0",
+    "markdown-it-highlightjs": "^3.5.0",
+    "markdown-it-image-lazy-loading": "^1.1.0",
+    "markdown-it-imsize": "^2.0.1",
+    "markdown-it-ins": "^3.0.1",
+    "markdown-it-katex": "^2.0.3",
+    "markdown-it-mark": "^3.0.1",
+    "markdown-it-mermaid": "^0.2.5",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "markdown-it-toc": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^12.0.3",
+    "typescript": "^4.3.5"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  }
+}

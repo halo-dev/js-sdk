@@ -5,6 +5,7 @@
     { "path": "./logger" },
     { "path": "./rest-api-client" },
     { "path": "./admin-api" },
-    { "path": "./content-api" }
+    { "path": "./content-api" },
+    { "path": "./markdown-renderer" }
   ]
 }
