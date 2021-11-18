@@ -1,13 +1,13 @@
-import { HaloRestAPIClient, HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "./url";
-import { Environment, Response, AccessToken, LoginPreCheck } from "./types";
+import {HaloRestAPIClient, HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "./url";
+import {AccessToken, Environment, LoginPreCheck, Response} from "./types";
 import {
   AttachmentClient,
   BackupClient,
   CategoryClient,
   InstallationClient,
-  JournalCommentClient,
   JournalClient,
+  JournalCommentClient,
   LinkClient,
   LogClient,
   MailClient,
@@ -15,10 +15,10 @@ import {
   MigrationClient,
   OptionClient,
   PhotoClient,
-  PostCommentClient,
   PostClient,
-  SheetCommentClient,
+  PostCommentClient,
   SheetClient,
+  SheetCommentClient,
   StatisticClient,
   TagClient,
   ThemeClient,
@@ -72,75 +72,6 @@ export class AdminApiClient {
     this._tag = new TagClient(this.client);
     this._theme = new ThemeClient(this.client);
     this._user = new UserClient(this.client);
-  }
-
-  public getEnvironment(): Promise<Response<Environment>> {
-    const path = buildPath({
-      endpointName: "environments",
-    });
-    return this.client.get(path, {});
-  }
-
-  public getLogFile(lines: number): Promise<Response<String>> {
-    const path = buildPath({
-      endpointName: "halo/logfile",
-    });
-    return this.client.get(path, { lines });
-  }
-
-  public isInstalled(): Promise<Response<Boolean>> {
-    const path = buildPath({
-      endpointName: "is_installed",
-    });
-    return this.client.get(path, {});
-  }
-
-  public logout(): void {
-    const path = buildPath({
-      endpointName: "logout",
-    });
-    this.client.post(path, {});
-  }
-
-  public sendResetPasswordCode(params: {
-    username: string;
-    email: string;
-    code?: string;
-    password?: string;
-  }): void {
-    const path = buildPath({
-      endpointName: "password/code",
-    });
-    this.client.post(path, params);
-  }
-
-  public resetPassword(params: {
-    username: string;
-    email: string;
-    code?: string;
-    password?: string;
-  }): void {
-    const path = buildPath({
-      endpointName: "password/reset",
-    });
-    this.client.post(path, params);
-  }
-
-  public refreshToken(refreshToken: string): Promise<Response<AccessToken>> {
-    const path = buildPath({
-      endpointName: `refresh/${refreshToken}`,
-    });
-    return this.client.post(path, {});
-  }
-
-  public needMFACode(params: {
-    username: string;
-    password: string;
-  }): Promise<Response<LoginPreCheck>> {
-    const path = buildPath({
-      endpointName: "login/precheck",
-    });
-    return this.client.post(path, { ...params });
   }
 
   public get attachment() {
@@ -225,5 +156,74 @@ export class AdminApiClient {
 
   public get user() {
     return this._user;
+  }
+
+  public getEnvironment(): Promise<Response<Environment>> {
+    const path = buildPath({
+      endpointName: "environments",
+    });
+    return this.client.get(path, {});
+  }
+
+  public getLogFile(lines: number): Promise<Response<String>> {
+    const path = buildPath({
+      endpointName: "halo/logfile",
+    });
+    return this.client.get(path, {lines});
+  }
+
+  public isInstalled(): Promise<Response<Boolean>> {
+    const path = buildPath({
+      endpointName: "is_installed",
+    });
+    return this.client.get(path, {});
+  }
+
+  public logout(): void {
+    const path = buildPath({
+      endpointName: "logout",
+    });
+    this.client.post(path, {});
+  }
+
+  public sendResetPasswordCode(params: {
+    username: string;
+    email: string;
+    code?: string;
+    password?: string;
+  }): Promise<void> {
+    const path = buildPath({
+      endpointName: "password/code",
+    });
+    return this.client.post(path, params);
+  }
+
+  public resetPassword(params: {
+    username: string;
+    email: string;
+    code?: string;
+    password?: string;
+  }): Promise<void> {
+    const path = buildPath({
+      endpointName: "password/reset",
+    });
+    return this.client.post(path, params);
+  }
+
+  public refreshToken(refreshToken: string): Promise<Response<AccessToken>> {
+    const path = buildPath({
+      endpointName: `refresh/${refreshToken}`,
+    });
+    return this.client.post(path, {});
+  }
+
+  public needMFACode(params: {
+    username: string;
+    password: string;
+  }): Promise<Response<LoginPreCheck>> {
+    const path = buildPath({
+      endpointName: "login/precheck",
+    });
+    return this.client.post(path, {...params});
   }
 }
