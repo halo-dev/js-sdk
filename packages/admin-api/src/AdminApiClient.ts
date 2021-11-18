@@ -191,7 +191,7 @@ export class AdminApiClient {
     email: string;
     code?: string;
     password?: string;
-  }): Promise<void> {
+  }): Promise<object> {
     const path = buildPath({
       endpointName: "password/code",
     });
@@ -203,7 +203,7 @@ export class AdminApiClient {
     email: string;
     code?: string;
     password?: string;
-  }): Promise<void> {
+  }): Promise<object> {
     const path = buildPath({
       endpointName: "password/reset",
     });
