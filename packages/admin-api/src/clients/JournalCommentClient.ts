@@ -1,13 +1,13 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
 import {
-  Response,
-  Page,
-  JournalCommentQuery,
-  JournalCommentWithJournal,
   BaseComment,
   BaseCommentParam,
   CommentStatus,
+  JournalCommentQuery,
+  JournalCommentWithJournal,
+  Page,
+  Response,
 } from "../types";
 
 export class JournalCommentClient {
@@ -25,11 +25,11 @@ export class JournalCommentClient {
    */
   public async list(
     params: JournalCommentQuery
-  ): Promise<Page<JournalCommentWithJournal>> {
+  ): Promise<Response<Page<JournalCommentWithJournal>>> {
     const path = buildPath({
       endpointName: "journals/comments",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   /**
@@ -42,7 +42,7 @@ export class JournalCommentClient {
     const path = buildPath({
       endpointName: "journals/comments",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
   /**
@@ -85,11 +85,11 @@ export class JournalCommentClient {
     journalId: number;
     sort?: Array<string>;
     page?: number;
-  }): Promise<Page<BaseComment>> {
+  }): Promise<Response<Page<BaseComment>>> {
     const path = buildPath({
       endpointName: `journals/comments/${params.journalId}/list_view`,
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   /**
@@ -102,11 +102,11 @@ export class JournalCommentClient {
     journalId: number;
     sort?: Array<string>;
     page?: number;
-  }): Promise<Page<BaseComment>> {
+  }): Promise<Response<Page<BaseComment>>> {
     const path = buildPath({
       endpointName: `journals/comments/${params.journalId}/tree_view`,
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   /**
@@ -122,6 +122,6 @@ export class JournalCommentClient {
     const path = buildPath({
       endpointName: "journals/comments/latest",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 }

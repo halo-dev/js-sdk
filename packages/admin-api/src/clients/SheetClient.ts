@@ -1,15 +1,15 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
 import {
-  Response,
-  Page,
-  PageQuery,
-  Sheet,
-  SheetParam,
-  SheetDetail,
-  PostStatus,
   BasePostDetail,
   IndependentSheet,
+  Page,
+  PageQuery,
+  PostStatus,
+  Response,
+  Sheet,
+  SheetDetail,
+  SheetParam,
 } from "../types";
 
 export class SheetClient {
@@ -19,11 +19,11 @@ export class SheetClient {
     this.client = client;
   }
 
-  public list(params: PageQuery): Promise<Page<Sheet>> {
+  public list(params: PageQuery): Promise<Response<Page<Sheet>>> {
     const path = buildPath({
       endpointName: "sheets",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public listIndependents(): Promise<Response<IndependentSheet>> {
@@ -37,7 +37,7 @@ export class SheetClient {
     const path = buildPath({
       endpointName: "sheets",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
   public get(sheetId: number): Promise<Response<SheetDetail>> {
@@ -62,7 +62,7 @@ export class SheetClient {
     const path = buildPath({
       endpointName: `sheets/${sheetId}?autoSave=${autoSave}`,
     });
-    return this.client.put(path, { ...params });
+    return this.client.put(path, {...params});
   }
 
   public async updateStatusById(
@@ -78,11 +78,11 @@ export class SheetClient {
   public updateDraftById(
     sheetId: number,
     content?: string
-  ): Promise<BasePostDetail> {
+  ): Promise<Response<BasePostDetail>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/status/draft/content`,
     });
-    return this.client.put(path, { content });
+    return this.client.put(path, {content});
   }
 
   public delete(sheetId: number): Promise<Response<SheetDetail>> {

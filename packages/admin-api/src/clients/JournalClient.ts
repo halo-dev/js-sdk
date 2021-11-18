@@ -1,13 +1,6 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import {
-  Response,
-  Page,
-  Journal,
-  JournalType,
-  JournalQuery,
-  JournalWithCmtCount,
-} from "../types";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
+import {Journal, JournalQuery, JournalType, JournalWithCmtCount, Page, Response} from "../types";
 
 export class JournalClient {
   private client: HttpClient;
@@ -22,11 +15,25 @@ export class JournalClient {
    * @param params parameter for queries
    * @returns A page response of journals.
    */
-  public list(params: JournalQuery): Promise<Page<JournalWithCmtCount>> {
+  public list(params: JournalQuery): Promise<Response<Page<JournalWithCmtCount>>> {
     const path = buildPath({
       endpointName: "journals",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
+  }
+
+
+  /**
+   * Gets latest journals.
+   *
+   * @param top top option for queries
+   * @returns A response of lastes journals.
+   */
+  public latest(top: number): Promise<Response<Array<Journal>>> {
+    const path = buildPath({
+      endpointName: "journals/latest",
+    });
+    return this.client.get(path, {top});
   }
 
   /**
@@ -39,7 +46,7 @@ export class JournalClient {
     const path = buildPath({
       endpointName: "journals",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
   /**
@@ -59,7 +66,7 @@ export class JournalClient {
     const path = buildPath({
       endpointName: `journals/${journalId}`,
     });
-    return this.client.put(path, { ...params });
+    return this.client.put(path, {...params});
   }
 
   /**
@@ -71,18 +78,5 @@ export class JournalClient {
       endpointName: `journals/${journalId}`,
     });
     await this.client.delete(path, {});
-  }
-
-  /**
-   * Gets latest journals.
-   *
-   * @param top top option for queries
-   * @returns A response of lastes journals.
-   */
-  public latest(top: number): Promise<Response<Array<Journal>>> {
-    const path = buildPath({
-      endpointName: "journals/latest",
-    });
-    return this.client.get(path, { top });
   }
 }

@@ -1,6 +1,6 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import { Response, Page, Photo, PhotoQuery } from "../types";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
+import {Page, Photo, PhotoQuery, Response} from "../types";
 
 export class PhotoClient {
   private client: HttpClient;
@@ -9,18 +9,18 @@ export class PhotoClient {
     this.client = client;
   }
 
-  public list(params: PhotoQuery): Promise<Page<Photo>> {
+  public list(params: PhotoQuery): Promise<Response<Page<Photo>>> {
     const path = buildPath({
       endpointName: "photos",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public create(params: Photo): Promise<Response<Photo>> {
     const path = buildPath({
       endpointName: "photos",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
   public get(photoId: number): Promise<Response<Photo>> {
@@ -34,7 +34,7 @@ export class PhotoClient {
     const path = buildPath({
       endpointName: `photos/${photoId}`,
     });
-    return this.client.put(path, { ...params });
+    return this.client.put(path, {...params});
   }
 
   public async delete(photoId: number): Promise<void> {
@@ -48,7 +48,7 @@ export class PhotoClient {
     const path = buildPath({
       endpointName: "photos/latest",
     });
-    return this.client.get(path, { sort });
+    return this.client.get(path, {sort});
   }
 
   public listTeams(): Promise<Response<Array<string>>> {

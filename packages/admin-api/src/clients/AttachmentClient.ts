@@ -1,6 +1,6 @@
-import { HttpClient, FormData } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import { Response, Page, AttachmentQuery, Attachment } from "../types";
+import {FormData, HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
+import {Attachment, AttachmentQuery, Page, Response} from "../types";
 
 export class AttachmentClient {
   private client: HttpClient;
@@ -28,11 +28,11 @@ export class AttachmentClient {
    * @param params attachment query parameter
    * @returns Returns attachment page response.
    */
-  public list(params: AttachmentQuery): Promise<Page<Attachment>> {
+  public list(params: AttachmentQuery): Promise<Response<Page<Attachment>>> {
     const path = buildPath({
       endpointName: "attachments",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   /**
@@ -77,7 +77,7 @@ export class AttachmentClient {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
     });
-    return this.client.put(path, { name });
+    return this.client.put(path, {name});
   }
 
   /**
