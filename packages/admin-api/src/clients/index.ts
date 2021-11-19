@@ -20,3 +20,4 @@ export {TagClient} from "./TagClient";
 export {ThemeClient} from "./ThemeClient";
 export {UserClient} from "./UserClient";
 export {StaticStorageClient} from './StaticStorageClient'
+export {CommentClient} from './CommentClient'

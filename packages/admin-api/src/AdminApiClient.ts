@@ -5,6 +5,7 @@ import {
   AttachmentClient,
   BackupClient,
   CategoryClient,
+  CommentClient,
   InstallationClient,
   JournalClient,
   JournalCommentClient,
@@ -19,11 +20,11 @@ import {
   PostCommentClient,
   SheetClient,
   SheetCommentClient,
+  StaticStorageClient,
   StatisticClient,
   TagClient,
   ThemeClient,
-  UserClient,
-  StaticStorageClient
+  UserClient
 } from "./clients";
 
 export class AdminApiClient {
@@ -50,6 +51,7 @@ export class AdminApiClient {
   private readonly _theme: ThemeClient;
   private readonly _user: UserClient;
   private readonly _staticStorage: StaticStorageClient
+  private readonly _comment: CommentClient
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();
@@ -75,6 +77,7 @@ export class AdminApiClient {
     this._theme = new ThemeClient(this.client);
     this._user = new UserClient(this.client);
     this._staticStorage = new StaticStorageClient(this.client)
+    this._comment = new CommentClient(this.client)
   }
 
   public get attachment() {
@@ -163,6 +166,10 @@ export class AdminApiClient {
 
   public get staticStorage() {
     return this._staticStorage
+  }
+
+  public get comment() {
+    return this._comment
   }
 
   public getEnvironment(): Promise<Response<Environment>> {
