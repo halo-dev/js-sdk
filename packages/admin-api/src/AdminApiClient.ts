@@ -23,6 +23,7 @@ import {
   TagClient,
   ThemeClient,
   UserClient,
+  StaticStorageClient
 } from "./clients";
 
 export class AdminApiClient {
@@ -48,6 +49,7 @@ export class AdminApiClient {
   private readonly _tag: TagClient;
   private readonly _theme: ThemeClient;
   private readonly _user: UserClient;
+  private readonly _staticStorage: StaticStorageClient
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();
@@ -72,6 +74,7 @@ export class AdminApiClient {
     this._tag = new TagClient(this.client);
     this._theme = new ThemeClient(this.client);
     this._user = new UserClient(this.client);
+    this._staticStorage = new StaticStorageClient(this.client)
   }
 
   public get attachment() {
@@ -156,6 +159,10 @@ export class AdminApiClient {
 
   public get user() {
     return this._user;
+  }
+
+  public get staticStorage() {
+    return this._staticStorage
   }
 
   public getEnvironment(): Promise<Response<Environment>> {

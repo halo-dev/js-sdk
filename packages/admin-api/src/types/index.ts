@@ -527,3 +527,19 @@ export type MultiFactorAuthParam = {
   mfaKey: string;
   authcode: string;
 };
+
+export type StaticFile = {
+  id: number,
+  name: string,
+  path: string,
+  relativePath: string,
+  isFile: boolean,
+  mimeType: string,
+  createTime: number,
+  children: Array<StaticFile>
+}
+
+export type StaticContentParam = {
+  path: string,
+  content: string
+}

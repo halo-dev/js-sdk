@@ -67,4 +67,6 @@ export {
   ThemeFile,
   MultiFactorAuthParam,
   Environment,
+  StaticFile,
+  StaticContentParam
 } from "./types";
