@@ -13,13 +13,6 @@ export interface PageQuery {
 }
 
 export interface Page<T = any> {
-  status: number | string;
-  message?: string;
-  devMessage?: any;
-  data: PageEntity<T>;
-}
-
-export type PageEntity<T = any> = {
   hasContent: boolean;
   hasNext: boolean;
   hasPrevious: boolean;
@@ -30,7 +23,7 @@ export type PageEntity<T = any> = {
   rpp: number;
   total: number;
   content: Array<T>;
-};
+}
 
 export type MFAType = "NONE" | "TFA_TOTP";
 
