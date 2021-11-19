@@ -2,6 +2,7 @@ import {HaloRestAPIClient, HttpClient} from "@halo-dev/rest-api-client";
 import {buildPath} from "./url";
 import {AccessToken, Environment, LoginPreCheck, Response} from "./types";
 import {
+  ActuatorClient,
   AttachmentClient,
   BackupClient,
   CategoryClient,
@@ -52,6 +53,7 @@ export class AdminApiClient {
   private readonly _user: UserClient;
   private readonly _staticStorage: StaticStorageClient
   private readonly _comment: CommentClient
+  private readonly _actuator: ActuatorClient
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();
@@ -78,6 +80,7 @@ export class AdminApiClient {
     this._user = new UserClient(this.client);
     this._staticStorage = new StaticStorageClient(this.client)
     this._comment = new CommentClient(this.client)
+    this._actuator = new ActuatorClient(this.client)
   }
 
   public get attachment() {
@@ -170,6 +173,10 @@ export class AdminApiClient {
 
   public get comment() {
     return this._comment
+  }
+
+  public get actuator() {
+    return this._actuator
   }
 
   public getEnvironment(): Promise<Response<Environment>> {
