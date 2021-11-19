@@ -192,7 +192,7 @@ auth: {
 }
 ```
 
-**Basic 认证 **
+**Basic 认证**
 
 会在请求头添加例如 `Authorization: Basic dXNlci1jbGllbi1zZWNyZXQtODg4OA==` 这样的 pair
 
