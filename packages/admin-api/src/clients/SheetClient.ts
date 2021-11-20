@@ -57,10 +57,9 @@ export class SheetClient {
   public update(
     sheetId: number,
     params: SheetParam,
-    autoSave?: boolean
   ): Promise<Response<SheetDetail>> {
     const path = buildPath({
-      endpointName: `sheets/${sheetId}?autoSave=${autoSave}`,
+      endpointName: `sheets/${sheetId}`,
     });
     return this.client.put(path, {...params});
   }

@@ -66,10 +66,7 @@ export class PostClient {
 
   public update(
     postId: number,
-    params: {
-      autoSave?: boolean;
-      post: PostParam;
-    }
+    params: PostParam
   ): Promise<Response<PostDetail>> {
     const path = buildPath({
       endpointName: `posts/${postId}`,
