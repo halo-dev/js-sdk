@@ -45,10 +45,6 @@ export class FileTokenStore implements TokenStore {
   }
 
   private isEmpty(obj: any): boolean {
-    if (typeof obj == "undefined" || obj == null || obj == "") {
-      return true;
-    } else {
-      return false;
-    }
+    return typeof obj == "undefined" || obj == null || obj == "";
   }
 }
