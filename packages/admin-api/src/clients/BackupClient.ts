@@ -9,35 +9,35 @@ export class BackupClient {
     this.client = client;
   }
 
-  public getWorkdirBackup(): Promise<Response<Backup>> {
+  public getWorkdirBackup(filename: string): Promise<Response<Backup>> {
     const path = buildPath({
-      endpointName: 'backups/work-dir/fetch'
+      endpointName: `backups/work-dir/fetch?filename=${filename}`
     })
 
     return this.client.get(path, {})
   }
 
-  public getDataBackup(): Promise<Response<Backup>> {
+  public getDataBackup(filename: string): Promise<Response<Backup>> {
     const path = buildPath({
-      endpointName: 'backups/data/fetch'
+      endpointName: `backups/data/fetch?filename=${filename}`
     })
 
     return this.client.get(path, {})
   }
 
-  public getMarkdownBackup(): Promise<Response<Backup>> {
+  public getMarkdownBackup(filename: string): Promise<Response<Backup>> {
     const path = buildPath({
-      endpointName: 'backups/markdown/fetch'
+      endpointName: `backups/markdown/fetch?filename=${filename}`
     })
 
     return this.client.get(path, {})
   }
 
-  public backupWorkdir(): Promise<Response<Backup>> {
+  public backupWorkdir(options: Array<string>): Promise<Response<Backup>> {
     const path = buildPath({
       endpointName: 'backups/work-dir'
     })
-    return this.client.post(path, {})
+    return this.client.post(path, options)
   }
 
   public getWorkdirBackupOptions(): Promise<Response<Array<string>>> {
