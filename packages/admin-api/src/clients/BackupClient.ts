@@ -104,7 +104,7 @@ export class BackupClient {
     return this.client.delete(path, {})
   }
 
-  public importMarkdown(data: unknown): Promise<Response<BasePostDetail>> {
+  public importMarkdown(data: any): Promise<Response<BasePostDetail>> {
     const path = buildPath({
       endpointName: "backups/markdown/import",
     });
