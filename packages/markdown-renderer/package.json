@@ -1,6 +1,6 @@
 {
   "name": "@halo-dev/markdown-renderer",
-  "version": "1.0.0-alpha.20",
+  "version": "1.0.0-alpha.21",
   "description": "Halo markdown renderer.",
   "main": "lib/index.js",
   "module": "esm/index.js",
