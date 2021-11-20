@@ -10,6 +10,8 @@ import {
 } from "../types";
 import {buildPath} from "../url";
 
+type commentTargets = 'posts' | 'sheets' | 'journals'
+
 export class CommentClient {
   private client: HttpClient
 
@@ -17,28 +19,28 @@ export class CommentClient {
     this.client = client;
   }
 
-  public list(target: 'posts' | 'sheets' | 'journals', params: CommentQuery): Promise<Response<Page<PostCommentWithPost>>> {
+  public list(target: commentTargets, params: CommentQuery): Promise<Response<Page<PostCommentWithPost>>> {
     const path = buildPath({
       endpointName: `${target}/comments`
     })
     return this.client.get(path, params)
   }
 
-  public latest(target: 'posts' | 'sheets' | 'journals', top: number, status: CommentStatus): Promise<Response<Page<PostCommentWithPost>>> {
+  public latest(target: commentTargets, top: number, status: CommentStatus): Promise<Response<Page<PostCommentWithPost>>> {
     const path = buildPath({
       endpointName: `${target}/comments/latest`
     })
     return this.client.get(path, {top, status})
   }
 
-  public listAsView(target: 'posts' | 'sheets' | 'journals', targetId: number, params: { page: number, sort?: Array<string> }): Promise<Response<Page<BaseComment>>> {
+  public listAsView(target: commentTargets, targetId: number, params: { page: number, sort?: Array<string> }): Promise<Response<Page<BaseComment>>> {
     const path = buildPath({
       endpointName: `${target}/comments/${targetId}/list_view`,
     });
     return this.client.get(path, params);
   }
 
-  public listAsTreeView(target: 'posts' | 'sheets' | 'journals', targetId: number, params: {
+  public listAsTreeView(target: commentTargets, targetId: number, params: {
     sort?: Array<string>;
     page?: number;
   }): Promise<Response<Page<BaseComment>>> {
@@ -48,14 +50,14 @@ export class CommentClient {
     return this.client.get(path, params);
   }
 
-  public get(target: 'posts' | 'sheets' | 'journals', commentId: number): Promise<Response<PostCommentWithPost>> {
+  public get(target: commentTargets, commentId: number): Promise<Response<PostCommentWithPost>> {
     const path = buildPath({
       endpointName: `${target}/comments/${commentId}`,
     });
     return this.client.get(path, {});
   }
 
-  public create(target: 'posts' | 'sheets' | 'journals', params: BaseCommentParam): Promise<Response<BaseComment>> {
+  public create(target: commentTargets, params: BaseCommentParam): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `${target}/comments`,
     });
@@ -63,7 +65,7 @@ export class CommentClient {
   }
 
   public update(
-    target: 'posts' | 'sheets' | 'journals',
+    target: commentTargets,
     commentId: number,
     params: BaseCommentParam
   ): Promise<Response<BaseComment>> {
@@ -74,7 +76,7 @@ export class CommentClient {
   }
 
   public updateStatusById(
-    target: 'posts' | 'sheets' | 'journals',
+    target: commentTargets,
     commentId: number,
     status: CommentStatus
   ): Promise<Response<BaseComment>> {
@@ -85,7 +87,7 @@ export class CommentClient {
   }
 
   public updateStatusInBatch(
-    target: 'posts' | 'sheets' | 'journals',
+    target: commentTargets,
     commentIds: Array<number>,
     status: CommentStatus
   ): Promise<Response<Array<BaseComment>>> {
@@ -95,7 +97,7 @@ export class CommentClient {
     return this.client.put(path, commentIds);
   }
 
-  public delete(target: 'posts' | 'sheets' | 'journals', commentId: number): Promise<Response<BaseComment>> {
+  public delete(target: commentTargets, commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `${target}/comments/${commentId}`,
     });
@@ -103,7 +105,7 @@ export class CommentClient {
   }
 
   public deleteInBatch(
-    target: 'posts' | 'sheets' | 'journals',
+    target: commentTargets,
     postCommentIds: Array<number>
   ): Promise<Response<Array<BaseComment>>> {
     const path = buildPath({
