@@ -1,6 +1,6 @@
-import { HttpClient, FormData } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import { Response, Backup, BasePostDetail } from "../types";
+import {FormData, HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
+import {Backup, BasePostDetail, Response} from "../types";
 
 export class BackupClient {
   private client: HttpClient;
@@ -42,7 +42,7 @@ export class BackupClient {
     const path = buildPath({
       endpointName: "backups/data",
     });
-    await this.client.delete(path, { filename });
+    await this.client.delete(path, {filename});
   }
 
   /**
@@ -68,7 +68,7 @@ export class BackupClient {
     const path = buildPath({
       endpointName: "backups/data/fetch",
     });
-    return this.client.get(path, { filename });
+    return this.client.get(path, {filename});
   }
 
   /**
@@ -95,7 +95,7 @@ export class BackupClient {
     const path = buildPath({
       endpointName: "backups/markdown/export",
     });
-    return this.client.post(path, { needFrontMatter });
+    return this.client.post(path, {needFrontMatter});
   }
 
   /**
@@ -107,7 +107,7 @@ export class BackupClient {
     const path = buildPath({
       endpointName: "backups/markdown/export",
     });
-    await this.client.delete(path, { filename });
+    await this.client.delete(path, {filename});
   }
 
   /**
@@ -120,7 +120,7 @@ export class BackupClient {
     const path = buildPath({
       endpointName: `backups/markdown/export/${filename}`,
     });
-    return this.client.get(path, { filename });
+    return this.client.get(path, {filename});
   }
 
   /**
@@ -133,7 +133,7 @@ export class BackupClient {
     const path = buildPath({
       endpointName: "backups/markdown/fetch",
     });
-    return this.client.get(path, { filename });
+    return this.client.get(path, {filename});
   }
 
   /**
@@ -163,6 +163,13 @@ export class BackupClient {
     return this.client.get(path, {});
   }
 
+  public listBackupItems(): Promise<Response<string>> {
+    const path = buildPath({
+      endpointName: 'backups/work-dir/options'
+    })
+    return this.client.get(path, {})
+  }
+
   /**
    * Delete a backup from work directory by filename.
    *
@@ -172,7 +179,7 @@ export class BackupClient {
     const path = buildPath({
       endpointName: "backups/work-dir",
     });
-    await this.client.delete(path, { filename });
+    await this.client.delete(path, {filename});
   }
 
   /**
@@ -185,7 +192,7 @@ export class BackupClient {
     const path = buildPath({
       endpointName: `backups/work-dir/${filename}`,
     });
-    return this.client.get(path, { filename });
+    return this.client.get(path, {filename});
   }
 
   /**
@@ -198,6 +205,6 @@ export class BackupClient {
     const path = buildPath({
       endpointName: "backups/work-dir/fetch",
     });
-    return this.client.get(path, { filename });
+    return this.client.get(path, {filename});
   }
 }

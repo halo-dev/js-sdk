@@ -200,11 +200,11 @@ export class AdminApiClient {
     return this.client.get(path, {});
   }
 
-  public logout(): void {
+  public logout(): Promise<Response<any>> {
     const path = buildPath({
       endpointName: "logout",
     });
-    this.client.post(path, {});
+    return this.client.post(path, {});
   }
 
   public sendResetPasswordCode(params: {
