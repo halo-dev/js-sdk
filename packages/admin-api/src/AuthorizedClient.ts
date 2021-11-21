@@ -7,7 +7,7 @@ import {
 } from "@halo-dev/rest-api-client";
 
 export class AuthorizedClient {
-  private readonly client: DefaultHttpClient;
+  private client: DefaultHttpClient;
 
   constructor(baseUrl: string) {
     const requestConfigBuilder = new HaloRequestConfigBuilder({
