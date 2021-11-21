@@ -5,6 +5,9 @@ import FormData from "form-data";
 injectPlatformDeps(browserDeps);
 
 export { HaloRestAPIClient } from "./HaloRestAPIClient";
+export { HaloResponseHandler } from "./HaloResponseHandler";
+export { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
+export { DefaultHttpClient } from "./http";
 
 export {
   CustomizeAuth,
