@@ -59,7 +59,7 @@ const buildDiscriminatedAuth = (
 
 export class HaloRestAPIClient {
   private baseUrl?: string;
-  private tokenProvider?: TokenProvider;
+  tokenProvider?: TokenProvider;
   private httpClient: DefaultHttpClient;
   private requestConfigBuilder: HaloRequestConfigBuilder;
 
