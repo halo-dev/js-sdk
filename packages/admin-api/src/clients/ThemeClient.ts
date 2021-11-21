@@ -105,7 +105,7 @@ export class ThemeClient {
   /**
    * List activated theme files.
    *
-   * @returns arrary of ThemeFile
+   * @returns array of ThemeFile
    */
   public listActivatedFiles(): Promise<Response<Array<ThemeFile>>> {
     const path = buildPath({
@@ -200,7 +200,7 @@ export class ThemeClient {
    */
   public async saveSettings(
     themeId: string,
-    settings: Map<String, Object>
+    settings: Record<string, unknown>
   ): Promise<void> {
     const path = buildPath({
       endpointName: `themes/${themeId}/settings`,
@@ -214,7 +214,7 @@ export class ThemeClient {
    * @param settings settings
    */
   public async saveActivatedSettings(
-    settings: Map<String, Object>
+    settings: Record<string, unknown>
   ): Promise<void> {
     const path = buildPath({
       endpointName: "themes/activation/settings",
