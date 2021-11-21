@@ -528,6 +528,13 @@ export type MultiFactorAuthParam = {
   authcode: string;
 };
 
+export type MultiFactorAuth = {
+  qrImage: string
+  optAuthUrl: string
+  mfaKey: string
+  mfaType: string
+}
+
 export type StaticFile = {
   id: number,
   name: string,

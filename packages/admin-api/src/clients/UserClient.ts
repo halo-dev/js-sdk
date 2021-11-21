@@ -1,6 +1,6 @@
 import {HttpClient} from "@halo-dev/rest-api-client";
 import {buildPath} from "../url";
-import {MultiFactorAuthParam, Response, User} from "../types";
+import {MultiFactorAuth, MultiFactorAuthParam, Response, User} from "../types";
 
 export class UserClient {
   private client: HttpClient;
@@ -41,14 +41,14 @@ export class UserClient {
     return this.client.put(path, {...params});
   }
 
-  public generateMFAQrImage(params: MultiFactorAuthParam): Promise<Response<any>> {
+  public generateMFAQrImage(params: MultiFactorAuthParam): Promise<Response<MultiFactorAuth>> {
     const path = buildPath({
       endpointName: "users/mfa/generate",
     });
     return this.client.put(path, {...params});
   }
 
-  public updateMFAuth(params: MultiFactorAuthParam): Promise<Response<any>> {
+  public updateMFAuth(params: MultiFactorAuthParam): Promise<Response<MultiFactorAuth>> {
     const path = buildPath({
       endpointName: "users/mfa/update",
     });
