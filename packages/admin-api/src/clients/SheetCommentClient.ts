@@ -105,7 +105,7 @@ export class SheetCommentClient {
     commentIds: Array<number>
   ): Promise<Response<Array<BaseComment>>> {
     const path = buildPath({
-      endpointName: "sheets​/comments​​",
+      endpointName: "sheets/comments",
     });
     return this.client.delete(path, commentIds);
   }

@@ -56,9 +56,9 @@ export class BackupClient {
 
   public deleteWorkdirBackup(filename: string): Promise<Response<Backup>> {
     const path = buildPath({
-      endpointName: `backups/work-dir?filename=${filename}`
+      endpointName: `backups/work-dir`
     })
-    return this.client.delete(path, {})
+    return this.client.delete(path, {filename})
   }
 
   public backupData(): Promise<Response<Backup>> {
@@ -78,16 +78,16 @@ export class BackupClient {
 
   public deleteDataBackup(filename: string): Promise<Response<Backup>> {
     const path = buildPath({
-      endpointName: `backups/data?filename=${filename}`
+      endpointName: `backups/data`
     })
-    return this.client.delete(path, {})
+    return this.client.delete(path, {filename})
   }
 
-  public backupMarkdown(): Promise<Response<Backup>> {
+  public backupMarkdown(params: { needFrontMatter: boolean }): Promise<Response<Backup>> {
     const path = buildPath({
       endpointName: 'backups/markdown'
     })
-    return this.client.post(path, {})
+    return this.client.post(path, params)
   }
 
   public listMarkdownBackups(): Promise<Response<Array<Backup>>> {
@@ -99,9 +99,9 @@ export class BackupClient {
 
   public deleteMarkdownBackup(filename: string): Promise<Response<Backup>> {
     const path = buildPath({
-      endpointName: `backups/markdown?filename=${filename}`
+      endpointName: `backups/markdown`
     })
-    return this.client.delete(path, {})
+    return this.client.delete(path, {filename})
   }
 
   public importMarkdown(data: any): Promise<Response<BasePostDetail>> {
