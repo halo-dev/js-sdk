@@ -9,7 +9,7 @@ export class TagClient {
     this.client = client;
   }
 
-  public listAll(params: {
+  public list(params: {
     sort: Array<string>;
     more: boolean;
   }): Promise<Response<Array<Tag>>> {

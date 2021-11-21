@@ -21,11 +21,15 @@ export class PostClient {
     this.client = client;
   }
 
-  public list(params: PageQuery): Promise<Page<PostList>> {
+  public list(
+    params: PageQuery,
+    keyword?: string,
+    categoryId?: number
+  ): Promise<Page<PostList>> {
     const path = buildPath({
       endpointName: "posts",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, { keyword, categoryId, ...params });
   }
 
   public search(
@@ -38,7 +42,7 @@ export class PostClient {
     return this.client.get(path, { keyword, ...pageQuery });
   }
 
-  public getById(
+  public get(
     postId: number,
     params?: {
       formatDisabled: boolean;

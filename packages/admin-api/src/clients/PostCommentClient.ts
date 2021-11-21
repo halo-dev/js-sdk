@@ -1,13 +1,13 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
 import {
-  Response,
-  Page,
-  BaseCommentParam,
-  CommentStatus,
   BaseComment,
-  PostCommentWithPost,
+  BaseCommentParam,
   CommentQuery,
+  CommentStatus,
+  Page,
+  PostCommentWithPost,
+  Response,
 } from "../types";
 
 export class PostCommentClient {
@@ -17,33 +17,33 @@ export class PostCommentClient {
     this.client = client;
   }
 
-  public list(params: CommentQuery): Promise<Page<PostCommentWithPost>> {
+  public list(params: CommentQuery): Promise<Response<Page<PostCommentWithPost>>> {
     const path = buildPath({
       endpointName: "posts/comments",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public listAsView(params: {
     postId: number;
     sort?: Array<string>;
     page?: number;
-  }): Promise<Page<BaseComment>> {
+  }): Promise<Response<Page<BaseComment>>> {
     const path = buildPath({
       endpointName: `posts/comments/${params.postId}/list_view`,
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public listAsTreeView(params: {
     postId: number;
     sort?: Array<string>;
     page?: number;
-  }): Promise<Page<BaseComment>> {
+  }): Promise<Response<Page<BaseComment>>> {
     const path = buildPath({
       endpointName: `posts/comments/${params.postId}/tree_view`,
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public latest(params: {
@@ -53,24 +53,24 @@ export class PostCommentClient {
     const path = buildPath({
       endpointName: "posts/comments/latest",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public create(params: BaseCommentParam): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: "posts/comments",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
-  public updateById(
+  public update(
     commentId: number,
     params: BaseCommentParam
   ): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `posts/comments/${commentId}`,
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public updateStatusById(
@@ -93,7 +93,7 @@ export class PostCommentClient {
     return this.client.put(path, commentIds);
   }
 
-  public deleteById(commentId: number): Promise<Response<BaseComment>> {
+  public delete(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `posts/comments/${commentId}`,
     });

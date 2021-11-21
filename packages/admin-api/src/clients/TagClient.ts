@@ -26,21 +26,21 @@ export class TagClient {
     return this.client.post(path, { ...params });
   }
 
-  public getById(tagId: number): Promise<Response<Tag>> {
+  public get(tagId: number): Promise<Response<Tag>> {
     const path = buildPath({
       endpointName: `tags/${tagId}`,
     });
     return this.client.get(path, {});
   }
 
-  public updateById(tagId: number, params: TagParam): Promise<Response<Tag>> {
+  public update(tagId: number, params: TagParam): Promise<Response<Tag>> {
     const path = buildPath({
       endpointName: `tags/${tagId}`,
     });
     return this.client.put(path, { ...params });
   }
 
-  public deleteById(tagId: number): Promise<Response<Tag>> {
+  public delete(tagId: number): Promise<Response<Tag>> {
     const path = buildPath({
       endpointName: `tags/${tagId}`,
     });

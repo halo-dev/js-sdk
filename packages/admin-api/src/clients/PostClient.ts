@@ -1,15 +1,15 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
 import {
-  Response,
-  Page,
-  PostQuery,
+  BasePostMinimal,
   BasePostSimple,
-  PostParam,
+  Page,
   Post,
   PostDetail,
+  PostParam,
+  PostQuery,
   PostStatus,
-  BasePostMinimal,
+  Response,
 } from "../types";
 
 export class PostClient {
@@ -19,14 +19,14 @@ export class PostClient {
     this.client = client;
   }
 
-  public list(params: PostQuery): Promise<Page<BasePostSimple>> {
+  public list(params: PostQuery): Promise<Response<Page<BasePostSimple>>> {
     const path = buildPath({
       endpointName: "posts",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
-  public getById(postId: number): Promise<Response<PostDetail>> {
+  public get(postId: number): Promise<Response<PostDetail>> {
     const path = buildPath({
       endpointName: `posts/${postId}`,
     });
@@ -44,37 +44,34 @@ export class PostClient {
     const path = buildPath({
       endpointName: "posts/latest",
     });
-    return this.client.get(path, { top });
+    return this.client.get(path, {top});
   }
 
   public listByStatus(
     status: PostStatus,
     query?: PostQuery
-  ): Promise<Page<BasePostSimple>> {
+  ): Promise<Response<Page<BasePostSimple>>> {
     const path = buildPath({
       endpointName: `posts/status/${status}`,
     });
-    return this.client.get(path, { ...query });
+    return this.client.get(path, {...query});
   }
 
   public create(params: PostParam): Promise<Response<PostDetail>> {
     const path = buildPath({
       endpointName: "posts",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
-  public updateById(
+  public update(
     postId: number,
-    params: {
-      autoSave?: boolean;
-      post: PostParam;
-    }
+    params: PostParam
   ): Promise<Response<PostDetail>> {
     const path = buildPath({
       endpointName: `posts/${postId}`,
     });
-    return this.client.put(path, { ...params });
+    return this.client.put(path, {...params});
   }
 
   public updateStatusById(
@@ -104,7 +101,7 @@ export class PostClient {
     const path = buildPath({
       endpointName: `posts/${postId}/status/draft/content`,
     });
-    return this.client.put(path, { content });
+    return this.client.put(path, {content});
   }
 
   public async like(postId: number): Promise<void> {
@@ -114,7 +111,7 @@ export class PostClient {
     await this.client.put(path, {});
   }
 
-  public deleteById(postId: number): Promise<Response<Post>> {
+  public delete(postId: number): Promise<Response<Post>> {
     const path = buildPath({
       endpointName: `posts/${postId}`,
     });

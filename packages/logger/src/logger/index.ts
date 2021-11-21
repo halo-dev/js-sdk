@@ -1,5 +1,5 @@
-import debug, { Debugger } from "./debug";
-export { Debugger } from "./debug";
+import debug from "./debug";
+import { Debugger } from "../types";
 
 const registeredLoggers = new Set<HaloDebugger>();
 const logLevelFromEnv =
@@ -125,7 +125,6 @@ export interface HaloLogger {
 /**
  * Creates a logger for use by the Halo SDKs that inherits from `HaloLogger`.
  * @param namespace - The name of the SDK package.
- * @hidden
  */
 export function createClientLogger(namespace: string): HaloLogger {
   const clientRootLogger: HaloClientLogger = HaloLogger.extend(namespace);

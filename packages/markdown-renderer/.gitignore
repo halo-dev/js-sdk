@@ -1,5 +1,4 @@
 tsconfig.tsbuildinfo
 lib
-cjs
-umd
 package-lock.json
+esm

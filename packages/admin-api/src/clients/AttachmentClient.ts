@@ -1,6 +1,6 @@
-import { HttpClient, FormData } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import { Response, Page, AttachmentQuery, Attachment } from "../types";
+import {FormData, HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
+import {Attachment, AttachmentQuery, Page, Response} from "../types";
 
 export class AttachmentClient {
   private client: HttpClient;
@@ -15,7 +15,7 @@ export class AttachmentClient {
    * @param attachmentId attachment id
    * @returns Returns attachment detail response.
    */
-  public getById(attachmentId: number): Promise<Response<Attachment>> {
+  public get(attachmentId: number): Promise<Response<Attachment>> {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
     });
@@ -28,11 +28,11 @@ export class AttachmentClient {
    * @param params attachment query parameter
    * @returns Returns attachment page response.
    */
-  public list(params: AttachmentQuery): Promise<Page<Attachment>> {
+  public list(params: AttachmentQuery): Promise<Response<Page<Attachment>>> {
     const path = buildPath({
       endpointName: "attachments",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   /**
@@ -56,9 +56,7 @@ export class AttachmentClient {
    * @param attachmentId attachment id
    * @returns Returns attachment detail of deleted
    */
-  public deleteById(
-    attachmentId: number
-  ): Promise<Response<Array<Attachment>>> {
+  public delete(attachmentId: number): Promise<Response<Array<Attachment>>> {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
     });
@@ -72,14 +70,14 @@ export class AttachmentClient {
    * @param name a new attachment name
    * @returns Returns an updated attachment response.
    */
-  public updateById(
+  public update(
     attachmentId: number,
     name: string
   ): Promise<Response<Attachment>> {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
     });
-    return this.client.put(path, { name });
+    return this.client.put(path, {name});
   }
 
   /**

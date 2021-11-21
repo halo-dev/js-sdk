@@ -1,13 +1,6 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import {
-  Response,
-  Page,
-  Journal,
-  JournalType,
-  JournalQuery,
-  JournalWithCmtCount,
-} from "../types";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
+import {Journal, JournalQuery, JournalType, JournalWithCmtCount, Page, Response} from "../types";
 
 export class JournalClient {
   private client: HttpClient;
@@ -16,21 +9,54 @@ export class JournalClient {
     this.client = client;
   }
 
-  public list(params: JournalQuery): Promise<Page<JournalWithCmtCount>> {
+  /**
+   * Lists journals.
+   *
+   * @param params parameter for queries
+   * @returns A page response of journals.
+   */
+  public list(params: JournalQuery): Promise<Response<Page<JournalWithCmtCount>>> {
     const path = buildPath({
       endpointName: "journals",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
+
+  /**
+   * Gets latest journals.
+   *
+   * @param top top option for queries
+   * @returns A response of lastes journals.
+   */
+  public latest(top: number): Promise<Response<Array<Journal>>> {
+    const path = buildPath({
+      endpointName: "journals/latest",
+    });
+    return this.client.get(path, {top});
+  }
+
+  /**
+   * Creates a journal.
+   *
+   * @param params parameter for creates
+   * @returns A response of created journal.
+   */
   public create(params: Journal): Promise<Response<Journal>> {
     const path = buildPath({
       endpointName: "journals",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
-  public updateById(
+  /**
+   * Updates a journal by id.
+   *
+   * @param journalId journal id
+   * @param params parameter for updates
+   * @returns A response of updated journal.
+   */
+  public update(
     journalId: number,
     params: {
       sourceContent: string;
@@ -40,20 +66,17 @@ export class JournalClient {
     const path = buildPath({
       endpointName: `journals/${journalId}`,
     });
-    return this.client.put(path, { ...params });
+    return this.client.put(path, {...params});
   }
 
-  public async deleteById(journalId: number): Promise<void> {
+  /**
+   * Deletes a journal by id.
+   * @param journalId journal id
+   */
+  public async delete(journalId: number): Promise<void> {
     const path = buildPath({
       endpointName: `journals/${journalId}`,
     });
     await this.client.delete(path, {});
-  }
-
-  public latest(top: number): Promise<Response<Array<Journal>>> {
-    const path = buildPath({
-      endpointName: "journals/latest",
-    });
-    return this.client.get(path, { top });
   }
 }

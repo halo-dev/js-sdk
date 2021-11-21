@@ -38,7 +38,7 @@ export class JournalClient {
     return this.client.get(path, { sort });
   }
 
-  public getById(journalId: number): Promise<Response<Journal>> {
+  public get(journalId: number): Promise<Response<Journal>> {
     const path = buildPath({
       endpointName: `journals/${journalId}`,
     });

@@ -1,6 +1,6 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import { Response, Option, OptionQuery } from "../types";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
+import {Option, OptionQuery, Response} from "../types";
 
 export class OptionClient {
   private client: HttpClient;
@@ -20,27 +20,24 @@ export class OptionClient {
     const path = buildPath({
       endpointName: "options",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
-  public getById(id: number): Promise<Response<Option>> {
+  public get(id: number): Promise<Response<Option>> {
     const path = buildPath({
       endpointName: `options/${id}`,
     });
     return this.client.get(path, {});
   }
 
-  public updateById(
-    optionId: number,
-    params: Option
-  ): Promise<Response<Option>> {
+  public update(optionId: number, params: Option): Promise<Response<Option>> {
     const path = buildPath({
       endpointName: `options/${optionId}`,
     });
-    return this.client.put(path, { ...params });
+    return this.client.put(path, {...params});
   }
 
-  public async deleteById(optionId: number): Promise<void> {
+  public async delete(optionId: number): Promise<void> {
     const path = buildPath({
       endpointName: `options/${optionId}`,
     });
@@ -51,7 +48,7 @@ export class OptionClient {
     const path = buildPath({
       endpointName: "options/list_view",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public listAsMapView(): Promise<Response<Record<string, any>>> {
@@ -67,14 +64,14 @@ export class OptionClient {
     const path = buildPath({
       endpointName: "options/map_view/keys",
     });
-    return this.client.get(path, { ...params });
+    return this.client.post(path, params);
   }
 
   public async saveMapView(params: any): Promise<void> {
     const path = buildPath({
       endpointName: "options/map_view/saving",
     });
-    await this.client.post(path, { ...params });
+    await this.client.post(path, {...params});
   }
 
   public async save(params: Array<Option>): Promise<void> {

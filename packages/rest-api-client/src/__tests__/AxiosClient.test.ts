@@ -1,6 +1,7 @@
 import { HaloRestAPIClient, DefaultTokenProvider, FileTokenStore } from "../";
-import * as Logger from "@halo-dev/logger/lib";
+import * as Logger from "@halo-dev/logger";
 Logger.setLogLevel("debug");
+const logger = Logger.createClientLogger("AxiosClient");
 describe("Halo exios test", () => {
   it("test", async () => {
     const baseUrl = "http://127.0.0.1:8090";
@@ -8,7 +9,7 @@ describe("Halo exios test", () => {
       baseUrl,
     });
 
-    const tokenStore = new FileTokenStore("/Users/guqing/token.json");
+    const tokenStore = new FileTokenStore("/home/guqing/token.json");
 
     const tokenProvider = new DefaultTokenProvider(
       {
@@ -20,8 +21,8 @@ describe("Halo exios test", () => {
     );
     haloRestApiClient.setTokenProvider(tokenProvider);
     const client = haloRestApiClient.buildHttpClient();
-    console.log(client);
+    logger.info(JSON.stringify(client));
     const data = await client.get("/api/admin/posts", {});
-    console.log(data);
+    logger.info(data);
   });
 });

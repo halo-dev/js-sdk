@@ -9,7 +9,7 @@ export class MenuClient {
     this.client = client;
   }
 
-  public listAll(sort?: Array<string>): Promise<Response<Array<Menu>>> {
+  public list(sort?: Array<string>): Promise<Response<Array<Menu>>> {
     const path = buildPath({
       endpointName: "menus",
     });

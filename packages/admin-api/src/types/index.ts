@@ -13,13 +13,6 @@ export interface PageQuery {
 }
 
 export interface Page<T = any> {
-  status: number | string;
-  message?: string;
-  devMessage?: any;
-  data: PageEntity<T>;
-}
-
-export type PageEntity<T = any> = {
   hasContent: boolean;
   hasNext: boolean;
   hasPrevious: boolean;
@@ -30,7 +23,7 @@ export type PageEntity<T = any> = {
   rpp: number;
   total: number;
   content: Array<T>;
-};
+}
 
 export type MFAType = "NONE" | "TFA_TOTP";
 
@@ -534,3 +527,26 @@ export type MultiFactorAuthParam = {
   mfaKey: string;
   authcode: string;
 };
+
+export type MultiFactorAuth = {
+  qrImage: string
+  optAuthUrl: string
+  mfaKey: string
+  mfaType: string
+}
+
+export type StaticFile = {
+  id: number,
+  name: string,
+  path: string,
+  relativePath: string,
+  isFile: boolean,
+  mimeType: string,
+  createTime: number,
+  children: Array<StaticFile>
+}
+
+export type StaticContentParam = {
+  path: string,
+  content: string
+}

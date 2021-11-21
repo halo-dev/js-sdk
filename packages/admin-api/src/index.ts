@@ -1,10 +1,10 @@
 export { AdminApiClient } from "./AdminApiClient";
 export * from "@halo-dev/rest-api-client";
+export * from "./clients";
 export {
   Response,
   PageQuery,
   Page,
-  PageEntity,
   UserParam,
   User,
   InstallParam,
@@ -66,4 +66,7 @@ export {
   Group,
   ThemeFile,
   MultiFactorAuthParam,
+  Environment,
+  StaticFile,
+  StaticContentParam
 } from "./types";

@@ -1,6 +1,6 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import { Response, Link } from "../types";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
+import {Link, Response} from "../types";
 
 export class LinkClient {
   private client: HttpClient;
@@ -13,38 +13,38 @@ export class LinkClient {
     const path = buildPath({
       endpointName: "links",
     });
-    return this.client.get(path, { sort });
+    return this.client.get(path, {sort});
   }
 
   public create(params: Link): Promise<Response<Link>> {
     const path = buildPath({
       endpointName: "links",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
-  public getById(id: number): Promise<Response<Link>> {
+  public get(id: number): Promise<Response<Link>> {
     const path = buildPath({
       endpointName: `links/${id}`,
     });
     return this.client.get(path, {});
   }
 
-  public updateById(linkId: number, params: Link): Promise<Response<Link>> {
+  public update(linkId: number, params: Link): Promise<Response<Link>> {
     const path = buildPath({
       endpointName: `links/${linkId}`,
     });
-    return this.client.put(path, { ...params });
+    return this.client.put(path, {...params});
   }
 
-  public async deleteById(id: number): Promise<void> {
+  public async delete(id: number): Promise<void> {
     const path = buildPath({
       endpointName: `links/${id}`,
     });
     await this.client.delete(path, {});
   }
 
-  public listTeams(): Promise<Array<string>> {
+  public listTeams(): Promise<Response<Array<string>>> {
     const path = buildPath({
       endpointName: "links/teams",
     });

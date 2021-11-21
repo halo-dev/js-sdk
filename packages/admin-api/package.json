@@ -1,6 +1,6 @@
 {
   "name": "@halo-dev/admin-api",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.23",
   "description": "Halo admin api client.",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -55,10 +55,10 @@
     ]
   },
   "dependencies": {
-    "@halo-dev/rest-api-client": "^1.0.0-alpha.6"
+    "@halo-dev/rest-api-client": "^1.0.0-alpha.23"
   },
   "devDependencies": {
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.2"
   },
   "exports": {
     ".": {

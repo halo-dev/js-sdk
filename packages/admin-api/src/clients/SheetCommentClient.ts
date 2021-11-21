@@ -1,14 +1,14 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
+import {HttpClient} from "@halo-dev/rest-api-client";
+import {buildPath} from "../url";
 import {
-  Response,
-  Page,
   BaseComment,
   BaseCommentParam,
-  CommentStatus,
-  CommentQuery,
-  SheetCommentWithSheet,
   BaseCommentWithParent,
+  CommentQuery,
+  CommentStatus,
+  Page,
+  Response,
+  SheetCommentWithSheet,
 } from "../types";
 
 export class SheetCommentClient {
@@ -18,14 +18,14 @@ export class SheetCommentClient {
     this.client = client;
   }
 
-  public list(params: CommentQuery): Promise<Page<SheetCommentWithSheet>> {
+  public list(params: CommentQuery): Promise<Response<Page<SheetCommentWithSheet>>> {
     const path = buildPath({
       endpointName: "sheets/comments",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
-  public getById(commentId: number): Promise<Response<SheetCommentWithSheet>> {
+  public get(commentId: number): Promise<Response<SheetCommentWithSheet>> {
     const path = buildPath({
       endpointName: `sheets/comments/${commentId}`,
     });
@@ -36,22 +36,22 @@ export class SheetCommentClient {
     sheetId: number;
     sort?: Array<string>;
     page?: number;
-  }): Promise<Page<BaseCommentWithParent>> {
+  }): Promise<Response<Page<BaseCommentWithParent>>> {
     const path = buildPath({
       endpointName: `sheets/comments/${params.sheetId}/list_view`,
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public listAsTreeView(params: {
     sheetId: number;
     sort?: Array<string>;
     page?: number;
-  }): Promise<Page<BaseComment>> {
+  }): Promise<Response<Page<BaseComment>>> {
     const path = buildPath({
       endpointName: `sheets/comments/${params.sheetId}/tree_view`,
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public latest(params: {
@@ -61,24 +61,24 @@ export class SheetCommentClient {
     const path = buildPath({
       endpointName: "sheets/comments/latest",
     });
-    return this.client.get(path, { ...params });
+    return this.client.get(path, {...params});
   }
 
   public create(params: BaseCommentParam): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: "sheets/comments",
     });
-    return this.client.post(path, { ...params });
+    return this.client.post(path, {...params});
   }
 
-  public updateById(
+  public update(
     commentId: number,
     params: BaseCommentParam
   ): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `sheets/comments/${commentId}`,
     });
-    return this.client.put(path, { ...params });
+    return this.client.put(path, {...params});
   }
 
   public updateStatusById(
@@ -105,12 +105,12 @@ export class SheetCommentClient {
     commentIds: Array<number>
   ): Promise<Response<Array<BaseComment>>> {
     const path = buildPath({
-      endpointName: "sheets​/comments​​",
+      endpointName: "sheets/comments",
     });
     return this.client.delete(path, commentIds);
   }
 
-  public deleteById(commentId: number): Promise<Response<BaseComment>> {
+  public delete(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `sheets/comments/${commentId}`,
     });

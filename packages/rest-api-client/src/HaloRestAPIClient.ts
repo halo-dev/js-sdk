@@ -11,7 +11,6 @@ type Auth = OmitTypePropertyFromUnion<DiscriminatedAuth>;
 type Options = {
   baseUrl?: string;
   auth?: Auth;
-  guestSpaceId?: number | string;
   basicAuth?: BasicAuth;
   clientCertAuth?:
     | {
