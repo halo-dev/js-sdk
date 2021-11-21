@@ -1,6 +1,6 @@
 {
   "name": "@halo-dev/logger",
-  "version": "1.0.0-alpha.27",
+  "version": "1.0.0-alpha.28",
   "description": "Halo SDK for JavaScript - Logger",
   "main": "./lib/index.js",
   "module": "./lib/index.js",
