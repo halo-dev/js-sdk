@@ -1,13 +1,13 @@
 import { injectPlatformDeps } from "./platform/";
 import * as nodeDeps from "./platform/node";
 import FormData from "form-data";
-import { HaloResponseHandler } from "./HaloResponseHandler";
-import { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
-import { DefaultHttpClient } from "./http";
 
 injectPlatformDeps(nodeDeps);
 
 export { HaloRestAPIClient } from "./HaloRestAPIClient";
+export { HaloResponseHandler } from "./HaloResponseHandler";
+export { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
+export { DefaultHttpClient } from "./http";
 
 export {
   CustomizeAuth,
@@ -28,9 +28,4 @@ export {
   DefaultTokenProvider,
 } from "./auth";
 
-export {
-  FormData,
-  HaloResponseHandler,
-  HaloRequestConfigBuilder,
-  DefaultHttpClient,
-};
+export { FormData };
