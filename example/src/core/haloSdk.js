@@ -7,17 +7,7 @@ import {
 
 import encryptUtil from "../utils/encrypt";
 
-const userCredentials = encryptUtil.decrypt(
-  localStorage.getItem("UserCredentials")
-);
-
-const localStorageTokenStore = new LocalStorageTokenStore();
-
 const baseUrl = process.env.VUE_APP_BASE_URL;
-
-const haloRestApiClient = new HaloRestAPIClient({
-  baseUrl: baseUrl
-});
 
 const buildTokenProvider = credentials => {
   return new DefaultTokenProvider(
@@ -25,14 +15,21 @@ const buildTokenProvider = credentials => {
       ...credentials
     },
     baseUrl,
-    localStorageTokenStore
+    new LocalStorageTokenStore()
   );
 };
 
-if (userCredentials) {
-  const tokenProvider = buildTokenProvider(userCredentials);
-  haloRestApiClient.setTokenProvider(tokenProvider);
-}
+const haloRestApiClient = new HaloRestAPIClient({
+  baseUrl: baseUrl,
+  tokenProvider: (function tokenProvider() {
+    const credentials = localStorage.getItem("UserCredentials");
+    const userCredentials = encryptUtil.decrypt(credentials);
+    if (userCredentials) {
+      return buildTokenProvider(userCredentials);
+    }
+    return null;
+  })()
+});
 
 const haloAdminClient = new AdminApiClient(haloRestApiClient);
 
@@ -45,4 +42,14 @@ export const doAuthorize = credentials => {
   return tokenProvider.getToken();
 };
 
-export { haloRestApiClient, haloAdminClient, localStorageTokenStore };
+const tokenProvider = haloRestApiClient.getTokenProvider();
+if (tokenProvider) {
+  haloRestApiClient
+    .getTokenProvider()
+    .useAuthenticateRequestInterceptor(credentials => {
+      console.log(credentials);
+      return credentials;
+    });
+}
+
+export { haloRestApiClient, haloAdminClient };
