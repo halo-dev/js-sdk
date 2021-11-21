@@ -1,12 +1,13 @@
 import { Credentials, TokenType, TokenProvider, TokenStore } from "../types";
+import { RejectedFn, ResolvedFn } from "../types/auth";
 import { HttpAuthenticator } from "./HttpAuthenticator";
 import { InMemeryTokenStore } from "./InMemeryTokenStore";
 
 export class DefaultTokenProvider implements TokenProvider {
   private credentials: Credentials;
   private headerName: string;
-  private httpAuthenticator: HttpAuthenticator;
   private tokenStore: TokenStore;
+  httpAuthenticator: HttpAuthenticator;
 
   constructor(
     credentials: Credentials,
@@ -85,5 +86,12 @@ export class DefaultTokenProvider implements TokenProvider {
         return tokenType;
       }
     }
+  }
+
+  public useAuthenticateRequestInterceptor(
+    resolved: ResolvedFn<Credentials>,
+    rejected?: RejectedFn
+  ): number {
+    return this.httpAuthenticator.interceptors.use(resolved, rejected);
   }
 }

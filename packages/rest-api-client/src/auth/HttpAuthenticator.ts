@@ -7,19 +7,43 @@ import {
 } from "../types";
 import { HaloResponseHandler } from "../HaloResponseHandler";
 import { platformDeps } from "../platform/";
+import InterceptorManager from "./InterceptorManager";
+import { RejectedFn, ResolvedFn } from "../types/auth";
+
+interface PromiseChain<T> {
+  resolved: ResolvedFn<T> | ((credentials: Credentials) => Credentials);
+  rejected?: RejectedFn;
+}
 
 export class HttpAuthenticator {
   private baseUrl: string;
   private responseHandler: HaloResponseHandler;
+  interceptors: InterceptorManager<Credentials>;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
     this.responseHandler = new HaloResponseHandler();
+    this.interceptors = new InterceptorManager<Credentials>();
   }
 
-  public authenticate(
+  public async authenticate(
     credentials: Credentials
   ): Promise<HttpResponse<AccessToken>> {
+    const mfaResponse = await this.needMFACode(credentials);
+
+    if (mfaResponse.data.needMFACode) {
+      const chain: PromiseChain<any>[] = [];
+      this.interceptors.forEach((interceptor) => chain.unshift(interceptor));
+      let credentialsParamPromise = Promise.resolve(credentials);
+      while (chain.length) {
+        const { resolved, rejected } = chain.shift()!;
+        credentialsParamPromise = credentialsParamPromise.then(
+          resolved,
+          rejected
+        );
+      }
+      credentials = await credentialsParamPromise;
+    }
     return this.sendRequest({
       method: "post",
       url: `${this.baseUrl}/api/admin/login`,
