@@ -1,5 +1,5 @@
 import { DefaultHttpClient } from "./http/";
-import { ProxyConfig, TokenProvider } from "./types";
+import { ProxyConfig } from "./types";
 import { BasicAuth, DiscriminatedAuth, CustomizeAuth } from "./types/auth";
 import { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
 import { HaloResponseHandler } from "./HaloResponseHandler";
@@ -24,22 +24,9 @@ type Options = {
       };
   proxy?: ProxyConfig;
   userAgent?: string;
-  tokenProvider?: TokenProvider;
 };
 
-const buildDiscriminatedAuth = (
-  auth: Auth,
-  tokenProvider?: TokenProvider
-): DiscriminatedAuth | undefined => {
-  if (tokenProvider) {
-    return {
-      type: "customizeAuth",
-      authHeader: tokenProvider.getAuthHeader(),
-      getToken() {
-        return "";
-      },
-    };
-  }
+const buildDiscriminatedAuth = (auth: Auth): DiscriminatedAuth | undefined => {
   if ("username" in auth) {
     return { type: "password", ...auth };
   }
@@ -60,24 +47,17 @@ const buildDiscriminatedAuth = (
 
 export class HaloRestAPIClient {
   private baseUrl?: string;
-  tokenProvider?: TokenProvider;
   private httpClient: DefaultHttpClient;
-  private requestConfigBuilder: HaloRequestConfigBuilder;
   private _interceptors: Interceptors;
 
   constructor(options: Options = {}) {
     this.baseUrl = platformDeps.buildBaseUrl(options.baseUrl);
-    this.tokenProvider = options.tokenProvider;
-    const auth = buildDiscriminatedAuth(
-      options.auth ?? {},
-      options.tokenProvider
-    );
+    const auth = buildDiscriminatedAuth(options.auth ?? {});
     const requestConfigBuilder = new HaloRequestConfigBuilder({
       ...options,
       baseUrl: this.baseUrl,
       auth,
     });
-    this.requestConfigBuilder = requestConfigBuilder;
     const responseHandler = new HaloResponseHandler();
     this.httpClient = new DefaultHttpClient({
       responseHandler,
@@ -96,15 +76,6 @@ export class HaloRestAPIClient {
 
   public buildHttpClient() {
     return this.httpClient;
-  }
-
-  public getTokenProvider() {
-    return this.tokenProvider;
-  }
-
-  public setTokenProvider(tokenProvider: TokenProvider) {
-    this.tokenProvider = tokenProvider;
-    this.requestConfigBuilder.setTokenProvider(tokenProvider);
   }
 
   public get interceptors() {

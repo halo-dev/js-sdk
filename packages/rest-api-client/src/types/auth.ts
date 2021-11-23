@@ -43,11 +43,3 @@ export type BasicAuth = {
 };
 
 export const SESSION_TOKEN_KEY = "__REQUEST_TOKEN__";
-
-export interface ResolvedFn<T> {
-  (val: T): T | Promise<T>;
-}
-
-export interface RejectedFn {
-  (error: any): any;
-}

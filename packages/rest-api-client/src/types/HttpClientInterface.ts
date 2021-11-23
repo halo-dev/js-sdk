@@ -1,5 +1,4 @@
 import FormData from "form-data";
-import { TokenProvider } from "./CredentialsInterface";
 
 export interface HttpClient {
   get: <T extends object>(path: string, params: object) => Promise<T>;
@@ -57,7 +56,6 @@ export interface RequestConfigBuilder {
     params: Params | FormData | Array<any>,
     options?: { responseType: "arraybuffer" }
   ) => Promise<RequestConfig>;
-  getTokenProvider(): TokenProvider | undefined;
 }
 
 export interface ResolvedFn<T> {

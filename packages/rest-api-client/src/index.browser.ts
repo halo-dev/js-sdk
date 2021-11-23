@@ -16,16 +16,8 @@ export {
   AccessToken,
   TokenType,
   Credentials,
-  TokenProvider,
-  TokenStore,
   HttpClient,
   ResponseHandler,
 } from "./types";
-
-export {
-  FileTokenStore,
-  LocalStorageTokenStore,
-  DefaultTokenProvider,
-} from "./auth";
 
 export { FormData };

@@ -1,4 +1,4 @@
-import Axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import Axios from "axios";
 import {
   HttpClient,
   RequestConfig,
@@ -6,7 +6,6 @@ import {
   ResponseHandler,
 } from "../types";
 import FormData from "form-data";
-import logger from "../logger";
 import { RequestInterceptor, ResponseInterceptor } from "./InterceptorManager";
 
 export interface Interceptors {
@@ -18,7 +17,6 @@ export class AxiosClient implements HttpClient {
   private responseHandler: ResponseHandler;
   private requestConfigBuilder: RequestConfigBuilder;
   interceptors: Interceptors;
-  private retryCount = 0;
 
   constructor({
     responseHandler,
@@ -93,33 +91,6 @@ export class AxiosClient implements HttpClient {
   }
 
   private async sendRequest(requestConfig: RequestConfig) {
-    const tokenProvider = this.requestConfigBuilder.getTokenProvider();
-    if (tokenProvider) {
-      const token = await tokenProvider.getToken();
-      Axios.interceptors.response.use(
-        (config) => {
-          return config;
-        },
-        async (error) => {
-          const response = error.response;
-          const status = response ? response.status : -1;
-          logger.error("Server response status", status);
-
-          const data = response ? response.data : null;
-          if (data && data.status === 401 && this.retryCount < 3) {
-            if (token) {
-              this.retryCount++;
-              tokenProvider.clearToken();
-              const newAccessToken = await tokenProvider.getToken();
-              response.config.headers[tokenProvider.getAuthHeader()] =
-                newAccessToken.access_token;
-              return Axios(response.config);
-            }
-          }
-          return Promise.reject(error);
-        }
-      );
-    }
     return this.responseHandler.handle(
       // eslint-disable-next-line new-cap
       Axios({
