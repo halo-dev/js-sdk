@@ -1,6 +1,6 @@
-import {HaloRestAPIClient, HttpClient} from "@halo-dev/rest-api-client";
-import {buildPath} from "./url";
-import {AccessToken, Environment, LoginPreCheck, Response} from "./types";
+import { HaloRestAPIClient, HttpClient } from "@halo-dev/rest-api-client";
+import { buildPath } from "./url";
+import { AccessToken, Environment, LoginPreCheck, Response } from "./types";
 import {
   ActuatorClient,
   AttachmentClient,
@@ -25,7 +25,7 @@ import {
   StatisticClient,
   TagClient,
   ThemeClient,
-  UserClient
+  UserClient,
 } from "./clients";
 
 export class AdminApiClient {
@@ -51,9 +51,9 @@ export class AdminApiClient {
   private readonly _tag: TagClient;
   private readonly _theme: ThemeClient;
   private readonly _user: UserClient;
-  private readonly _staticStorage: StaticStorageClient
-  private readonly _comment: CommentClient
-  private readonly _actuator: ActuatorClient
+  private readonly _staticStorage: StaticStorageClient;
+  private readonly _comment: CommentClient;
+  private readonly _actuator: ActuatorClient;
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient();
@@ -78,9 +78,9 @@ export class AdminApiClient {
     this._tag = new TagClient(this.client);
     this._theme = new ThemeClient(this.client);
     this._user = new UserClient(this.client);
-    this._staticStorage = new StaticStorageClient(this.client)
-    this._comment = new CommentClient(this.client)
-    this._actuator = new ActuatorClient(this.client)
+    this._staticStorage = new StaticStorageClient(this.client);
+    this._comment = new CommentClient(this.client);
+    this._actuator = new ActuatorClient(this.client);
   }
 
   public get attachment() {
@@ -168,15 +168,15 @@ export class AdminApiClient {
   }
 
   public get staticStorage() {
-    return this._staticStorage
+    return this._staticStorage;
   }
 
   public get comment() {
-    return this._comment
+    return this._comment;
   }
 
   public get actuator() {
-    return this._actuator
+    return this._actuator;
   }
 
   public getEnvironment(): Promise<Response<Environment>> {
@@ -190,7 +190,7 @@ export class AdminApiClient {
     const path = buildPath({
       endpointName: "halo/logfile",
     });
-    return this.client.get(path, {lines});
+    return this.client.get(path, { lines });
   }
 
   public isInstalled(): Promise<Response<Boolean>> {
@@ -245,6 +245,17 @@ export class AdminApiClient {
     const path = buildPath({
       endpointName: "login/precheck",
     });
-    return this.client.post(path, {...params});
+    return this.client.post(path, { ...params });
+  }
+
+  public login(params: {
+    username: string;
+    password: string;
+    authcode: boolean;
+  }): Promise<Response<AccessToken>> {
+    const path = buildPath({
+      endpointName: "login",
+    });
+    return this.client.post(path, { ...params });
   }
 }

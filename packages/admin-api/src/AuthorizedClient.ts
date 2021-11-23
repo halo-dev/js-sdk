@@ -58,6 +58,17 @@ export class AuthorizedClient {
     return this.client.post(path, {});
   }
 
+  public login(params: {
+    username: string;
+    password: string;
+    authcode: boolean;
+  }): Promise<Response<AccessToken>> {
+    const path = buildPath({
+      endpointName: "login",
+    });
+    return this.client.post(path, { ...params });
+  }
+
   public needMFACode(params: {
     username: string;
     password: string;
