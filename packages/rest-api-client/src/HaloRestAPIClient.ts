@@ -4,6 +4,7 @@ import { BasicAuth, DiscriminatedAuth, CustomizeAuth } from "./types/auth";
 import { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
 import { HaloResponseHandler } from "./HaloResponseHandler";
 import { platformDeps } from "./platform/index";
+import { Interceptors } from "./http/AxiosClient";
 
 type OmitTypePropertyFromUnion<T> = T extends unknown ? Omit<T, "type"> : never;
 type Auth = OmitTypePropertyFromUnion<DiscriminatedAuth>;
@@ -62,6 +63,7 @@ export class HaloRestAPIClient {
   tokenProvider?: TokenProvider;
   private httpClient: DefaultHttpClient;
   private requestConfigBuilder: HaloRequestConfigBuilder;
+  private _interceptors: Interceptors;
 
   constructor(options: Options = {}) {
     this.baseUrl = platformDeps.buildBaseUrl(options.baseUrl);
@@ -81,6 +83,7 @@ export class HaloRestAPIClient {
       responseHandler,
       requestConfigBuilder,
     });
+    this._interceptors = this.httpClient.interceptors;
   }
 
   public static get version() {
@@ -102,5 +105,9 @@ export class HaloRestAPIClient {
   public setTokenProvider(tokenProvider: TokenProvider) {
     this.tokenProvider = tokenProvider;
     this.requestConfigBuilder.setTokenProvider(tokenProvider);
+  }
+
+  public get interceptors() {
+    return this._interceptors;
   }
 }

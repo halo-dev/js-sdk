@@ -1,22 +1,38 @@
-import Axios from "axios";
-import {HttpClient, RequestConfig, RequestConfigBuilder, ResponseHandler,} from "../types";
+import Axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import {
+  HttpClient,
+  RequestConfig,
+  RequestConfigBuilder,
+  ResponseHandler,
+} from "../types";
 import FormData from "form-data";
 import logger from "../logger";
+import { RequestInterceptor, ResponseInterceptor } from "./InterceptorManager";
+
+export interface Interceptors {
+  request: RequestInterceptor;
+  response: ResponseInterceptor;
+}
 
 export class AxiosClient implements HttpClient {
   private responseHandler: ResponseHandler;
   private requestConfigBuilder: RequestConfigBuilder;
+  interceptors: Interceptors;
   private retryCount = 0;
 
   constructor({
-                responseHandler,
-                requestConfigBuilder,
-              }: {
+    responseHandler,
+    requestConfigBuilder,
+  }: {
     responseHandler: ResponseHandler;
     requestConfigBuilder: RequestConfigBuilder;
   }) {
     this.responseHandler = responseHandler;
     this.requestConfigBuilder = requestConfigBuilder;
+    this.interceptors = {
+      request: new RequestInterceptor(),
+      response: new ResponseInterceptor(),
+    };
   }
 
   public async get(path: string, params: any) {

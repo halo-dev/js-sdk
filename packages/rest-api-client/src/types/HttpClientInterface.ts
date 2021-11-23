@@ -59,3 +59,11 @@ export interface RequestConfigBuilder {
   ) => Promise<RequestConfig>;
   getTokenProvider(): TokenProvider | undefined;
 }
+
+export interface ResolvedFn<T> {
+  (val: T): T | Promise<T>;
+}
+
+export interface RejectedFn {
+  (error: any): any;
+}
