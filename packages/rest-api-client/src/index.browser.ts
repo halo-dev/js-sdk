@@ -1,6 +1,7 @@
 import { injectPlatformDeps } from "./platform/";
 import * as browserDeps from "./platform/browser";
 import FormData from "form-data";
+import Axios from "axios";
 
 injectPlatformDeps(browserDeps);
 
@@ -20,4 +21,4 @@ export {
   ResponseHandler,
 } from "./types";
 
-export { FormData };
+export { FormData, Axios };
