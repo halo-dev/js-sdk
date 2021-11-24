@@ -1,6 +1,6 @@
 {
   "name": "@halo-dev/js-sdk",
-  "version": "1.0.0-alpha.17",
+  "version": "1.0.0-alpha.34",
   "description": "Packages for Halo JavaScript SDK.",
   "private": true,
   "scripts": {
