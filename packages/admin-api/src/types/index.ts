@@ -1,3 +1,13 @@
+import { CancelToken } from "axios";
+
+export type UploadOptions = {
+  timeout?: number;
+  cancelToken?: CancelToken;
+  onUploadProgress?: (e: ProgressEvent) => void;
+  validateStatus?: (status: number) => boolean;
+  paramsSerializer?: (params: any) => string;
+};
+
 export type Response<T = any> = {
   status: number | string;
   message?: string;
@@ -529,24 +539,24 @@ export type MultiFactorAuthParam = {
 };
 
 export type MultiFactorAuth = {
-  qrImage: string
-  optAuthUrl: string
-  mfaKey: string
-  mfaType: string
-}
+  qrImage: string;
+  optAuthUrl: string;
+  mfaKey: string;
+  mfaType: string;
+};
 
 export type StaticFile = {
-  id: number,
-  name: string,
-  path: string,
-  relativePath: string,
-  isFile: boolean,
-  mimeType: string,
-  createTime: number,
-  children: Array<StaticFile>
-}
+  id: number;
+  name: string;
+  path: string;
+  relativePath: string;
+  isFile: boolean;
+  mimeType: string;
+  createTime: number;
+  children: Array<StaticFile>;
+};
 
 export type StaticContentParam = {
-  path: string,
-  content: string
-}
+  path: string;
+  content: string;
+};

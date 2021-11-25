@@ -1,6 +1,12 @@
-import {FormData, HttpClient} from "@halo-dev/rest-api-client";
-import {buildPath} from "../url";
-import {Attachment, AttachmentQuery, Page, Response} from "../types";
+import { FormData, HttpClient } from "@halo-dev/rest-api-client";
+import { buildPath } from "../url";
+import {
+  Attachment,
+  AttachmentQuery,
+  Page,
+  Response,
+  UploadOptions,
+} from "../types";
 
 export class AttachmentClient {
   private client: HttpClient;
@@ -32,7 +38,7 @@ export class AttachmentClient {
     const path = buildPath({
       endpointName: "attachments",
     });
-    return this.client.get(path, {...params});
+    return this.client.get(path, { ...params });
   }
 
   /**
@@ -77,7 +83,7 @@ export class AttachmentClient {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
     });
-    return this.client.put(path, {name});
+    return this.client.put(path, { name });
   }
 
   /**
@@ -108,25 +114,31 @@ export class AttachmentClient {
    * Upload a single attachment file.
    *
    * @param data attachment file object.
+   * @param options other upload options.
    * @returns Returns a response of uploaded attachment
    */
-  public upload(data: unknown): Promise<Response<Attachment>> {
+  public upload(
+    data: unknown,
+    options?: UploadOptions
+  ): Promise<Response<Attachment>> {
     const path = buildPath({
       endpointName: "attachments/upload",
     });
     const formData = new FormData();
     formData.append("file", data);
-    return this.client.post(path, formData);
+    return this.client.post(path, formData, { ...options });
   }
 
   /**
    * Batch upload attachments.
    *
    * @param data attachment file object.
+   * @param options other upload options.
    * @returns Returns a response of uploaded attachments.
    */
   public uploadInBatch(
-    data: Array<unknown>
+    data: Array<unknown>,
+    options?: UploadOptions
   ): Promise<Response<Array<Attachment>>> {
     const path = buildPath({
       endpointName: "attachments/uploads",
@@ -135,6 +147,6 @@ export class AttachmentClient {
     data.forEach((fileStream) => {
       formData.append("files", fileStream);
     });
-    return this.client.post(path, formData);
+    return this.client.post(path, formData, { ...options });
   }
 }

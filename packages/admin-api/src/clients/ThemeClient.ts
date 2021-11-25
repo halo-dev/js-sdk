@@ -1,6 +1,12 @@
-import {HttpClient, FormData} from "@halo-dev/rest-api-client";
-import {buildPath} from "../url";
-import {Group, Response, ThemeFile, ThemeProperty} from "../types";
+import { HttpClient, FormData } from "@halo-dev/rest-api-client";
+import { buildPath } from "../url";
+import {
+  Group,
+  Response,
+  ThemeFile,
+  ThemeProperty,
+  UploadOptions,
+} from "../types";
 
 export class ThemeClient {
   private client: HttpClient;
@@ -48,7 +54,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: `themes/${themeId}`,
     });
-    return this.client.delete(path, {deleteSettings});
+    return this.client.delete(path, { deleteSettings });
   }
 
   /**
@@ -126,7 +132,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: "themes/files/content",
     });
-    return this.client.get(path, {path: filepath});
+    return this.client.get(path, { path: filepath });
   }
 
   /**
@@ -143,7 +149,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: `themes/${themeId}/files/content`,
     });
-    return this.client.get(path, {path: filepath});
+    return this.client.get(path, { path: filepath });
   }
 
   /**
@@ -162,7 +168,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: `themes/${themeId}/files/content`,
     });
-    await this.client.put(path, {...params});
+    await this.client.put(path, { ...params });
   }
 
   /**
@@ -205,7 +211,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: `themes/${themeId}/settings`,
     });
-    await this.client.post(path, {settings});
+    await this.client.post(path, { settings });
   }
 
   /**
@@ -219,7 +225,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: "themes/activation/settings",
     });
-    await this.client.post(path, {settings});
+    await this.client.post(path, { settings });
   }
 
   /**
@@ -268,7 +274,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: "themes/activation/template/exists",
     });
-    return this.client.get(path, {template});
+    return this.client.get(path, { template });
   }
 
   /**
@@ -281,7 +287,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: "themes/fetching",
     });
-    return this.client.get(path, {uri});
+    return this.client.get(path, { uri });
   }
 
   /**
@@ -312,7 +318,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: "themes/files/content",
     });
-    return this.client.put(path, {...params});
+    return this.client.put(path, { ...params });
   }
 
   /**
@@ -333,13 +339,16 @@ export class ThemeClient {
    * @param data data
    * @returns ThemeProperty
    */
-  public upload(data: unknown): Promise<Response<ThemeProperty>> {
+  public upload(
+    data: unknown,
+    options: UploadOptions
+  ): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: "themes/upload",
     });
     const formData = new FormData();
     formData.append("file", data);
-    return this.client.post(path, formData);
+    return this.client.post(path, formData, { ...options });
   }
 
   /**
