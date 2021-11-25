@@ -1,4 +1,4 @@
-import { AxiosTransformer, CancelToken } from "axios";
+import { CancelToken } from "axios";
 import FormData from "form-data";
 
 export interface HttpClient {
@@ -88,8 +88,8 @@ export interface RequestOptions {
   maxBodyLength?: number;
   maxRedirects?: number;
   responseType?: string;
-  transformRequest?: AxiosTransformer | AxiosTransformer[];
-  transformResponse?: AxiosTransformer | AxiosTransformer[];
+  transformRequest?: object | object[];
+  transformResponse?: object | object[];
   cancelToken?: CancelToken;
   withCredentials?: boolean;
   xsrfCookieName?: string;
