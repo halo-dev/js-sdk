@@ -1,12 +1,37 @@
+import { AxiosTransformer, CancelToken } from "axios";
 import FormData from "form-data";
 
 export interface HttpClient {
-  get: <T extends object>(path: string, params: object) => Promise<T>;
-  getData: (path: string, params: object) => Promise<ArrayBuffer>;
-  post: <T extends object>(path: string, params: object) => Promise<T>;
-  postData: <T extends object>(path: string, params: FormData) => Promise<T>;
-  put: <T extends object>(path: string, params: object) => Promise<T>;
-  delete: <T extends object>(path: string, params: object) => Promise<T>;
+  get: <T extends object>(
+    path: string,
+    params: object,
+    options?: RequestOptions
+  ) => Promise<T>;
+  getData: (
+    path: string,
+    params: object,
+    options?: RequestOptions
+  ) => Promise<ArrayBuffer>;
+  post: <T extends object>(
+    path: string,
+    params: object,
+    options?: RequestOptions
+  ) => Promise<T>;
+  postData: <T extends object>(
+    path: string,
+    params: FormData,
+    options?: RequestOptions
+  ) => Promise<T>;
+  put: <T extends object>(
+    path: string,
+    params: object,
+    options?: RequestOptions
+  ) => Promise<T>;
+  delete: <T extends object>(
+    path: string,
+    params: object,
+    options?: RequestOptions
+  ) => Promise<T>;
 }
 
 export type ErrorResponse<T = any> = {
@@ -40,22 +65,40 @@ export interface ResponseHandler {
   handle: <T = any>(response: Promise<HttpResponse<T>>) => Promise<T>;
 }
 
-export type RequestConfig = {
+export interface RequestConfig {
   method: HttpMethod;
   url: string;
   headers: any;
   httpsAgent?: any;
   data?: any;
   proxy?: ProxyConfig;
-};
+}
 
 export interface RequestConfigBuilder {
   build: (
     method: HttpMethod,
     path: string,
     params: Params | FormData | Array<any>,
-    options?: { responseType: "arraybuffer" }
+    options?: RequestOptions
   ) => Promise<RequestConfig>;
+}
+
+export interface RequestOptions {
+  timeout?: number;
+  maxBodyLength?: number;
+  maxRedirects?: number;
+  responseType?: string;
+  transformRequest?: AxiosTransformer | AxiosTransformer[];
+  transformResponse?: AxiosTransformer | AxiosTransformer[];
+  cancelToken?: CancelToken;
+  withCredentials?: boolean;
+  xsrfCookieName?: string;
+  xsrfHeaderName?: string;
+  onDownloadProgress?: (e: any) => void;
+  onUploadProgress?: (e: any) => void;
+  validateStatus?: (status: number) => boolean;
+  paramsSerializer?: (params: any) => string;
+  [propsName: string]: any;
 }
 
 export interface ResolvedFn<T> {

@@ -11,6 +11,7 @@ import {
 } from "./types";
 import { BasicAuth, DiscriminatedAuth, SESSION_TOKEN_KEY } from "./types/auth";
 import { platformDeps } from "./platform/";
+import { RequestOptions } from "./types/HttpClientInterface";
 
 type Data = Params | FormData | Array<any>;
 
@@ -67,7 +68,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     method: HttpMethod,
     path: string,
     params: Data,
-    options?: { responseType: "arraybuffer" }
+    options?: RequestOptions
   ) {
     const requestConfig: RequestConfig = {
       method,

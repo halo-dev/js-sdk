@@ -7,6 +7,7 @@ import {
 } from "../types";
 import FormData from "form-data";
 import { RequestInterceptor, ResponseInterceptor } from "./InterceptorManager";
+import { RequestOptions } from "../types/HttpClientInterface";
 
 export interface Interceptors {
   request: RequestInterceptor;
@@ -54,11 +55,12 @@ export class AxiosClient implements HttpClient {
     return this.sendRequest(requestConfig);
   }
 
-  public async post(path: string, params: any) {
+  public async post(path: string, params: any, options?: RequestOptions) {
     const requestConfig = await this.requestConfigBuilder.build(
       "post",
       path,
-      params
+      params,
+      options
     );
     return this.sendRequest(requestConfig);
   }
@@ -72,20 +74,22 @@ export class AxiosClient implements HttpClient {
     return this.sendRequest(requestConfig);
   }
 
-  public async put(path: string, params: any) {
+  public async put(path: string, params: any, options?: RequestOptions) {
     const requestConfig = await this.requestConfigBuilder.build(
       "put",
       path,
-      params
+      params,
+      options
     );
     return this.sendRequest(requestConfig);
   }
 
-  public async delete(path: string, params: any) {
+  public async delete(path: string, params: any, options?: RequestOptions) {
     const requestConfig = await this.requestConfigBuilder.build(
       "delete",
       path,
-      params
+      params,
+      options
     );
     return this.sendRequest(requestConfig);
   }
