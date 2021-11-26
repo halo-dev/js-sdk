@@ -1,5 +1,5 @@
 import {HttpClient} from "@halo-dev/rest-api-client";
-import {Response, StaticContentParam, StaticFile} from "../types";
+import {Response, StaticContentParam, StaticFile, UploadOptions} from "../types";
 import {buildPath} from "../url";
 
 export class StaticStorageClient {
@@ -36,14 +36,14 @@ export class StaticStorageClient {
   }
 
 
-  public upload(basePath: string, file: File): Promise<Response<any>> {
+  public upload(file: File, options: UploadOptions, basePath: string): Promise<Response<any>> {
     const path = buildPath({
       endpointName: `statics/upload`
     })
     return this.client.post(path, {
       basePath,
       file
-    })
+    }, {...options})
   }
 
   public rename(basePath: string, newName: string): Promise<Response<any>> {

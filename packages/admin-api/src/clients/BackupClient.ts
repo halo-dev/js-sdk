@@ -1,6 +1,6 @@
 import {HttpClient} from "@halo-dev/rest-api-client";
 import {buildPath} from "../url";
-import {Backup, BasePostDetail, Response} from "../types";
+import {Backup, BasePostDetail, Response, UploadOptions} from "../types";
 
 export class BackupClient {
   private client: HttpClient;
@@ -104,12 +104,12 @@ export class BackupClient {
     return this.client.delete(path, {filename})
   }
 
-  public importMarkdown(data: any): Promise<Response<BasePostDetail>> {
+  public importMarkdown(data: any, options: UploadOptions): Promise<Response<BasePostDetail>> {
     const path = buildPath({
       endpointName: "backups/markdown/import",
     });
     const formData = new FormData();
     formData.append("file", data);
-    return this.client.post(path, formData);
+    return this.client.post(path, formData, {...options});
   }
 }
