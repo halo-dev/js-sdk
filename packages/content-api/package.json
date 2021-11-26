@@ -1,6 +1,6 @@
 {
   "name": "@halo-dev/content-api",
-  "version": "1.0.0-alpha.42",
+  "version": "1.0.0-alpha.43",
   "description": "Halo content api client.",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -54,7 +54,7 @@
     ]
   },
   "dependencies": {
-    "@halo-dev/rest-api-client": "^1.0.0-alpha.42"
+    "@halo-dev/rest-api-client": "^1.0.0-alpha.43"
   },
   "devDependencies": {
     "typescript": "^4.5.2"
