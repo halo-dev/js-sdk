@@ -364,6 +364,6 @@ export class ThemeClient {
     });
     const formData = new FormData();
     formData.append("file", data);
-    return this.client.post(path, formData, {...options});
+    return this.client.put(path, formData, {...options});
   }
 }
