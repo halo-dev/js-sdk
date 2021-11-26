@@ -1,17 +1,11 @@
 import FormData from "form-data";
 import qs from "qs";
-import { Base64 } from "js-base64";
+import {Base64} from "js-base64";
 
-import {
-  HttpMethod,
-  Params,
-  ProxyConfig,
-  RequestConfig,
-  RequestConfigBuilder,
-} from "./types";
-import { BasicAuth, DiscriminatedAuth, SESSION_TOKEN_KEY } from "./types/auth";
-import { platformDeps } from "./platform/";
-import { RequestOptions } from "./types/HttpClientInterface";
+import {HttpMethod, Params, ProxyConfig, RequestConfig, RequestConfigBuilder,} from "./types";
+import {BasicAuth, DiscriminatedAuth, SESSION_TOKEN_KEY} from "./types/auth";
+import {platformDeps} from "./platform/";
+import {RequestOptions} from "./types/HttpClientInterface";
 
 type Data = Params | FormData | Array<any>;
 
@@ -23,42 +17,42 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   private readonly auth?: DiscriminatedAuth;
   private readonly clientCertAuth?:
     | {
-        pfx: Buffer;
-        password: string;
-      }
+    pfx: Buffer;
+    password: string;
+  }
     | {
-        pfxFilePath: string;
-        password: string;
-      };
+    pfxFilePath: string;
+    password: string;
+  };
   private readonly proxy?: ProxyConfig;
   private requestToken: string | null;
 
   constructor({
-    baseUrl,
-    auth,
-    basicAuth,
-    clientCertAuth,
-    proxy,
-    userAgent,
-  }: {
+                baseUrl,
+                auth,
+                basicAuth,
+                clientCertAuth,
+                proxy,
+                userAgent,
+              }: {
     baseUrl: string;
     auth?: DiscriminatedAuth;
     basicAuth?: BasicAuth;
     clientCertAuth?:
       | {
-          pfx: Buffer;
-          password: string;
-        }
+      pfx: Buffer;
+      password: string;
+    }
       | {
-          pfxFilePath: string;
-          password: string;
-        };
+      pfxFilePath: string;
+      password: string;
+    };
     proxy?: ProxyConfig;
     userAgent?: string;
   }) {
     this.baseUrl = baseUrl;
     this.auth = auth;
-    this.headers = this.buildHeaders({ basicAuth, userAgent });
+    this.headers = this.buildHeaders({basicAuth, userAgent});
     this.clientCertAuth = clientCertAuth;
     this.proxy = proxy;
     this.requestToken = null;
@@ -88,7 +82,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
           return {
             ...requestConfig,
             method: "post" as const,
-            headers: { ...this.headers, "X-HTTP-Method-Override": "GET" },
+            headers: {...this.headers, "X-HTTP-Method-Override": "GET"},
             data: await this.buildData(params),
           };
         }
@@ -103,9 +97,9 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
           return {
             ...requestConfig,
             headers:
-              // NOTE: formData.getHeaders does not exist in a browser environment.
+            // NOTE: formData.getHeaders does not exist in a browser environment.
               typeof formData.getHeaders === "function"
-                ? { ...this.headers, ...formData.getHeaders() }
+                ? {...this.headers, ...formData.getHeaders()}
                 : this.headers,
             data: formData,
           };
@@ -145,7 +139,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
   }
 
   private buildRequestUrl(path: string, params: Data): string {
-    return `${this.baseUrl}${path}?${qs.stringify(params, { indices: false })}`;
+    return [`${this.baseUrl}${path}`, `${qs.stringify(params, {indices: false})}`].join("?");
   }
 
   private async buildData<T extends Data>(params: T): Promise<T> {
@@ -167,16 +161,16 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
     basicAuth?: BasicAuth;
     userAgent?: string;
   }): any {
-    const { basicAuth, userAgent } = params;
+    const {basicAuth, userAgent} = params;
     const basicAuthHeaders = basicAuth
       ? {
-          Authorization: `Basic ${Base64.encode(
-            `${basicAuth.username}:${basicAuth.password}`
-          )}`,
-        }
+        Authorization: `Basic ${Base64.encode(
+          `${basicAuth.username}:${basicAuth.password}`
+        )}`,
+      }
       : {};
-    const platformDepsHeaders = platformDeps.buildHeaders({ userAgent });
-    const commonHeaders = { ...platformDepsHeaders, ...basicAuthHeaders };
+    const platformDepsHeaders = platformDeps.buildHeaders({userAgent});
+    const commonHeaders = {...platformDepsHeaders, ...basicAuthHeaders};
 
     if (!this.auth) {
       return {};
@@ -206,7 +200,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
             "API-Authorization": apiToken.join(","),
           };
         }
-        return { ...commonHeaders, "API-Authorization": apiToken };
+        return {...commonHeaders, "API-Authorization": apiToken};
       }
       case "oAuthToken": {
         return {
@@ -222,7 +216,7 @@ export class HaloRequestConfigBuilder implements RequestConfigBuilder {
       }
       default: {
         // https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest
-        return { ...commonHeaders, "X-Requested-With": "XMLHttpRequest" };
+        return {...commonHeaders, "X-Requested-With": "XMLHttpRequest"};
       }
     }
   }

@@ -85,21 +85,21 @@ export class BackupClient {
 
   public backupMarkdown(params: { needFrontMatter: boolean }): Promise<Response<Backup>> {
     const path = buildPath({
-      endpointName: 'backups/markdown'
+      endpointName: 'backups/markdown/export'
     })
     return this.client.post(path, params)
   }
 
   public listMarkdownBackups(): Promise<Response<Array<Backup>>> {
     const path = buildPath({
-      endpointName: 'backups/markdown'
+      endpointName: 'backups/markdown/export'
     })
     return this.client.get(path, {})
   }
 
   public deleteMarkdownBackup(filename: string): Promise<Response<Backup>> {
     const path = buildPath({
-      endpointName: `backups/markdown`
+      endpointName: `backups/markdown/export`
     })
     return this.client.delete(path, {filename})
   }
