@@ -27,12 +27,9 @@ export class StaticStorageClient {
 
   public createFolder(basePath: string, folderName: string): Promise<Response<any>> {
     const path = buildPath({
-      endpointName: `statics`
+      endpointName: `statics?basePath=${basePath}&folderName=${folderName}`
     })
-    return this.client.post(path, {
-      basePath,
-      folderName
-    })
+    return this.client.post(path, {})
   }
 
 
@@ -49,7 +46,7 @@ export class StaticStorageClient {
     const path = buildPath({
       endpointName: `statics/rename`
     })
-    return this.client.put(path, {
+    return this.client.post(path, {
       basePath,
       newName
     })
