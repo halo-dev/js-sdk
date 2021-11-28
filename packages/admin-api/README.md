@@ -28,11 +28,11 @@ npm install @halo-dev/admin-api --save
 Here is a simple code for obtaining a list of articles.
 
 ```javascript
-import { AdminApiClient, HaloRestAPIClient } from "@halo-dev/admin-api";
+import {AdminApiClient, HaloRestAPIClient} from "@halo-dev/admin-api";
 // http request tool for halo rest api.
 const haloRestApiClient = new HaloRestAPIClient({
   baseUrl: process.env.HALO_BASE_URL,
-  auth: { adminToken: "halo admin token" },
+  auth: {adminToken: "halo admin token"},
 });
 // create adminApiClient by haloRestApiCLient.
 const haloAdminClient = new AdminApiClient(haloRestApiClient);

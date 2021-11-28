@@ -1,12 +1,12 @@
-import {FormData, HttpClient} from "@halo-dev/rest-api-client";
-import {buildPath} from "../url";
-import {Group, Response, ThemeFile, ThemeProperty, UploadOptions,} from "../types";
+import { FormData, HttpClient } from '@halo-dev/rest-api-client'
+import { buildPath } from '../url'
+import { Group, Response, ThemeFile, ThemeProperty, UploadOptions } from '../types'
 
 export class ThemeClient {
-  private client: HttpClient;
+  private client: HttpClient
 
   constructor(client: HttpClient) {
-    this.client = client;
+    this.client = client
   }
 
   /**
@@ -16,9 +16,9 @@ export class ThemeClient {
    */
   public list(): Promise<Response<Array<ThemeProperty>>> {
     const path = buildPath({
-      endpointName: "themes",
-    });
-    return this.client.get(path, {});
+      endpointName: 'themes',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -30,8 +30,8 @@ export class ThemeClient {
   public get(themeId: string): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/${themeId}`,
-    });
-    return this.client.get(path, {});
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -41,14 +41,11 @@ export class ThemeClient {
    * @param deleteSettings whether to delete the theme settings at the same time.
    * @returns ThemeProperty
    */
-  public delete(
-    themeId: string,
-    deleteSettings?: boolean
-  ): Promise<Response<ThemeProperty>> {
+  public delete(themeId: string, deleteSettings?: boolean): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/${themeId}`,
-    });
-    return this.client.delete(path, {deleteSettings});
+    })
+    return this.client.delete(path, { deleteSettings })
   }
 
   /**
@@ -60,8 +57,8 @@ export class ThemeClient {
   public active(themeId: string): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/activation`,
-    });
-    return this.client.post(path, {});
+    })
+    return this.client.post(path, {})
   }
 
   /**
@@ -71,9 +68,9 @@ export class ThemeClient {
    */
   public listActivatedConfigurations(): Promise<Response<Array<Group>>> {
     const path = buildPath({
-      endpointName: "themes/activation/configurations",
-    });
-    return this.client.get(path, {});
+      endpointName: 'themes/activation/configurations',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -85,8 +82,8 @@ export class ThemeClient {
   public listConfigurations(themeId: string): Promise<Response<Array<Group>>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/configurations`,
-    });
-    return this.client.get(path, {});
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -98,8 +95,8 @@ export class ThemeClient {
   public listFiles(themeId: string): Promise<Response<Array<ThemeFile>>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/files`,
-    });
-    return this.client.get(path, {});
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -109,9 +106,9 @@ export class ThemeClient {
    */
   public listActivatedFiles(): Promise<Response<Array<ThemeFile>>> {
     const path = buildPath({
-      endpointName: "themes/activation/files",
-    });
-    return this.client.get(path, {});
+      endpointName: 'themes/activation/files',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -120,13 +117,11 @@ export class ThemeClient {
    * @param filepath filepath
    * @returns template content
    */
-  public getActivatedTemplateContent(
-    filepath: string
-  ): Promise<Response<string>> {
+  public getActivatedTemplateContent(filepath: string): Promise<Response<string>> {
     const path = buildPath({
-      endpointName: "themes/files/content",
-    });
-    return this.client.get(path, {path: filepath});
+      endpointName: 'themes/files/content',
+    })
+    return this.client.get(path, { path: filepath })
   }
 
   /**
@@ -136,14 +131,11 @@ export class ThemeClient {
    * @param filepath filepath
    * @returns template content
    */
-  public getTemplateContent(
-    themeId: string,
-    filepath: string
-  ): Promise<Response<string>> {
+  public getTemplateContent(themeId: string, filepath: string): Promise<Response<string>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/files/content`,
-    });
-    return this.client.get(path, {path: filepath});
+    })
+    return this.client.get(path, { path: filepath })
   }
 
   /**
@@ -155,14 +147,14 @@ export class ThemeClient {
   public async updateTemplateContent(
     themeId: string,
     params: {
-      path?: string;
-      content?: string;
-    }
+      path?: string
+      content?: string
+    },
   ): Promise<void> {
     const path = buildPath({
       endpointName: `themes/${themeId}/files/content`,
-    });
-    await this.client.put(path, {...params});
+    })
+    await this.client.put(path, { ...params })
   }
 
   /**
@@ -171,13 +163,11 @@ export class ThemeClient {
    * @param themeId themeId
    * @returns Record<string, unknown>
    */
-  public listSettings(
-    themeId: string
-  ): Promise<Response<Record<string, unknown>>> {
+  public listSettings(themeId: string): Promise<Response<Record<string, unknown>>> {
     const path = buildPath({
       endpointName: `themes/${themeId}/settings`,
-    });
-    return this.client.get(path, {});
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -187,9 +177,9 @@ export class ThemeClient {
    */
   public listActivatedSettings(): Promise<Response<Record<string, unknown>>> {
     const path = buildPath({
-      endpointName: "themes/activation/settings",
-    });
-    return this.client.get(path, {});
+      endpointName: 'themes/activation/settings',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -198,14 +188,11 @@ export class ThemeClient {
    * @param themeId themeId
    * @param settings settings
    */
-  public async saveSettings(
-    themeId: string,
-    settings: Record<string, unknown>
-  ): Promise<void> {
+  public async saveSettings(themeId: string, settings: Record<string, unknown>): Promise<void> {
     const path = buildPath({
       endpointName: `themes/${themeId}/settings`,
-    });
-    await this.client.post(path, {settings});
+    })
+    await this.client.post(path, { settings })
   }
 
   /**
@@ -213,13 +200,11 @@ export class ThemeClient {
    *
    * @param settings settings
    */
-  public async saveActivatedSettings(
-    settings: Record<string, unknown>
-  ): Promise<void> {
+  public async saveActivatedSettings(settings: Record<string, unknown>): Promise<void> {
     const path = buildPath({
-      endpointName: "themes/activation/settings",
-    });
-    await this.client.post(path, {settings});
+      endpointName: 'themes/activation/settings',
+    })
+    await this.client.post(path, { settings })
   }
 
   /**
@@ -229,9 +214,9 @@ export class ThemeClient {
    */
   public getActivatedTheme(): Promise<Response<ThemeProperty>> {
     const path = buildPath({
-      endpointName: "themes/activation",
-    });
-    return this.client.get(path, {});
+      endpointName: 'themes/activation',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -239,11 +224,11 @@ export class ThemeClient {
    *
    * @returns array of template name.
    */
-  public listCustomPostTemplates(): Promise<Response<Array<String>>> {
+  public listCustomPostTemplates(): Promise<Response<Array<string>>> {
     const path = buildPath({
-      endpointName: "themes/activation/template/custom/post",
-    });
-    return this.client.get(path, {});
+      endpointName: 'themes/activation/template/custom/post',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -251,11 +236,11 @@ export class ThemeClient {
    *
    * @returns array of template name.
    */
-  public listCustomSheetTemplates(): Promise<Response<Array<String>>> {
+  public listCustomSheetTemplates(): Promise<Response<Array<string>>> {
     const path = buildPath({
-      endpointName: "themes/activation/template/custom/sheet",
-    });
-    return this.client.get(path, {});
+      endpointName: 'themes/activation/template/custom/sheet',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -266,9 +251,9 @@ export class ThemeClient {
    */
   public exists(template: string): Promise<Response<boolean>> {
     const path = buildPath({
-      endpointName: "themes/activation/template/exists",
-    });
-    return this.client.get(path, {template});
+      endpointName: 'themes/activation/template/exists',
+    })
+    return this.client.get(path, { template })
   }
 
   /**
@@ -279,9 +264,9 @@ export class ThemeClient {
    */
   public fetchTheme(uri: string): Promise<Response<ThemeProperty>> {
     const path = buildPath({
-      endpointName: "themes/fetching",
-    });
-    return this.client.get(path, {uri});
+      endpointName: 'themes/fetching',
+    })
+    return this.client.get(path, { uri })
   }
 
   /**
@@ -290,13 +275,11 @@ export class ThemeClient {
    * @param themeId themeId
    * @returns void
    */
-  public updateThemeByFetching(
-    themeId: string
-  ): Promise<Response<ThemeProperty>> {
+  public updateThemeByFetching(themeId: string): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/fetching/${themeId}`,
-    });
-    return this.client.put(path, {});
+    })
+    return this.client.put(path, {})
   }
 
   /**
@@ -305,14 +288,11 @@ export class ThemeClient {
    * @param params path, content
    * @returns void
    */
-  public updateActivatedTemplateContent(params: {
-    path?: string;
-    content?: string;
-  }): Promise<Response<void>> {
+  public updateActivatedTemplateContent(params: { path?: string; content?: string }): Promise<Response<void>> {
     const path = buildPath({
-      endpointName: "themes/files/content",
-    });
-    return this.client.put(path, {...params});
+      endpointName: 'themes/files/content',
+    })
+    return this.client.put(path, { ...params })
   }
 
   /**
@@ -322,9 +302,9 @@ export class ThemeClient {
    */
   public reload(): Promise<Response<void>> {
     const path = buildPath({
-      endpointName: "themes/reload",
-    });
-    return this.client.post(path, {});
+      endpointName: 'themes/reload',
+    })
+    return this.client.post(path, {})
   }
 
   /**
@@ -334,16 +314,13 @@ export class ThemeClient {
    * @param options Upload options
    * @returns ThemeProperty
    */
-  public upload(
-    data: unknown,
-    options: UploadOptions
-  ): Promise<Response<ThemeProperty>> {
+  public upload(data: unknown, options: UploadOptions): Promise<Response<ThemeProperty>> {
     const path = buildPath({
-      endpointName: "themes/upload",
-    });
-    const formData = new FormData();
-    formData.append("file", data);
-    return this.client.post(path, formData, {...options});
+      endpointName: 'themes/upload',
+    })
+    const formData = new FormData()
+    formData.append('file', data)
+    return this.client.post(path, formData, { ...options })
   }
 
   /**
@@ -354,16 +331,12 @@ export class ThemeClient {
    * @param data data
    * @returns ThemeProperty
    */
-  public updateByUpload(
-    data: unknown,
-    options: UploadOptions,
-    themeId: string,
-  ): Promise<Response<ThemeProperty>> {
+  public updateByUpload(data: unknown, options: UploadOptions, themeId: string): Promise<Response<ThemeProperty>> {
     const path = buildPath({
       endpointName: `themes/upload/${themeId}`,
-    });
-    const formData = new FormData();
-    formData.append("file", data);
-    return this.client.put(path, formData, {...options});
+    })
+    const formData = new FormData()
+    formData.append('file', data)
+    return this.client.put(path, formData, { ...options })
   }
 }

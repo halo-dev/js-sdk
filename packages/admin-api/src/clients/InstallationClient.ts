@@ -1,12 +1,12 @@
-import { HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import { InstallParam, Response } from "../types";
+import { HttpClient } from '@halo-dev/rest-api-client'
+import { buildPath } from '../url'
+import { InstallParam, Response } from '../types'
 
 export class InstallationClient {
-  private client: HttpClient;
+  private client: HttpClient
 
   constructor(client: HttpClient) {
-    this.client = client;
+    this.client = client
   }
 
   /**
@@ -17,8 +17,8 @@ export class InstallationClient {
    */
   public install(params: InstallParam): Promise<Response<string>> {
     const path = buildPath({
-      endpointName: "installations",
-    });
-    return this.client.post(path, { ...params });
+      endpointName: 'installations',
+    })
+    return this.client.post(path, { ...params })
   }
 }

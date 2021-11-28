@@ -1,38 +1,34 @@
-import { UnsupportedPlatformError } from "./UnsupportedPlatformError";
-import { DiscriminatedAuth } from "../types";
+import { UnsupportedPlatformError } from './UnsupportedPlatformError'
+import { DiscriminatedAuth } from '../types'
 
 export const readFileFromPath = () => {
-  throw new UnsupportedPlatformError("Browser");
-};
+  throw new UnsupportedPlatformError('Browser')
+}
 
 export const getRequestToken = async () => {
-  if (
-    typeof halo === "object" &&
-    halo !== null &&
-    typeof halo.getRequestToken === "function"
-  ) {
-    return halo.getRequestToken();
+  if (typeof halo === 'object' && halo !== null && typeof halo.getRequestToken === 'function') {
+    return halo.getRequestToken()
   }
-  throw new Error("session authentication must specify a request token");
-};
+  throw new Error('session authentication must specify a request token')
+}
 
 export const getDefaultAuth = (): DiscriminatedAuth => {
   return {
-    type: "session",
-  };
-};
+    type: 'session',
+  }
+}
 
 export const buildPlatformDependentConfig = () => {
-  return {};
-};
+  return {}
+}
 
 export const buildHeaders = () => {
-  return {};
-};
+  return {}
+}
 
 export const buildFormDataValue = (data: any) => {
-  return new Blob([data]);
-};
+  return new Blob([data])
+}
 
 // export const buildBaseUrl = (baseUrl?: string) => {
 //   if (baseUrl) {
@@ -43,5 +39,5 @@ export const buildFormDataValue = (data: any) => {
 // };
 
 export const getVersion = () => {
-  return PACKAGE_VERSION;
-};
+  return PACKAGE_VERSION
+}

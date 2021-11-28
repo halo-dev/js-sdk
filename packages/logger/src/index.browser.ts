@@ -1,6 +1,6 @@
-import { injectPlatformDeps } from "./platform/";
-import * as browserDeps from "./platform/browser";
+import { injectPlatformDeps } from './platform/'
+import * as browserDeps from './platform/browser'
 
-injectPlatformDeps(browserDeps);
+injectPlatformDeps(browserDeps)
 
-export * from "./logger/index";
+export * from './logger/index'

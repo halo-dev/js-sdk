@@ -1,12 +1,12 @@
-import {HttpClient} from "@halo-dev/rest-api-client";
-import {buildPath} from "../url";
-import {Category, CategoryParam, CategoryTree, Response} from "../types";
+import { HttpClient } from '@halo-dev/rest-api-client'
+import { buildPath } from '../url'
+import { Category, CategoryParam, CategoryTree, Response } from '../types'
 
 export class CategoryClient {
-  private client: HttpClient;
+  private client: HttpClient
 
   constructor(client: HttpClient) {
-    this.client = client;
+    this.client = client
   }
 
   /**
@@ -15,14 +15,11 @@ export class CategoryClient {
    * @param params parameter for queries
    * @returns A response of all categories.
    */
-  public list(params: {
-    sort?: Array<string>;
-    more?: boolean;
-  }): Promise<Response<Array<Category>>> {
+  public list(params: { sort?: Array<string>; more?: boolean }): Promise<Response<Array<Category>>> {
     const path = buildPath({
-      endpointName: "categories",
-    });
-    return this.client.get(path, {...params});
+      endpointName: 'categories',
+    })
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -31,13 +28,11 @@ export class CategoryClient {
    * @param sort sort option for queries, value is category field
    * @returns A response of all categories.
    */
-  public listAsTree(
-    sort: Array<string>
-  ): Promise<Response<Array<CategoryTree>>> {
+  public listAsTree(sort: Array<string>): Promise<Response<Array<CategoryTree>>> {
     const path = buildPath({
-      endpointName: "categories/tree_view",
-    });
-    return this.client.get(path, {sort});
+      endpointName: 'categories/tree_view',
+    })
+    return this.client.get(path, { sort })
   }
 
   /**
@@ -49,8 +44,8 @@ export class CategoryClient {
   public get(categoryId: number): Promise<Response<Category>> {
     const path = buildPath({
       endpointName: `categories/${categoryId}`,
-    });
-    return this.client.get(path, {});
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -61,9 +56,9 @@ export class CategoryClient {
    */
   public create(params: CategoryParam): Promise<Response<Category>> {
     const path = buildPath({
-      endpointName: "categories",
-    });
-    return this.client.post(path, {...params});
+      endpointName: 'categories',
+    })
+    return this.client.post(path, { ...params })
   }
 
   /**
@@ -73,14 +68,11 @@ export class CategoryClient {
    * @param params category update parameter
    * @returns A response of updated category.
    */
-  public update(
-    categoryId: number,
-    params: CategoryParam
-  ): Promise<Response<Category>> {
+  public update(categoryId: number, params: CategoryParam): Promise<Response<Category>> {
     const path = buildPath({
       endpointName: `categories/${categoryId}`,
-    });
-    return this.client.put(path, {...params});
+    })
+    return this.client.put(path, { ...params })
   }
 
   /**
@@ -91,7 +83,7 @@ export class CategoryClient {
   public async delete(categoryId: number): Promise<void> {
     const path = buildPath({
       endpointName: `categories/${categoryId}`,
-    });
-    await this.client.delete(path, {});
+    })
+    await this.client.delete(path, {})
   }
 }

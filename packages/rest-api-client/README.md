@@ -44,16 +44,23 @@ const client = new HaloRestAPIClient({
   }
 });
 ```
+
 The `auth` parameter supports the following ways:
+
 1. Use API token authentication
+
 ```javascript
 auth: { apiToken: process.env.HALO_API_TOKEN }
 ```
+
 2. Use Admin token authentication
+
 ```javascript
 auth: { adminToken: process.env.HALO_ADMIN_TOKEN }
 ```
+
 3. Use custom header auth
+
 ```javascript
 auth: {
     type: "customizeAuth",

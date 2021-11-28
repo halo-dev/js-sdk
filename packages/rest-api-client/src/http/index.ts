@@ -1,1 +1,1 @@
-export { AxiosClient as DefaultHttpClient } from "./AxiosClient";
+export { AxiosClient as DefaultHttpClient } from './AxiosClient'

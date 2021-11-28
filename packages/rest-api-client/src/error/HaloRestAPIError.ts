@@ -1,46 +1,46 @@
-import { ErrorResponse } from "../types";
+import { ErrorResponse } from '../types'
 
 type SingleErrorResponseData = {
-  status: string | number;
-  message: string;
-  data?: any;
-};
+  status: string | number
+  message: string
+  data?: any
+}
 
-type HaloErrorResponseData = SingleErrorResponseData;
+type HaloErrorResponseData = SingleErrorResponseData
 
-export type HaloErrorResponse = ErrorResponse<HaloErrorResponseData>;
+export type HaloErrorResponse = ErrorResponse<HaloErrorResponseData>
 
 export class HaloRestAPIError extends Error {
-  status: number | string;
-  data?: any;
-  headers: any;
-
-  private static buildErrorResponseDate(error: HaloErrorResponse): {
-    data: SingleErrorResponseData;
-  } {
-    // improvable
-    return { data: error.data };
-  }
+  status: number | string
+  data?: any
+  headers: any
 
   constructor(error: HaloErrorResponse) {
-    const { data } = HaloRestAPIError.buildErrorResponseDate(error);
+    const { data } = HaloRestAPIError.buildErrorResponseDate(error)
 
-    super(data.message);
+    super(data.message)
 
-    this.name = "HaloRestAPIError";
-    this.data = data;
-    this.status = data.status;
-    this.headers = error.headers;
-    this.message = `[${this.status}] ${this.message}`;
+    this.name = 'HaloRestAPIError'
+    this.data = data
+    this.status = data.status
+    this.headers = error.headers
+    this.message = `[${this.status}] ${this.message}`
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types
     // Maintains proper stack trace for where our error was thrown (only available on V8)
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, HaloRestAPIError);
+      Error.captureStackTrace(this, HaloRestAPIError)
     }
 
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
     // Set the prototype explicitly.
-    Object.setPrototypeOf(this, HaloRestAPIError.prototype);
+    Object.setPrototypeOf(this, HaloRestAPIError.prototype)
+  }
+
+  private static buildErrorResponseDate(error: HaloErrorResponse): {
+    data: SingleErrorResponseData
+  } {
+    // improvable
+    return { data: error.data }
   }
 }
