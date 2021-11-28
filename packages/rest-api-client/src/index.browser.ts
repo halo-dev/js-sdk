@@ -1,4 +1,4 @@
-import { injectPlatformDeps } from "./platform/";
+ import { injectPlatformDeps } from "./platform/";
 import * as browserDeps from "./platform/browser";
 import FormData from "form-data";
 import Axios from "axios";

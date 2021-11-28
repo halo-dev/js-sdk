@@ -1,9 +1,9 @@
 import { DefaultHttpClient } from "./http/";
 import { ProxyConfig } from "./types";
-import { BasicAuth, DiscriminatedAuth, CustomizeAuth } from "./types/auth";
+import { BasicAuth, DiscriminatedAuth, CustomizeAuth } from "./types";
 import { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
 import { HaloResponseHandler } from "./HaloResponseHandler";
-import { platformDeps } from "./platform/index";
+import { platformDeps } from "./platform";
 import { Interceptors } from "./http/AxiosClient";
 
 type OmitTypePropertyFromUnion<T> = T extends unknown ? Omit<T, "type"> : never;
@@ -46,9 +46,9 @@ const buildDiscriminatedAuth = (auth: Auth): DiscriminatedAuth | undefined => {
 };
 
 export class HaloRestAPIClient {
-  private baseUrl?: string;
-  private httpClient: DefaultHttpClient;
-  private _interceptors: Interceptors;
+  private readonly baseUrl?: string;
+  private readonly httpClient: DefaultHttpClient;
+  private readonly _interceptors: Interceptors;
 
   constructor(options: Options = {}) {
     this.baseUrl = platformDeps.buildBaseUrl(options.baseUrl);

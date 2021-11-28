@@ -1,5 +1,5 @@
 import { UnsupportedPlatformError } from "./UnsupportedPlatformError";
-import { DiscriminatedAuth } from "../types/auth";
+import { DiscriminatedAuth } from "../types";
 
 export const readFileFromPath = () => {
   throw new UnsupportedPlatformError("Browser");
@@ -34,13 +34,13 @@ export const buildFormDataValue = (data: any) => {
   return new Blob([data]);
 };
 
-export const buildBaseUrl = (baseUrl?: string) => {
-  if (baseUrl) {
-    return baseUrl;
-  }
-  const { host, protocol } = global.server! || {};
-  return `${protocol}//${host}`;
-};
+// export const buildBaseUrl = (baseUrl?: string) => {
+//   if (baseUrl) {
+//     return baseUrl;
+//   }
+//   const { host, protocol } = global.server! || {};
+//   return `${protocol}//${host}`;
+// };
 
 export const getVersion = () => {
   return PACKAGE_VERSION;

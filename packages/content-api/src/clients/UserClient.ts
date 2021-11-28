@@ -1,3 +1,4 @@
+// @ts-ignore
 import { HttpClient } from "@halo-dev/rest-api-client";
 import { buildPath } from "../url";
 import { Response, User } from "../types";
