@@ -15,7 +15,7 @@
   </a>
 </p>
 
-<p>A js sdk for Halo's Content APIs,implemented with TypeScript,encapsulating parameter types and return value types to make the use of API more brief.</p>
+<p>JavaScript SDK for Halo's Content API,implemented with TypeScript,encapsulating parameter types and return value types to make the use of API more brief.</p>
 
 ## Installation
 
@@ -25,23 +25,26 @@ npm install @halo-dev/content-api --save
 
 ## Usage
 
-Here is a simple code for obtaining a list of articles.
+Here is a simple code for obtaining a list of posts.
 
 ```javascript
-import { ContentApiClient, HaloRestAPIClient } from "@halo-dev/content-api";
+import { ContentApiClient, HaloRestAPIClient } from '@halo-dev/content-api'
+
 // http request tool for halo rest api.
 const haloRestApiClient = new HaloRestAPIClient({
   baseUrl: process.env.HALO_BASE_URL,
   auth: { apiToken: process.env.HALO_API_TOKEN },
-});
+})
+
 // create contentApiClient by haloRestApiCLient.
-const haloContentClient = new ContentApiClient(haloRestApiClient);
+const haloContentClient = new ContentApiClient(haloRestApiClient)
+
 // obtaining a list of articles.
 haloContentClient.post.list().then((res) => {
-  console.log(res);
-});
+  console.log(res)
+})
 ```
 
 ### License
 
-[MIT license](/LICENSE)
+[MIT license](../../LICENSE)

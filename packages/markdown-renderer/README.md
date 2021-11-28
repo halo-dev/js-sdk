@@ -24,9 +24,9 @@ npm install @halo-dev/markdown-renderer --save
 ## Usage
 
 ```javascript
-import markdownRenderer from "@halo-dev/markdown-renderer";
+import markdownRenderer from '@halo-dev/markdown-renderer'
 
-const html = markdownRenderer.render("Hello Halo");
+const html = markdownRenderer.render('Hello Halo')
 ```
 
 ### License
