@@ -44,7 +44,7 @@ haloAdminClient.post.list().then((res) => {
 })
 ```
 
-Specific use example reference [example](https://github.com/halo-dev/js-sdk/tree/master/example)
+You can also view the complete implementation of the halo-admin project: [@halo-dev/halo-admin](https://github.com/halo-dev/halo-admin).
 
 ### License
 
