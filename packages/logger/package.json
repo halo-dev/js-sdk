@@ -4,7 +4,7 @@
   "description": "Halo SDK for JavaScript - Logger",
   "main": "./lib/index.js",
   "module": "./lib/index.js",
-  "browser": "lib/index.browser.js",
+  "browser": "./lib/index.browser.js",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -13,15 +13,13 @@
   },
   "private": false,
   "scripts": {
-    "build": "rollup -c 2>&1",
-    "test": " jest --rootDir=src",
-    "lint": "eslint --ext .ts src"
+    "dev": "tsc --build --force --watch",
+    "build": "tsc --build --force",
+    "test": "jest --rootDir src"
   },
   "types": "lib/index.d.ts",
   "files": [
-    "esm",
     "lib",
-    "umd",
     "README.md",
     "LICENSE"
   ],
@@ -37,10 +35,9 @@
     "logging",
     "node.js",
     "typescript",
-    "javascript",
-    "browser"
+    "javascript"
   ],
-  "author": "halo-dev",
+  "author": "@halo-dev",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/halo-dev/js-sdk/issues"
@@ -51,18 +48,12 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "11.0.2",
-    "@rollup/plugin-multi-entry": "^3.0.1",
-    "@rollup/plugin-replace": "^2.4.2",
     "@types/chai": "^4.2.22",
     "@types/sinon": "^9.0.11",
     "assert": "^1.5.0",
     "chai": "^4.3.4",
     "jest": "^26.6.3",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-terser": "^5.3.1",
-    "sinon": "^9.2.4",
-    "typescript": "^4.5.2"
+    "sinon": "^9.2.4"
   },
   "exports": {
     ".": {

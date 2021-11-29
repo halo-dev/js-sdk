@@ -15,7 +15,7 @@
   </a>
 </p>
 
-<p>A js sdk for Halo's Admin APIs,implemented with TypeScript,encapsulating parameter types and return value types to make the use of API more brief.</p>
+<p>JavaScript SDK for Halo's Admin API,implemented with TypeScript,encapsulating parameter types and return value types to make the use of API more brief.</p>
 
 ## Installation
 
@@ -25,25 +25,27 @@ npm install @halo-dev/admin-api --save
 
 ## Usage
 
-Here is a simple code for obtaining a list of articles.
+Here is a simple code for obtaining a list of posts.
 
 ```javascript
-import { AdminApiClient, HaloRestAPIClient } from "@halo-dev/admin-api";
+import { AdminApiClient, HaloRestAPIClient } from '@halo-dev/admin-api'
+
 // http request tool for halo rest api.
 const haloRestApiClient = new HaloRestAPIClient({
   baseUrl: process.env.HALO_BASE_URL,
-  auth: { adminToken: "halo admin token" },
-});
+})
+
 // create adminApiClient by haloRestApiCLient.
-const haloAdminClient = new AdminApiClient(haloRestApiClient);
+const haloAdminClient = new AdminApiClient(haloRestApiClient)
+
 // obtaining a list of articles.
 haloAdminClient.post.list().then((res) => {
-  console.log(res);
-});
+  console.log(res)
+})
 ```
 
-Specific use example reference [example](https://github.com/halo-dev/js-sdk/tree/master/example)
+You can also view the complete implementation of the halo-admin project: [@halo-dev/halo-admin](https://github.com/halo-dev/halo-admin).
 
 ### License
 
-[MIT license](/LICENSE)
+[MIT license](../../LICENSE)

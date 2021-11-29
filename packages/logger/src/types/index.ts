@@ -3,30 +3,31 @@
  */
 export interface Debugger {
   /**
-   * Logs the given arguments to the `log` method.
-   */
-  (...args: any[]): void;
-  /**
    * True if this logger is active and logging.
    */
-  enabled: boolean;
+  enabled: boolean
   /**
    * Used to cleanup/remove this logger.
    */
-  destroy: () => boolean;
+  destroy: () => boolean
   /**
    * The current log method. Can be overridden to redirect output.
    */
-  log: (...args: any[]) => void;
+  log: (...args: any[]) => void
   /**
    * The namespace of this logger.
    */
-  namespace: string;
+  namespace: string
   /**
    * Extends this logger with a child namespace.
    * Namespaces are separated with a ':' character.
    */
-  extend: (namespace: string) => Debugger;
+  extend: (namespace: string) => Debugger
+
+  /**
+   * Logs the given arguments to the `log` method.
+   */
+  (...args: any[]): void
 }
 
 /**
@@ -35,13 +36,9 @@ export interface Debugger {
  */
 export interface Debug {
   /**
-   * Creates a new logger with the given namespace.
-   */
-  (namespace: string): Debugger;
-  /**
    * The default log method (defaults to console)
    */
-  log: (...args: any[]) => void;
+  log: (...args: any[]) => void
   /**
    * Enables a particular set of namespaces.
    * To enable multiple separate them with commas, e.g. "info,debug".
@@ -49,13 +46,18 @@ export interface Debug {
    * Supports skip syntax, e.g. "halo:*,-halo:storage:*" will enable
    * everything under halo except for things under halo:storage.
    */
-  enable: (namespaces: string) => void;
+  enable: (namespaces: string) => void
   /**
    * Checks if a particular namespace is enabled.
    */
-  enabled: (namespace: string) => boolean;
+  enabled: (namespace: string) => boolean
   /**
    * Disables all logging, returns what was previously enabled.
    */
-  disable: () => string;
+  disable: () => string
+
+  /**
+   * Creates a new logger with the given namespace.
+   */
+  (namespace: string): Debugger
 }

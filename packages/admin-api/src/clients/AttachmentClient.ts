@@ -1,18 +1,12 @@
-import { FormData, HttpClient } from "@halo-dev/rest-api-client";
-import { buildPath } from "../url";
-import {
-  Attachment,
-  AttachmentQuery,
-  Page,
-  Response,
-  UploadOptions,
-} from "../types";
+import { FormData, HttpClient } from '@halo-dev/rest-api-client'
+import { buildPath } from '../url'
+import { Attachment, AttachmentQuery, Page, Response, UploadOptions } from '../types'
 
 export class AttachmentClient {
-  private client: HttpClient;
+  private client: HttpClient
 
   constructor(client: HttpClient) {
-    this.client = client;
+    this.client = client
   }
 
   /**
@@ -24,8 +18,8 @@ export class AttachmentClient {
   public get(attachmentId: number): Promise<Response<Attachment>> {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
-    });
-    return this.client.get(path, {});
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -36,9 +30,9 @@ export class AttachmentClient {
    */
   public list(params: AttachmentQuery): Promise<Response<Page<Attachment>>> {
     const path = buildPath({
-      endpointName: "attachments",
-    });
-    return this.client.get(path, { ...params });
+      endpointName: 'attachments',
+    })
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -47,13 +41,11 @@ export class AttachmentClient {
    * @param attachmentIds a collection of attachment id
    * @returns Returns attachments of deleted
    */
-  public deleteInBatch(
-    attachmentIds: Array<number>
-  ): Promise<Response<Array<Attachment>>> {
+  public deleteInBatch(attachmentIds: Array<number>): Promise<Response<Array<Attachment>>> {
     const path = buildPath({
-      endpointName: "attachments",
-    });
-    return this.client.delete(path, attachmentIds);
+      endpointName: 'attachments',
+    })
+    return this.client.delete(path, attachmentIds)
   }
 
   /**
@@ -65,8 +57,8 @@ export class AttachmentClient {
   public delete(attachmentId: number): Promise<Response<Array<Attachment>>> {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
-    });
-    return this.client.delete(path, {});
+    })
+    return this.client.delete(path, {})
   }
 
   /**
@@ -76,14 +68,11 @@ export class AttachmentClient {
    * @param name a new attachment name
    * @returns Returns an updated attachment response.
    */
-  public update(
-    attachmentId: number,
-    name: string
-  ): Promise<Response<Attachment>> {
+  public update(attachmentId: number, name: string): Promise<Response<Attachment>> {
     const path = buildPath({
       endpointName: `attachments/${attachmentId}`,
-    });
-    return this.client.put(path, { name });
+    })
+    return this.client.put(path, { name })
   }
 
   /**
@@ -93,9 +82,9 @@ export class AttachmentClient {
    */
   public listMediaTypes(): Promise<Response<Array<string>>> {
     const path = buildPath({
-      endpointName: "attachments/media_types",
-    });
-    return this.client.get(path, {});
+      endpointName: 'attachments/media_types',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -105,9 +94,9 @@ export class AttachmentClient {
    */
   public listTypes(): Promise<Response<Array<string>>> {
     const path = buildPath({
-      endpointName: "attachments/types",
-    });
-    return this.client.get(path, {});
+      endpointName: 'attachments/types',
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -117,16 +106,13 @@ export class AttachmentClient {
    * @param options other upload options.
    * @returns Returns a response of uploaded attachment
    */
-  public upload(
-    data: unknown,
-    options?: UploadOptions
-  ): Promise<Response<Attachment>> {
+  public upload(data: unknown, options?: UploadOptions): Promise<Response<Attachment>> {
     const path = buildPath({
-      endpointName: "attachments/upload",
-    });
-    const formData = new FormData();
-    formData.append("file", data);
-    return this.client.post(path, formData, { ...options });
+      endpointName: 'attachments/upload',
+    })
+    const formData = new FormData()
+    formData.append('file', data)
+    return this.client.post(path, formData, { ...options })
   }
 
   /**
@@ -136,17 +122,14 @@ export class AttachmentClient {
    * @param options other upload options.
    * @returns Returns a response of uploaded attachments.
    */
-  public uploadInBatch(
-    data: Array<unknown>,
-    options?: UploadOptions
-  ): Promise<Response<Array<Attachment>>> {
+  public uploadInBatch(data: Array<unknown>, options?: UploadOptions): Promise<Response<Array<Attachment>>> {
     const path = buildPath({
-      endpointName: "attachments/uploads",
-    });
-    const formData = new FormData();
+      endpointName: 'attachments/uploads',
+    })
+    const formData = new FormData()
     data.forEach((fileStream) => {
-      formData.append("files", fileStream);
-    });
-    return this.client.post(path, formData, { ...options });
+      formData.append('files', fileStream)
+    })
+    return this.client.post(path, formData, { ...options })
   }
 }

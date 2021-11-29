@@ -1,7 +1,7 @@
-export { AdminApiClient } from "./AdminApiClient";
-export { AuthorizedClient } from "./AuthorizedClient";
-export * from "@halo-dev/rest-api-client";
-export * from "./clients";
+export { AdminApiClient } from './AdminApiClient'
+export { AuthorizedClient } from './AuthorizedClient'
+export * from '@halo-dev/rest-api-client'
+export * from './clients'
 export {
   UploadOptions,
   Response,
@@ -71,4 +71,4 @@ export {
   Environment,
   StaticFile,
   StaticContentParam,
-} from "./types";
+} from './types'

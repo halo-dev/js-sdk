@@ -1,12 +1,12 @@
-import {HttpClient} from "@halo-dev/rest-api-client";
-import {buildPath} from "../url";
-import {Journal, JournalQuery, JournalType, JournalWithCmtCount, Page, Response} from "../types";
+import { HttpClient } from '@halo-dev/rest-api-client'
+import { buildPath } from '../url'
+import { Journal, JournalQuery, JournalType, JournalWithCmtCount, Page, Response } from '../types'
 
 export class JournalClient {
-  private client: HttpClient;
+  private client: HttpClient
 
   constructor(client: HttpClient) {
-    this.client = client;
+    this.client = client
   }
 
   /**
@@ -17,11 +17,10 @@ export class JournalClient {
    */
   public list(params: JournalQuery): Promise<Response<Page<JournalWithCmtCount>>> {
     const path = buildPath({
-      endpointName: "journals",
-    });
-    return this.client.get(path, {...params});
+      endpointName: 'journals',
+    })
+    return this.client.get(path, { ...params })
   }
-
 
   /**
    * Gets latest journals.
@@ -31,9 +30,9 @@ export class JournalClient {
    */
   public latest(top: number): Promise<Response<Array<Journal>>> {
     const path = buildPath({
-      endpointName: "journals/latest",
-    });
-    return this.client.get(path, {top});
+      endpointName: 'journals/latest',
+    })
+    return this.client.get(path, { top })
   }
 
   /**
@@ -44,9 +43,9 @@ export class JournalClient {
    */
   public create(params: Journal): Promise<Response<Journal>> {
     const path = buildPath({
-      endpointName: "journals",
-    });
-    return this.client.post(path, {...params});
+      endpointName: 'journals',
+    })
+    return this.client.post(path, { ...params })
   }
 
   /**
@@ -59,14 +58,14 @@ export class JournalClient {
   public update(
     journalId: number,
     params: {
-      sourceContent: string;
-      type?: JournalType;
-    }
+      sourceContent: string
+      type?: JournalType
+    },
   ): Promise<Response<Journal>> {
     const path = buildPath({
       endpointName: `journals/${journalId}`,
-    });
-    return this.client.put(path, {...params});
+    })
+    return this.client.put(path, { ...params })
   }
 
   /**
@@ -76,7 +75,7 @@ export class JournalClient {
   public async delete(journalId: number): Promise<void> {
     const path = buildPath({
       endpointName: `journals/${journalId}`,
-    });
-    await this.client.delete(path, {});
+    })
+    await this.client.delete(path, {})
   }
 }

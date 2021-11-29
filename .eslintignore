@@ -1,5 +1,3 @@
-coverage
-cjs/*
-umd/*
-es/*
-**/node_modules/
+**/lib/*
+**/node_modules/*
+example

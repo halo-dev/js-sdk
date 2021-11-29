@@ -1,16 +1,13 @@
 {
-  "extends": "../tsconfig-base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["es2015", "dom"],
-    "allowJs": true,
-    "checkJs": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "resolveJsonModule": true,
-    "outDir": "./lib",
-    "rootDir": "./src",
-    "typeRoots": ["node_modules/@types", "types", "../../node_modules/@types"]
+    "rootDir": "src",
+    "outDir": "lib"
   },
-  "include": ["src/"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
 }

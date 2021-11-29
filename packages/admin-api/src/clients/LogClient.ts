@@ -1,12 +1,12 @@
-import {HttpClient} from "@halo-dev/rest-api-client";
-import {buildPath} from "../url";
-import {Log, Page, Response} from "../types";
+import { HttpClient } from '@halo-dev/rest-api-client'
+import { buildPath } from '../url'
+import { Log, Page, Response } from '../types'
 
 export class LogClient {
-  private client: HttpClient;
+  private client: HttpClient
 
   constructor(client: HttpClient) {
-    this.client = client;
+    this.client = client
   }
 
   /**
@@ -14,15 +14,11 @@ export class LogClient {
    *
    * @param params
    */
-  public list(params: {
-    page: number;
-    size: number;
-    sort?: Array<string>;
-  }): Promise<Response<Page<Log>>> {
+  public list(params: { page: number; size: number; sort?: Array<string> }): Promise<Response<Page<Log>>> {
     const path = buildPath({
-      endpointName: "logs",
-    });
-    return this.client.get(path, {...params});
+      endpointName: 'logs',
+    })
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -30,9 +26,9 @@ export class LogClient {
    */
   public async clear(): Promise<void> {
     const path = buildPath({
-      endpointName: "logs/clear",
-    });
-    await this.client.get(path, {});
+      endpointName: 'logs/clear',
+    })
+    await this.client.get(path, {})
   }
 
   /**
@@ -42,8 +38,8 @@ export class LogClient {
    */
   public latest(top: number): Promise<Response<Array<Log>>> {
     const path = buildPath({
-      endpointName: "logs/latest",
-    });
-    return this.client.get(path, {top});
+      endpointName: 'logs/latest',
+    })
+    return this.client.get(path, { top })
   }
 }

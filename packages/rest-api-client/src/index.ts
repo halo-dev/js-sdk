@@ -1,14 +1,14 @@
-import { injectPlatformDeps } from "./platform/";
-import * as nodeDeps from "./platform/node";
-import FormData from "form-data";
-import Axios from "axios";
+import { injectPlatformDeps } from './platform/'
+import * as nodeDeps from './platform/node'
+import FormData from 'form-data'
+import Axios from 'axios'
 
-injectPlatformDeps(nodeDeps);
+injectPlatformDeps(nodeDeps)
 
-export { HaloRestAPIClient } from "./HaloRestAPIClient";
-export { HaloResponseHandler } from "./HaloResponseHandler";
-export { HaloRequestConfigBuilder } from "./HaloRequestConfigBuilder";
-export { DefaultHttpClient } from "./http";
+export { HaloRestAPIClient } from './HaloRestAPIClient'
+export { HaloResponseHandler } from './HaloResponseHandler'
+export { HaloRequestConfigBuilder } from './HaloRequestConfigBuilder'
+export { DefaultHttpClient } from './http'
 
 export {
   CustomizeAuth,
@@ -19,6 +19,6 @@ export {
   Credentials,
   HttpClient,
   ResponseHandler,
-} from "./types";
+} from './types'
 
-export { FormData, Axios };
+export { FormData, Axios }

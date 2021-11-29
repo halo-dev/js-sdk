@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.44",
   "description": "Halo markdown renderer.",
   "main": "lib/index.js",
-  "module": "esm/index.js",
+  "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "engines": {
     "node": ">=12"
@@ -13,16 +13,12 @@
   },
   "private": false,
   "scripts": {
+    "dev": "tsc --build --force --watch",
     "build": "tsc --build --force",
-    "lint": "eslint --ext .ts src",
-    "test": "jest --rootDir src",
-    "test:ci": "jest --rootDir src --runInBand",
-    "start": "yarn build --watch"
+    "test": "jest --rootDir src"
   },
   "files": [
-    "esm",
-    "lib",
-    "umd"
+    "lib"
   ],
   "repository": {
     "type": "git",
@@ -43,18 +39,12 @@
       "url": "https://github.com/ruibaby"
     }
   ],
-  "author": "halo-dev",
+  "author": "@halo-dev",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/halo-dev/js-sdk/issues"
   },
   "homepage": "https://github.com/halo-dev/js-sdk/tree/master/packages/markdown-renderer#readme",
-  "lint-staged": {
-    "*.{js,ts}": [
-      "yarn lint --fix",
-      "git add"
-    ]
-  },
   "dependencies": {
     "markdown-it": "^12.2.0",
     "markdown-it-attrs": "^4.1.0",
@@ -72,11 +62,11 @@
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "markdown-it-task-lists": "^2.1.1",
-    "markdown-it-toc": "^1.1.0"
+    "markdown-it-toc": "^1.1.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
-    "typescript": "^4.5.2"
+    "@types/markdown-it": "^12.2.3"
   },
   "exports": {
     ".": {

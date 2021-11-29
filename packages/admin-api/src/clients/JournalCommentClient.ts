@@ -1,5 +1,5 @@
-import {HttpClient} from "@halo-dev/rest-api-client";
-import {buildPath} from "../url";
+import { HttpClient } from '@halo-dev/rest-api-client'
+import { buildPath } from '../url'
 import {
   BaseComment,
   BaseCommentParam,
@@ -8,13 +8,13 @@ import {
   JournalCommentWithJournal,
   Page,
   Response,
-} from "../types";
+} from '../types'
 
 export class JournalCommentClient {
-  private client: HttpClient;
+  private client: HttpClient
 
   constructor(client: HttpClient) {
-    this.client = client;
+    this.client = client
   }
 
   /**
@@ -23,13 +23,11 @@ export class JournalCommentClient {
    * @param params parameter for queries
    * @returns A page response of journals.
    */
-  public async list(
-    params: JournalCommentQuery
-  ): Promise<Response<Page<JournalCommentWithJournal>>> {
+  public async list(params: JournalCommentQuery): Promise<Response<Page<JournalCommentWithJournal>>> {
     const path = buildPath({
-      endpointName: "journals/comments",
-    });
-    return this.client.get(path, {...params});
+      endpointName: 'journals/comments',
+    })
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -40,9 +38,9 @@ export class JournalCommentClient {
    */
   public create(params: BaseCommentParam): Promise<Response<BaseComment>> {
     const path = buildPath({
-      endpointName: "journals/comments",
-    });
-    return this.client.post(path, {...params});
+      endpointName: 'journals/comments',
+    })
+    return this.client.post(path, { ...params })
   }
 
   /**
@@ -54,8 +52,8 @@ export class JournalCommentClient {
   public delete(commentId: number): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `journals/comments/${commentId}`,
-    });
-    return this.client.delete(path, {});
+    })
+    return this.client.delete(path, {})
   }
 
   /**
@@ -65,14 +63,11 @@ export class JournalCommentClient {
    * @param status comment status
    * @returns A response of updated journal comment.
    */
-  public update(
-    commentId: number,
-    status: CommentStatus
-  ): Promise<Response<BaseComment>> {
+  public update(commentId: number, status: CommentStatus): Promise<Response<BaseComment>> {
     const path = buildPath({
       endpointName: `journals/comments/${commentId}/status/${status}`,
-    });
-    return this.client.put(path, {});
+    })
+    return this.client.put(path, {})
   }
 
   /**
@@ -82,14 +77,14 @@ export class JournalCommentClient {
    * @returns A page response of journal comments.
    */
   public listAsView(params: {
-    journalId: number;
-    sort?: Array<string>;
-    page?: number;
+    journalId: number
+    sort?: Array<string>
+    page?: number
   }): Promise<Response<Page<BaseComment>>> {
     const path = buildPath({
       endpointName: `journals/comments/${params.journalId}/list_view`,
-    });
-    return this.client.get(path, {...params});
+    })
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -99,14 +94,14 @@ export class JournalCommentClient {
    * @returns A page response of journal comments tree.
    */
   public listAsTree(params: {
-    journalId: number;
-    sort?: Array<string>;
-    page?: number;
+    journalId: number
+    sort?: Array<string>
+    page?: number
   }): Promise<Response<Page<BaseComment>>> {
     const path = buildPath({
       endpointName: `journals/comments/${params.journalId}/tree_view`,
-    });
-    return this.client.get(path, {...params});
+    })
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -115,13 +110,10 @@ export class JournalCommentClient {
    * @param params parameter for queries
    * @returns A response of latest journal comments.
    */
-  public latest(params: {
-    top?: number;
-    status?: CommentStatus;
-  }): Promise<Response<Array<BaseComment>>> {
+  public latest(params: { top?: number; status?: CommentStatus }): Promise<Response<Array<BaseComment>>> {
     const path = buildPath({
-      endpointName: "journals/comments/latest",
-    });
-    return this.client.get(path, {...params});
+      endpointName: 'journals/comments/latest',
+    })
+    return this.client.get(path, { ...params })
   }
 }

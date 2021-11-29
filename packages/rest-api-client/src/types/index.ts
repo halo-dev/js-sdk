@@ -1,6 +1,6 @@
-export { CustomizeAuth, DiscriminatedAuth, BasicAuth } from "./auth";
+export { CustomizeAuth, DiscriminatedAuth, BasicAuth } from './auth'
 
-export { AccessToken, TokenType, Credentials } from "./CredentialsInterface";
+export { AccessToken, TokenType, Credentials } from './CredentialsInterface'
 
 export {
   HttpClient,
@@ -13,4 +13,4 @@ export {
   RequestConfig,
   HttpMethod,
   Params,
-} from "./HttpClientInterface";
+} from './HttpClientInterface'
