@@ -59,6 +59,7 @@ export type Tag = {
   id: number
   name: string
   slug: string
+  color: string
   thumbnail: string
   createTime: number
   fullPath: string

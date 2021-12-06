@@ -343,6 +343,7 @@ export type Tag = {
   id: number
   name: string
   slug: string
+  color: string
   thumbnail: string
   createTime: string
   fullPath: string
@@ -466,6 +467,7 @@ export interface StatisticWithUser extends Statistic {
 export type TagParam = {
   name: string
   slug?: string
+  color?: string
   thumbnail?: string
 }
 export type UpdateStrategy = 'BRANCH' | 'RELEASE'
