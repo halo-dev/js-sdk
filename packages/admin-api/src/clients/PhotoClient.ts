@@ -23,6 +23,13 @@ export class PhotoClient {
     return this.client.post(path, { ...params })
   }
 
+  public createInBatch(params: Array<Photo>): Promise<Response<Array<Photo>>> {
+    const path = buildPath({
+      endpointName: 'photos/batch',
+    })
+    return this.client.post(path, [...params])
+  }
+
   public get(photoId: number): Promise<Response<Photo>> {
     const path = buildPath({
       endpointName: `photos/${photoId}`,
