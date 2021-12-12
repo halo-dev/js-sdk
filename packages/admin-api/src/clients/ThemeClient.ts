@@ -1,6 +1,6 @@
 import { FormData, HttpClient } from '@halo-dev/rest-api-client'
 import { buildPath } from '../url'
-import { Group, Response, ThemeFile, ThemeProperty, UploadOptions } from '../types'
+import { Group, Item, Response, ThemeFile, ThemeProperty, UploadOptions } from '../types'
 
 export class ThemeClient {
   private client: HttpClient
@@ -59,6 +59,31 @@ export class ThemeClient {
       endpointName: `themes/${themeId}/activation`,
     })
     return this.client.post(path, {})
+  }
+
+  /**
+   * Fetches theme configuration group names by theme id
+   *
+   * @param themeId theme id
+   */
+  public listConfigurationGroups(themeId: string): Promise<Response<Array<string>>> {
+    const path = buildPath({
+      endpointName: `themes/${themeId}/configurations/groups`,
+    })
+    return this.client.get(path, {})
+  }
+
+  /**
+   * Fetches theme configuration group by theme id and group name
+   *
+   * @param themeId theme id
+   * @param group group name
+   */
+  public listConfigurationsByGroup(themeId: string, group: string): Promise<Response<Array<Item>>> {
+    const path = buildPath({
+      endpointName: `themes/${themeId}/configurations/groups/${group}`,
+    })
+    return this.client.get(path, {})
   }
 
   /**
@@ -178,6 +203,19 @@ export class ThemeClient {
   public listActivatedSettings(): Promise<Response<Record<string, unknown>>> {
     const path = buildPath({
       endpointName: 'themes/activation/settings',
+    })
+    return this.client.get(path, {})
+  }
+
+  /**
+   * Lists theme settings by theme id and group name
+   *
+   * @param themeId theme id
+   * @param group group name
+   */
+  public listSettingsByGroup(themeId: string, group: string): Promise<Response<Record<string, unknown>>> {
+    const path = buildPath({
+      endpointName: `themes/${themeId}/groups/${group}/settings`,
     })
     return this.client.get(path, {})
   }
