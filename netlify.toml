@@ -4,4 +4,4 @@
 
 [build]
   publish = "docs"
-  command = "npx pnpm install --store=node_modules/.pnpm-store && npx pnpm build:docs"
+  command = "npx pnpm install --store=node_modules/.pnpm-store && npx pnpm build && npx pnpm build:docs"
