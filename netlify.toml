@@ -1,0 +1,7 @@
+[build.environment]
+  NODE_VERSION = "14"
+  NPM_FLAGS = "--version"
+
+[build]
+  publish = "docs"
+  command = "npx pnpm install --store=node_modules/.pnpm-store && npx pnpm build && npx pnpm build:docs"

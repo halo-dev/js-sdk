@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc --build --watch --verbose",
     "build": "tsc --build --force --verbose",
-    "build:docs": "typedoc --entryPointStrategy packages .",
+    "build:docs": "typedoc --excludeExternals --readme README.md --entryPointStrategy packages . ",
     "lint": "eslint .",
     "cleanup": "rimraf node_modules docs packages/**/lib packages/**/node_modules",
     "changeset": "changeset",
@@ -44,6 +44,7 @@
   ],
   "devDependencies": {
     "@changesets/cli": "^2.19.0",
+    "typedoc-plugin-missing-exports": "^0.22.6",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.3.0",

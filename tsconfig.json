@@ -3,12 +3,8 @@
   "compilerOptions": {
     "tsBuildInfoFile": "tsconfig.tsbuildinfo"
   },
-  "include": [
-  ],
-  "exclude": [
-    "node_modules",
-    "lib"
-  ],
+  "include": [],
+  "exclude": ["node_modules", "lib"],
   "references": [
     {
       "path": "./packages/logger"
