@@ -223,7 +223,7 @@ export class AdminApiClient {
     const path = buildPath({
       endpointName: 'password/reset',
     })
-    return this.client.post(path, params)
+    return this.client.put(path, params)
   }
 
   public refreshToken(refreshToken: string): Promise<Response<AccessToken>> {
