@@ -230,7 +230,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: `themes/${themeId}/settings`,
     })
-    await this.client.post(path, { settings })
+    await this.client.post(path, settings)
   }
 
   /**
@@ -242,7 +242,7 @@ export class ThemeClient {
     const path = buildPath({
       endpointName: 'themes/activation/settings',
     })
-    await this.client.post(path, { settings })
+    await this.client.post(path, settings)
   }
 
   /**
