@@ -30,13 +30,12 @@ export const buildFormDataValue = (data: any) => {
   return new Blob([data])
 }
 
-// export const buildBaseUrl = (baseUrl?: string) => {
-//   if (baseUrl) {
-//     return baseUrl;
-//   }
-//   const { host, protocol } = global.server! || {};
-//   return `${protocol}//${host}`;
-// };
+export const buildBaseUrl = (baseUrl?: string) => {
+  if (typeof baseUrl === 'undefined') {
+    throw new Error('in browser environment, baseUrl is required')
+  }
+  return baseUrl
+}
 
 export const getVersion = () => {
   return PACKAGE_VERSION
