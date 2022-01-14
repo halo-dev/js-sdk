@@ -302,9 +302,9 @@ export class ThemeClient {
    */
   public fetchTheme(uri: string): Promise<Response<ThemeProperty>> {
     const path = buildPath({
-      endpointName: 'themes/fetching',
+      endpointName: `themes/fetching?uri=${uri}`,
     })
-    return this.client.get(path, { uri })
+    return this.client.post(path, {})
   }
 
   /**
