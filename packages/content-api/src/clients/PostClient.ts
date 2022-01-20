@@ -1,18 +1,6 @@
 import { HttpClient } from '@halo-dev/rest-api-client'
 import { buildPath } from '../url'
-import {
-  BaseCommentParam,
-  BaseCommentQuery,
-  BaseCommentTree,
-  BaseCommentWithParent,
-  BasePostSimple,
-  CommentWithHasChildren,
-  Page,
-  PageQuery,
-  PostDetail,
-  PostList,
-  Response,
-} from '../types'
+import { BasePostSimple, Page, PageQuery, PostDetail, PostList, Response } from '../types'
 
 export class PostClient {
   private client: HttpClient
@@ -73,45 +61,6 @@ export class PostClient {
       endpointName: `posts/${postId}/next`,
     })
     return this.client.get(path, {})
-  }
-
-  public listTopComments(postId: number, params?: BaseCommentQuery): Promise<Page<CommentWithHasChildren>> {
-    const path = buildPath({
-      endpointName: `posts/${postId}/comments/top_view`,
-    })
-    return this.client.get(path, { ...params })
-  }
-
-  public listChildrenComments(
-    postId: number,
-    commentParentId: number,
-    sort?: Array<string>,
-  ): Promise<Page<CommentWithHasChildren>> {
-    const path = buildPath({
-      endpointName: `posts/${postId}/comments/${commentParentId}/children`,
-    })
-    return this.client.get(path, { sort })
-  }
-
-  public listCommentsAsTree(postId: number, params?: BaseCommentQuery): Promise<Page<BaseCommentTree>> {
-    const path = buildPath({
-      endpointName: `posts/${postId}/comments/tree_view`,
-    })
-    return this.client.get(path, { ...params })
-  }
-
-  public listComments(postId: number, params?: BaseCommentQuery): Promise<Page<BaseCommentWithParent>> {
-    const path = buildPath({
-      endpointName: `posts/${postId}/comments/list_view`,
-    })
-    return this.client.get(path, { ...params })
-  }
-
-  public comment(params: BaseCommentParam) {
-    const path = buildPath({
-      endpointName: 'posts/comments',
-    })
-    return this.client.post(path, { ...params })
   }
 
   public async like(postId: number): Promise<void> {

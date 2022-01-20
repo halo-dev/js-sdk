@@ -2,6 +2,7 @@ import { HaloRestAPIClient, HttpClient } from '@halo-dev/rest-api-client'
 import {
   ArchiveClient,
   CategoryClient,
+  CommentClient,
   JournalClient,
   LinkClient,
   MenuClient,
@@ -30,6 +31,7 @@ export class ContentApiClient {
   private readonly _tag: TagClient
   private readonly _theme: ThemeClient
   private readonly _user: UserClient
+  private readonly _comment: CommentClient
 
   constructor(client: HaloRestAPIClient) {
     this.client = client.buildHttpClient()
@@ -46,6 +48,7 @@ export class ContentApiClient {
     this._tag = new TagClient(this.client)
     this._theme = new ThemeClient(this.client)
     this._user = new UserClient(this.client)
+    this._comment = new CommentClient(this.client)
   }
 
   public get archive() {
@@ -98,5 +101,9 @@ export class ContentApiClient {
 
   public get user() {
     return this._user
+  }
+
+  public get comment() {
+    return this._comment
   }
 }
