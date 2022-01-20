@@ -26,7 +26,7 @@ export class CommentClient {
     const path = buildPath({
       endpointName: `${target}/${targetId}/comments/top_view`,
     })
-    return this.client.get(path, params)
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -46,7 +46,7 @@ export class CommentClient {
     const path = buildPath({
       endpointName: `${target}/${targetId}/comments/${commentId}/children`,
     })
-    return this.client.get(path, params)
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -67,7 +67,7 @@ export class CommentClient {
     const path = buildPath({
       endpointName: `${target}/${targetId}/comments/tree_view`,
     })
-    return this.client.get(path, params)
+    return this.client.get(path, { ...params })
   }
 
   /**
@@ -88,7 +88,7 @@ export class CommentClient {
     const path = buildPath({
       endpointName: `${target}/${targetId}/comments/list_view`,
     })
-    return this.client.get(path, params)
+    return this.client.get(path, { ...params })
   }
 
   /**
