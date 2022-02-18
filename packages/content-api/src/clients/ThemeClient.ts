@@ -22,4 +22,18 @@ export class ThemeClient {
     })
     return this.client.get(path, {})
   }
+
+  public getPropertyById(themeId: string): Promise<Response<ThemeProperty>> {
+    const path = buildPath({
+      endpointName: `themes/${themeId}`,
+    })
+    return this.client.get(path, {})
+  }
+
+  public listSettingsById(themeId: string): Promise<Response<Record<string, any>>> {
+    const path = buildPath({
+      endpointName: `themes/${themeId}/settings`,
+    })
+    return this.client.get(path, {})
+  }
 }
