@@ -76,6 +76,18 @@ export class CategoryClient {
   }
 
   /**
+   * Updates category in batch
+   *
+   * @param params
+   */
+  public updateInBatch(params: Array<CategoryParam>): Promise<Response<Array<Category>>> {
+    const path = buildPath({
+      endpointName: 'categories/batch',
+    })
+    return this.client.put(path, [...params])
+  }
+
+  /**
    * Deletes a category by id.
    *
    * @param categoryId category id
