@@ -140,6 +140,7 @@ export interface BasePostSimple extends BasePostMinimal {
   likes: number
   wordCount: number
   isTopped: boolean
+  inProcess: boolean
 }
 
 export interface BasePostDetail extends BasePostSimple {
