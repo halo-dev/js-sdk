@@ -368,6 +368,7 @@ export type PostParam = {
   tagIds?: Array<number>
   categoryIds?: Array<number>
   metas?: Array<PostMetaParam>
+  serverSideMarkdownRender?: boolean
 }
 
 export interface BasePostDetail extends BasePostSimple {

@@ -82,11 +82,16 @@ export class PostClient {
     return this.client.put(path, postIds)
   }
 
-  public updateDraftById(postId: number, content?: string): Promise<Response<BasePostMinimal>> {
+  public updateDraftById(
+    postId: number,
+    originalContent: string,
+    content?: string,
+    serverSideMarkdownRender?: boolean,
+  ): Promise<Response<BasePostMinimal>> {
     const path = buildPath({
       endpointName: `posts/${postId}/status/draft/content`,
     })
-    return this.client.put(path, { content })
+    return this.client.put(path, { originalContent, content, serverSideMarkdownRender })
   }
 
   public async like(postId: number): Promise<void> {
