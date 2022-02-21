@@ -68,11 +68,16 @@ export class SheetClient {
     await this.client.put(path, {})
   }
 
-  public updateDraftById(sheetId: number, content?: string): Promise<Response<BasePostDetail>> {
+  public updateDraftById(
+    sheetId: number,
+    originalContent: string,
+    content?: string,
+    keepRaw?: boolean,
+  ): Promise<Response<BasePostDetail>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/status/draft/content`,
     })
-    return this.client.put(path, { content })
+    return this.client.put(path, { originalContent, content, keepRaw })
   }
 
   public delete(sheetId: number): Promise<Response<SheetDetail>> {
