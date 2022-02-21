@@ -86,12 +86,12 @@ export class PostClient {
     postId: number,
     originalContent: string,
     content?: string,
-    serverSideMarkdownRender?: boolean,
+    keepRaw?: boolean,
   ): Promise<Response<BasePostMinimal>> {
     const path = buildPath({
       endpointName: `posts/${postId}/status/draft/content`,
     })
-    return this.client.put(path, { originalContent, content, serverSideMarkdownRender })
+    return this.client.put(path, { originalContent, content, keepRaw })
   }
 
   public async like(postId: number): Promise<void> {

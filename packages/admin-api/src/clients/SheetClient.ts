@@ -72,12 +72,12 @@ export class SheetClient {
     sheetId: number,
     originalContent: string,
     content?: string,
-    serverSideMarkdownRender?: boolean,
+    keepRaw?: boolean,
   ): Promise<Response<BasePostDetail>> {
     const path = buildPath({
       endpointName: `sheets/${sheetId}/status/draft/content`,
     })
-    return this.client.put(path, { originalContent, content, serverSideMarkdownRender })
+    return this.client.put(path, { originalContent, content, keepRaw })
   }
 
   public delete(sheetId: number): Promise<Response<SheetDetail>> {
