@@ -2,11 +2,11 @@
   "mode": "pre",
   "tag": "alpha",
   "initialVersions": {
-    "@halo-dev/admin-api": "1.0.0-alpha.49",
-    "@halo-dev/content-api": "1.0.0-alpha.49",
-    "@halo-dev/logger": "1.0.0-alpha.49",
-    "@halo-dev/markdown-renderer": "1.0.0-alpha.49",
-    "@halo-dev/rest-api-client": "1.0.0-alpha.49"
+    "@halo-dev/admin-api": "1.0.0-alpha.50",
+    "@halo-dev/content-api": "1.0.0-alpha.50",
+    "@halo-dev/logger": "1.0.0-alpha.50",
+    "@halo-dev/markdown-renderer": "1.0.0-alpha.50",
+    "@halo-dev/rest-api-client": "1.0.0-alpha.50"
   },
   "changesets": []
 }
