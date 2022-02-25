@@ -44,11 +44,25 @@ export class PhotoClient {
     return this.client.put(path, { ...params })
   }
 
+  public updateInBatch(params: Array<Photo>): Promise<Response<Array<Photo>>> {
+    const path = buildPath({
+      endpointName: 'photos/batch',
+    })
+    return this.client.put(path, [...params])
+  }
+
   public async delete(photoId: number): Promise<void> {
     const path = buildPath({
       endpointName: `photos/${photoId}`,
     })
     await this.client.delete(path, {})
+  }
+
+  public deleteInBatch(photoIds: Array<number>): Promise<Response<Array<Photo>>> {
+    const path = buildPath({
+      endpointName: 'photos/batch',
+    })
+    return this.client.delete(path, photoIds)
   }
 
   public latest(sort?: Array<string>): Promise<Response<Array<Photo>>> {
