@@ -1,6 +1,6 @@
 import { HttpClient } from '@halo-dev/rest-api-client'
 import { buildPath } from '../url'
-import { Journal, JournalQuery, JournalType, JournalWithCmtCount, Page, Response } from '../types'
+import { Journal, JournalParam, JournalQuery, JournalWithCmtCount, Page, Response } from '../types'
 
 export class JournalClient {
   private client: HttpClient
@@ -41,7 +41,7 @@ export class JournalClient {
    * @param params parameter for creates
    * @returns A response of created journal.
    */
-  public create(params: Journal): Promise<Response<Journal>> {
+  public create(params: JournalParam): Promise<Response<Journal>> {
     const path = buildPath({
       endpointName: 'journals',
     })
@@ -55,13 +55,7 @@ export class JournalClient {
    * @param params parameter for updates
    * @returns A response of updated journal.
    */
-  public update(
-    journalId: number,
-    params: {
-      sourceContent: string
-      type?: JournalType
-    },
-  ): Promise<Response<Journal>> {
+  public update(journalId: number, params: JournalParam): Promise<Response<Journal>> {
     const path = buildPath({
       endpointName: `journals/${journalId}`,
     })
