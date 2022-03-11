@@ -223,6 +223,13 @@ export type Journal = {
   type: JournalType
 }
 
+export type JournalParam = {
+  sourceContent: string
+  content: string
+  type: JournalType
+  keepRaw?: boolean
+}
+
 export interface JournalCommentWithJournal extends BaseComment {
   journal: Journal
 }
