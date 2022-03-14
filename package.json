@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc --build --watch --verbose",
-    "build": "tsc --build --force --verbose",
+    "dev": "pnpm --filter=./packages run dev --parallel",
+    "build": "pnpm --filter=./packages run build",
     "build:docs": "typedoc --excludeExternals --readme README.md --entryPointStrategy packages . ",
     "lint": "eslint .",
     "cleanup": "rimraf node_modules docs packages/**/lib packages/**/node_modules",
