@@ -37,6 +37,13 @@ export class LinkClient {
     return this.client.put(path, { ...params })
   }
 
+  public updateInBatch(params: Array<Link>): Promise<Response<Array<Link>>> {
+    const path = buildPath({
+      endpointName: 'links/batch',
+    })
+    return this.client.put(path, [...params])
+  }
+
   public async delete(id: number): Promise<void> {
     const path = buildPath({
       endpointName: `links/${id}`,
