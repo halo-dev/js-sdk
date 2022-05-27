@@ -45,14 +45,13 @@
   "homepage": "https://github.com/halo-dev/js-sdk#readme",
   "sideEffects": false,
   "dependencies": {
-    "tslib": "^2.3.1"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.0",
+    "@types/chai": "^4.3.1",
     "@types/sinon": "^9.0.11",
     "assert": "^1.5.0",
-    "chai": "^4.3.4",
-    "jest": "^26.6.3",
+    "chai": "^4.3.6",
     "sinon": "^9.2.4"
   },
   "exports": {

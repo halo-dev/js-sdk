@@ -51,7 +51,7 @@
   "homepage": "https://github.com/halo-dev/js-sdk/tree/master/packages/admin-api#readme",
   "dependencies": {
     "@halo-dev/rest-api-client": "workspace:*",
-    "tslib": "^2.3.1"
+    "tslib": "^2.4.0"
   },
   "exports": {
     ".": {
