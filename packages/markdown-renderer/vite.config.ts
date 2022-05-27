@@ -9,5 +9,6 @@ export default defineConfig({
       name: 'markdown-renderer',
       fileName: (format) => `markdown-renderer.${format}.js`,
     },
+    sourcemap: true,
   },
 })

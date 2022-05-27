@@ -14,7 +14,7 @@
  */
 
 function murmurhash3_32_gc(str, seed) {
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line
   var key, remainder, bytes, h1, h1b, c1, c1b, c2, c2b, k1, i
 
   key = new TextEncoder().encode(str)
