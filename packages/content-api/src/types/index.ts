@@ -24,9 +24,11 @@ export interface PageQuery {
   sort?: Array<string>
 }
 
-export type PostStatus = 'PUBLISHED' | 'DRAFT' | 'RECYCLE' | 'INTIMATE'
+export type PostStatus = 'PUBLISHED' | 'AUDITING' | 'DRAFT' | 'RECYCLE' | 'INTIMATE'
 
 export type PostEditorType = 'MARKDOWN' | 'RICHTEXT'
+
+export type PostType = 'BASE' | 'SHEET' | 'NEWS' | 'NOTIFICATION' | 'PAPER' | 'PROJECT'
 
 export type BasePostMinimal = {
   id: number
@@ -40,6 +42,16 @@ export type BasePostMinimal = {
   metaKeywords: string
   metaDescription: string
   fullPath: string
+  // cern fields
+  postType: PostType
+  postSource: string
+  postSourceLink: string
+  projectPeriod: string
+  projectSource: string
+  projectManager: string
+  paperPublishDate: number
+  paperPublisher: string
+  paperAuthors: string
 }
 
 export interface BasePostSimple extends BasePostMinimal {
@@ -75,6 +87,7 @@ export type Category = {
   password: string
   createTime: number
   fullPath: string
+  postType: PostType
 }
 
 export interface PostList extends BasePostSimple {
@@ -82,6 +95,7 @@ export interface PostList extends BasePostSimple {
   tags: Array<Tag>
   categories: Category
   metas: Record<string, any>
+  users: Array<User>
 }
 
 export type ArchiveYear = {

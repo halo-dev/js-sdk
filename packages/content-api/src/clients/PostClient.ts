@@ -26,6 +26,7 @@ export class PostClient {
   public get(
     postId: number,
     params?: {
+      token: string
       formatDisabled: boolean
       sourceDisabled: boolean
     },
