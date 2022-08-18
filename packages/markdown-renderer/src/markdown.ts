@@ -50,7 +50,9 @@ markdownIt
   .use(MarkdownItFootnote)
   .use(MarkdownItImagesPreview)
   .use(MarkdownItIns)
-  .use(MarkdownItKatex)
+  .use(MarkdownItKatex, {
+    trust: true,
+  })
   .use(MarkdownItMark)
   .use(MarkdownItSub)
   .use(MarkdownItSup)
