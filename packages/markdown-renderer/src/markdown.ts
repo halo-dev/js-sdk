@@ -51,7 +51,7 @@ markdownIt
   .use(MarkdownItImagesPreview)
   .use(MarkdownItIns)
   .use(MarkdownItKatex, {
-    trust: true
+    trust: true,
   })
   .use(MarkdownItMark)
   .use(MarkdownItSub)
