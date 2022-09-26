@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import buble from '@rollup/plugin-buble';
 import replace from '@rollup/plugin-replace';
-// import { terser } from 'rollup-plugin-terser';
+import { terser } from 'rollup-plugin-terser';
 
 export default {
   input: 'index.js',
@@ -16,6 +16,6 @@ export default {
       preventAssignment: true,
     }),
     buble({ objectAssign: true }),
-    //terser({ compress: { evaluate: false } }),
+    terser({ compress: { evaluate: false } })
   ],
 };
