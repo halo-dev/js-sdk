@@ -62,7 +62,8 @@
   const root = hostUrl
     ? hostUrl.replace(/\/$/, '')
     : currentScript.src.split('/').slice(0, -1).join('/');
-  const endpoint = `${root}/apis/api.halo.run/v1alpha1/countertrackers`;
+  // '/api/tracker' is endpoint placeholder, will replace when build
+  const endpoint = `${root}/api/tracker`;
   const screen = `${width}x${height}`;
   let currentUrl = `${pathname}${search}`;
   let currentRef = document.referrer;
