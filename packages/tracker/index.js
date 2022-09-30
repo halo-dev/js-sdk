@@ -88,7 +88,9 @@
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.text())
-      .then(text => (cache = text));
+      .then(text => {
+        console.debug('Visit count:', text)
+      });
   };
 
   const trackView = (url = currentUrl, referrer = currentRef) =>

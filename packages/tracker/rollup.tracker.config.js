@@ -11,7 +11,7 @@ export default {
   },
   plugins: [
     replace({
-      '/api/tracker': process.env.COLLECT_API_ENDPOINT || '/apis/api.halo.run/v1alpha1/countertrackers',
+      '/api/tracker': process.env.COLLECT_API_ENDPOINT || '/apis/api.halo.run/v1alpha1/trackers/counter',
       delimiters: ['', ''],
       preventAssignment: true,
     }),
